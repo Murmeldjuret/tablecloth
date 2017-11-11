@@ -12,7 +12,7 @@ class UserController {
 
     def index() {
         def users = userService.getUsers()
-        render(view: defaultView, model: [users: users])
+        render view: defaultView, model: [users: users]
     }
 
     def delete(String name) {

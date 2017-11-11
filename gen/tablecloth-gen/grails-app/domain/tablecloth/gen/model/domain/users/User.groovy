@@ -5,8 +5,8 @@ import groovy.transform.EqualsAndHashCode
 import groovy.transform.ToString
 
 @GrailsCompileStatic
-@EqualsAndHashCode(includes='username')
-@ToString(includes='username', includeNames=true, includePackage=false)
+@EqualsAndHashCode(includes = 'username')
+@ToString(includes = 'username', includeNames = true, includePackage = false)
 class User implements Serializable {
 
     private static final long serialVersionUID = 1
@@ -28,6 +28,6 @@ class User implements Serializable {
     }
 
     static mapping = {
-	    password column: '`password`'
+        password column: '`password`'
     }
 }
