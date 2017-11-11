@@ -8,16 +8,19 @@ class UserController {
 
     UserService userService
 
+    static String defaultView = '../users/users'
+
     def index() {
         def users = userService.getUsers()
-        render(view: '../users/users', model: [users: users])
+        render(view: defaultView, model: [users: users])
     }
 
     def delete(String name) {
-        if (name != '') {
+        if (name && name != '') {
             try {
                 userService.removeUser(name)
-                render status: HttpStatus.OK, text: 'User deleted!'
+                flash.message = 'User removed!'
+                redirect controller: 'user', action: 'index'
             } catch (e) {
                 render text: "User not removed, error reason: $e.message"
             }
@@ -26,11 +29,12 @@ class UserController {
         }
     }
 
-    def create(String name, String pw) { //SUPER SAFE GUARANTEED
+    def create(String name, String pw) {
         if (name && pw && name != '' && pw != '') {
             try {
                 userService.addUser(name, pw)
-                render status: HttpStatus.OK, text: 'User added!'
+                flash.message = 'User added!'
+                redirect controller: 'user', action: 'index'
             } catch (e) {
                 render text: "User not added, error reason: $e.message"
             }

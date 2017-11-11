@@ -82,4 +82,5 @@ $RECYCLE.BIN/
 
 # Windows shortcuts
 *.lnk
+/.idea/
 /.gradle/
