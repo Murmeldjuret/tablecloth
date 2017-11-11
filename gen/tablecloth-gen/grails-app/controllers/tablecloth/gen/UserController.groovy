@@ -2,39 +2,40 @@ package tablecloth.gen
 
 import grails.plugin.springsecurity.annotation.Secured
 import org.springframework.http.HttpStatus
-import tablecloth.gen.model.domain.users.Role
-import tablecloth.gen.model.domain.users.User
-import tablecloth.gen.model.domain.users.UserRole
 
 @Secured('ROLE_ADMIN')
-class UserController { //TODO add as Transactional service
+class UserController {
+
+    UserService userService
 
     def index() {
-        List<User> users = User.getAll()
-        String text = users.join("\n")
-        render text: text, encoding: 'UTF-8'
+        def users = userService.getUsers()
+        render(view: '../users/users', model: [users: users])
     }
 
     def delete(String name) {
-        User user = User.findByUsername(name)
-        if (!user) {
-            render text: "USER DOES NOT EXIST"
+        if (name != '') {
+            try {
+                userService.removeUser(name)
+                render status: HttpStatus.OK, text: 'User deleted!'
+            } catch (e) {
+                render text: "User not removed, error reason: $e.message"
+            }
         } else {
-            UserRole.removeAll(user)
-            user.delete(flush: true)
-            log.info("Deleted $user")
-            render status: HttpStatus.OK, text: 'User deleted!'
+            render status: HttpStatus.BAD_REQUEST, text: "User not removed, supplied name is not valid."
         }
     }
 
     def create(String name, String pw) { //SUPER SAFE GUARANTEED
-        if (User.findByUsername(name)) {
-            render text: "USER ALREADY EXISTS"
+        if (name && pw && name != '' && pw != '') {
+            try {
+                userService.addUser(name, pw)
+                render status: HttpStatus.OK, text: 'User added!'
+            } catch (e) {
+                render text: "User not added, error reason: $e.message"
+            }
         } else {
-            User newUser = new User(username: name, password: pw).save()
-            UserRole.create(newUser, Role.findByAuthority('ROLE_USER') as Role, true)
-            log.info("Added new $newUser")
-            render status: HttpStatus.OK, text: 'User added!'
+            render status: HttpStatus.BAD_REQUEST, text: "User not removed, supplied name and password are not valid."
         }
     }
 }
