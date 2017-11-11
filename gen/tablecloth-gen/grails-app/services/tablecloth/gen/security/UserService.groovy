@@ -1,4 +1,4 @@
-package tablecloth.gen
+package tablecloth.gen.security
 
 import grails.gorm.transactions.Transactional
 import tablecloth.gen.exceptions.TableclothDomainException

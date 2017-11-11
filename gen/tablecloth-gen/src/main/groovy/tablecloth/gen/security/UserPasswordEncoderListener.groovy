@@ -1,4 +1,4 @@
-package tablecloth
+package tablecloth.gen.security
 
 import grails.events.annotation.gorm.Listener
 import grails.plugin.springsecurity.SpringSecurityService

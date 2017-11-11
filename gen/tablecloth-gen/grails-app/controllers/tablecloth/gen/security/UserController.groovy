@@ -1,4 +1,4 @@
-package tablecloth.gen
+package tablecloth.gen.security
 
 import grails.plugin.springsecurity.annotation.Secured
 import org.springframework.http.HttpStatus

@@ -1,4 +1,4 @@
-import tablecloth.UserPasswordEncoderListener
+import tablecloth.gen.security.UserPasswordEncoderListener
 
 // Place your Spring DSL code here
 beans = {
