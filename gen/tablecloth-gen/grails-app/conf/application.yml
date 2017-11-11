@@ -85,6 +85,7 @@ endpoints:
     jmx:
         unique-names: true
 
+grails.plugin.springsecurity.password.algorithm: 'bcrypt'
 ---
 hibernate:
     cache:
