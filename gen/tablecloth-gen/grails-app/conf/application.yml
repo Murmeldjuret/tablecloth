@@ -93,6 +93,7 @@ hibernate:
         queries: false
         use_second_level_cache: false
         use_query_cache: false
+
 dataSource:
     pooled: true
     jmxExport: true
@@ -104,7 +105,7 @@ environments:
     development:
         dataSource:
             dbCreate: update
-            url: jdbc:h2:~/Users/Murmel/Source/devDB;MVCC=TRUE;LOCK_TIMEOUT=10000;DB_CLOSE_ON_EXIT=FALSE
+            url: jdbc:h2:D:\tablecloth\devDb;MVCC=TRUE;LOCK_TIMEOUT=10000;DB_CLOSE_ON_EXIT=FALSE
     test:
         dataSource:
             dbCreate: update

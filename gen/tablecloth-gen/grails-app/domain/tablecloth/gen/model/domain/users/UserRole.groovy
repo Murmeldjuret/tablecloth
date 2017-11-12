@@ -5,11 +5,19 @@ import grails.gorm.DetachedCriteria
 import groovy.transform.ToString
 import org.codehaus.groovy.util.HashCodeHelper
 
+import javax.persistence.GeneratedValue
+import javax.persistence.GenerationType
+import javax.persistence.Id
+
 @GrailsCompileStatic
 @ToString(cache = true, includeNames = true, includePackage = false)
 class UserRole implements Serializable {
 
     private static final long serialVersionUID = 1
+
+    @Id
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
+    Long id
 
     User user
     Role role

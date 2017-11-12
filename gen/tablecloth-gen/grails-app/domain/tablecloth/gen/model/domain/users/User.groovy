@@ -3,6 +3,11 @@ package tablecloth.gen.model.domain.users
 import grails.compiler.GrailsCompileStatic
 import groovy.transform.EqualsAndHashCode
 import groovy.transform.ToString
+import tablecloth.gen.model.domain.creatures.PlayerCharacter
+
+import javax.persistence.GeneratedValue
+import javax.persistence.GenerationType
+import javax.persistence.Id
 
 @GrailsCompileStatic
 @EqualsAndHashCode(includes = 'username')
@@ -10,6 +15,10 @@ import groovy.transform.ToString
 class User implements Serializable {
 
     private static final long serialVersionUID = 1
+
+    @Id
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
+    Long id
 
     String username
     String password
@@ -21,6 +30,10 @@ class User implements Serializable {
     Set<Role> getAuthorities() {
         (UserRole.findAllByUser(this) as List<UserRole>)*.role as Set<Role>
     }
+
+    static hasMany = [
+            characters: PlayerCharacter
+    ]
 
     static constraints = {
         password nullable: false, blank: false, password: true

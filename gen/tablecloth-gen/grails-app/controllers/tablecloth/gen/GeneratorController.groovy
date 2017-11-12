@@ -1,7 +1,7 @@
 package tablecloth.gen
 
 import grails.plugin.springsecurity.annotation.Secured
-import grails.web.Action
+import tablecloth.gen.security.SecurityService
 
 @Secured('ROLE_USER')
 class GeneratorController {
@@ -9,10 +9,10 @@ class GeneratorController {
     static defaultAction = "person"
 
     GeneratorService generatorService
+    SecurityService securityService
 
-    @Action
-    void person() {
-
-        render(text: "<xml>some xml</xml>", contentType: "text/xml", encoding: "UTF-8")
+    def person(String name) {
+        generatorService.generatePerson(name ?: 'bob', securityService.getUser())
+        redirect controller: 'user'
     }
 }

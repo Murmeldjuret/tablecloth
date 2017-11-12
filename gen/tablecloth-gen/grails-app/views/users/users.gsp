@@ -1,6 +1,6 @@
-<%@ page import="tablecloth.gen.model.domain.users.User" %>
+<%@ page import="tablecloth.gen.viewmodel.UserDisplayViewmodel" %>
 <!DOCTYPE html>
-<g:set var="users" value="${(List<User>) users}"/>
+<g:set var="users" value="${(List<UserDisplayViewmodel>) users}"/>
 <html>
 <head>
     <meta name="layout" content="main"/>
@@ -10,14 +10,18 @@
 <body>
 <g:if test="${flash.message}"><h2>${flash.message}</h2></g:if>
 <g:each in="${users}" var="user" status="i">
-    <h3>${i + 1}. ${user.username}</h3>
-        <g:if test="${user.authorities.find{it.authority == 'ROLE_ADMIN'}}">
-            is an admin
-        </g:if>
-        <g:else>
-            <g:link controller="user" action="delete"
-                    params="${[name: user.username]}">Delete</g:link>
-        </g:else>
+    <h3>${i + 1}. ${user.name}</h3>
+    <g:if test="${user.isCurrentUser}">
+        This is you!
+    </g:if>
+    <g:elseif test="${user.isAdmin}">
+        Admin!
+    </g:elseif>
+    <g:else>
+        <g:link controller="user" action="delete"
+                params="${[name: user.name]}">Delete</g:link>
+    </g:else>
+    Nr of PCs: ${user.pcCount}
     <br/>
 </g:each>
 </body>
