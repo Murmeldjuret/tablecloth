@@ -2,6 +2,8 @@ package tablecloth.gen.security
 
 import grails.plugin.springsecurity.annotation.Secured
 import org.springframework.http.HttpStatus
+import tablecloth.gen.commands.AddUserCommand
+import tablecloth.gen.commands.GetUserCommand
 
 @Secured('ROLE_ADMIN')
 class UserController {
@@ -15,10 +17,10 @@ class UserController {
         render view: defaultView, model: [users: users]
     }
 
-    def delete(String name) {
-        if (name && name != '') {
+    def delete(GetUserCommand cmd) {
+        if (cmd.validate()) {
             try {
-                userService.removeUser(name)
+                userService.removeUser(cmd.name)
                 flash.message = 'User removed!'
                 redirect controller: 'user', action: 'index'
             } catch (e) {
@@ -29,10 +31,10 @@ class UserController {
         }
     }
 
-    def create(String name, String pw) {
-        if (name && pw && name != '' && pw != '') {
+    def create(AddUserCommand cmd) {
+        if (cmd.validate()) {
             try {
-                userService.addUser(name, pw)
+                userService.addUser(cmd.name, cmd.pw)
                 flash.message = 'User added!'
                 redirect controller: 'user', action: 'index'
             } catch (e) {

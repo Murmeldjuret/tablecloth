@@ -15,16 +15,20 @@ class UserService {
     List<UserDisplayViewmodel> getUsers() {
         User currentUser = securityService.getUser()
         return User.getAll().collect { User user ->
-            int pcCount = PlayerCharacter.countByOwner(user) ?: 0
-            boolean isAdmin = user.authorities.find { it.authority == 'ROLE_ADMIN' }
-            boolean isCurrentUser = user == currentUser
-            return new UserDisplayViewmodel(
-                name: user.username,
-                isAdmin: isAdmin,
-                pcCount: pcCount,
-                isCurrentUser: isCurrentUser,
-            )
+            createDisplaViewmodel(user, currentUser)
         }
+    }
+
+    private UserDisplayViewmodel createDisplaViewmodel(User user, User currentUser) {
+        int pcCount = PlayerCharacter.countByOwner(user) ?: 0
+        boolean isAdmin = user.authorities.find { it.authority == 'ROLE_ADMIN' }
+        boolean isCurrentUser = user == currentUser
+        return new UserDisplayViewmodel(
+            name: user.username,
+            isAdmin: isAdmin,
+            pcCount: pcCount,
+            isCurrentUser: isCurrentUser,
+        )
     }
 
     @Transactional
