@@ -10,19 +10,7 @@
 <body>
 <g:if test="${flash.message}"><h2>${flash.message}</h2></g:if>
 <g:each in="${users}" var="user" status="i">
-    <h3>${i + 1}. ${user.name}</h3>
-    <g:if test="${user.isCurrentUser}">
-        This is you!
-    </g:if>
-    <g:elseif test="${user.isAdmin}">
-        Admin!
-    </g:elseif>
-    <g:else>
-        <g:link controller="user" action="delete"
-                params="${[name: user.name]}">Delete</g:link>
-    </g:else>
-    Nr of PCs: ${user.pcCount}
-    <br/>
+    <g:render template="/templates/dbform/user" model="[i: i, user: user]"/>
 </g:each>
 </body>
 </html>
