@@ -1,6 +1,5 @@
 package tablecloth.gen.model.domain.users
 
-import grails.compiler.GrailsCompileStatic
 import groovy.transform.EqualsAndHashCode
 import groovy.transform.ToString
 import tablecloth.gen.model.domain.creatures.PlayerCharacter
@@ -9,7 +8,6 @@ import javax.persistence.GeneratedValue
 import javax.persistence.GenerationType
 import javax.persistence.Id
 
-@GrailsCompileStatic
 @EqualsAndHashCode(includes = 'username')
 @ToString(includes = 'username', includeNames = true, includePackage = false)
 class User implements Serializable {

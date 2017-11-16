@@ -1,6 +1,5 @@
 package tablecloth.gen.model.domain.users
 
-import grails.compiler.GrailsCompileStatic
 import groovy.transform.EqualsAndHashCode
 import groovy.transform.ToString
 
@@ -8,7 +7,6 @@ import javax.persistence.GeneratedValue
 import javax.persistence.GenerationType
 import javax.persistence.Id
 
-@GrailsCompileStatic
 @EqualsAndHashCode(includes = 'authority')
 @ToString(includes = 'authority', includeNames = true, includePackage = false)
 class Role implements Serializable {

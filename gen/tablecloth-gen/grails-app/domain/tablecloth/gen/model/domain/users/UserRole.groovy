@@ -1,6 +1,5 @@
 package tablecloth.gen.model.domain.users
 
-import grails.compiler.GrailsCompileStatic
 import grails.gorm.DetachedCriteria
 import groovy.transform.ToString
 import org.codehaus.groovy.util.HashCodeHelper
@@ -9,7 +8,6 @@ import javax.persistence.GeneratedValue
 import javax.persistence.GenerationType
 import javax.persistence.Id
 
-@GrailsCompileStatic
 @ToString(cache = true, includeNames = true, includePackage = false)
 class UserRole implements Serializable {
 
@@ -27,6 +25,7 @@ class UserRole implements Serializable {
         if (other instanceof UserRole) {
             other.userId == user?.id && other.roleId == role?.id
         }
+        return false
     }
 
     @Override
@@ -66,6 +65,7 @@ class UserRole implements Serializable {
         if (u != null && r != null) {
             UserRole.where { user == u && role == r }.deleteAll()
         }
+        return false
     }
 
     static int removeAll(User u) {
