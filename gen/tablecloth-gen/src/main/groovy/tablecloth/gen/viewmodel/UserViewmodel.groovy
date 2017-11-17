@@ -1,6 +1,6 @@
 package tablecloth.gen.viewmodel
 
-class UserDisplayViewmodel {
+class UserViewmodel {
 
     String name
     int pcCount

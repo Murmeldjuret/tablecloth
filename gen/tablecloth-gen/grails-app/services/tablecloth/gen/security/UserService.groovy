@@ -6,24 +6,24 @@ import tablecloth.gen.model.domain.creatures.PlayerCharacter
 import tablecloth.gen.model.domain.users.Role
 import tablecloth.gen.model.domain.users.User
 import tablecloth.gen.model.domain.users.UserRole
-import tablecloth.gen.viewmodel.UserDisplayViewmodel
+import tablecloth.gen.viewmodel.UserViewmodel
 
 class UserService {
 
     SecurityService securityService
 
-    List<UserDisplayViewmodel> getUsers() {
+    List<UserViewmodel> getUsers() {
         User currentUser = securityService.getUser()
         return User.getAll().collect { User user ->
             createDisplaViewmodel(user, currentUser)
         }
     }
 
-    private UserDisplayViewmodel createDisplaViewmodel(User user, User currentUser) {
+    private UserViewmodel createDisplaViewmodel(User user, User currentUser) {
         int pcCount = PlayerCharacter.countByOwner(user) ?: 0
         boolean isAdmin = user.authorities.find { it.authority == 'ROLE_ADMIN' }
         boolean isCurrentUser = user == currentUser
-        return new UserDisplayViewmodel(
+        return new UserViewmodel(
             name: user.username,
             isAdmin: isAdmin,
             pcCount: pcCount,

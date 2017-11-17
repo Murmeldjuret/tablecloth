@@ -1,6 +1,6 @@
-<%@ page import="tablecloth.gen.viewmodel.UserDisplayViewmodel" %>
+<%@ page import="tablecloth.gen.viewmodel.UserViewmodel" %>
 <!DOCTYPE html>
-<g:set var="users" value="${(List<UserDisplayViewmodel>) users}"/>
+<g:set var="users" value="${(List<UserViewmodel>) users}"/>
 <html>
 <head>
     <meta name="layout" content="main"/>
