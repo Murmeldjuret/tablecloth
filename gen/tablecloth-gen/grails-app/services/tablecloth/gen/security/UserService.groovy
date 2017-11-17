@@ -13,16 +13,28 @@ class UserService {
     SecurityService securityService
 
     List<UserViewmodel> getUsers() {
-        User currentUser = securityService.getUser()
+        User currentUser = securityService.user
         return User.getAll().collect { User user ->
-            createDisplaViewmodel(user, currentUser)
+            createViewmodel(user, currentUser)
         }
     }
 
-    private UserViewmodel createDisplaViewmodel(User user, User currentUser) {
+    UserViewmodel getUser(String username) {
+        User user = User.findByUsername(username)
+        return getUser(user)
+    }
+
+    UserViewmodel getUser(User user) {
+        if (!user) {
+            return null
+        }
+        return createViewmodel(user, null)
+    }
+
+    private UserViewmodel createViewmodel(User user, User currentUser) {
         int pcCount = PlayerCharacter.countByOwner(user) ?: 0
         boolean isAdmin = user.authorities.find { it.authority == 'ROLE_ADMIN' }
-        boolean isCurrentUser = user == currentUser
+        boolean isCurrentUser = currentUser ? user == currentUser : false
         return new UserViewmodel(
             name: user.username,
             isAdmin: isAdmin,

@@ -12,7 +12,7 @@ class GeneratorController {
     SecurityService securityService
 
     def person(String name) {
-        generatorService.generatePerson(name ?: 'bob', securityService.getUser())
-        redirect controller: 'user'
+        generatorService.generatePerson(name ?: 'bob', securityService.user)
+        redirect controller: 'characters'
     }
 }
