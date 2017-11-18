@@ -5,7 +5,7 @@ import tablecloth.gen.model.domain.creatures.PlayerCharacter
 import tablecloth.gen.model.domain.users.User
 import tablecloth.gen.viewmodel.PersonViewmodel
 
-class CharacterService {
+class CharactersService {
 
     DatabaseService databaseService
 
@@ -14,7 +14,7 @@ class CharacterService {
         if (!user) {
             return null
         }
-        List<PlayerCharacter> chars = user.characters.toArray() ?: []
+        List<PlayerCharacter> chars = user.characters?.toArray() as List<PlayerCharacter> ?: []
         return chars?.collect {
             playerCharacterToViewmodel(it)
         }

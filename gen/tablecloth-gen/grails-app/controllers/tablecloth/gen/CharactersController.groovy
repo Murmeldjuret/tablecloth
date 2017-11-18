@@ -12,11 +12,11 @@ class CharactersController {
 
     SecurityService securityService
     UserService userService
-    CharacterService characterService
+    CharactersService charactersService
 
     def index() {
         def user = userService.getUser(securityService.user)
-        def characters = characterService.getCharsOfUser(user.name)
+        def characters = charactersService.getCharsOfUser(user.name)
         render view: 'characters', model: [user: user, chars: characters]
     }
 
@@ -27,7 +27,7 @@ class CharactersController {
             flash.message = "Could not find user by username $username"
             render view: 'error'
         } else {
-            def characters = characterService.getCharsOfUser(username)
+            def characters = charactersService.getCharsOfUser(username)
             render view: 'characters', model: [user: user, chars: characters, readonly: true]
         }
     }
@@ -46,7 +46,7 @@ class CharactersController {
             flash.message = "Failed to add character, reason: ${ValidatableResponseUtil.errorcount(cmd)}"
             redirect action: 'index'
         } else {
-            boolean success = characterService.deleteCharacter(cmd.charId)
+            boolean success = charactersService.deleteCharacter(cmd.charId)
             if (!success) {
                 flash.message = "Failed to delete character!"
                 render view: 'error'

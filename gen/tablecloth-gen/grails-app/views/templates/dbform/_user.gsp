@@ -14,6 +14,13 @@
     <g:link controller="user" action="delete"
             params="${[name: user.name]}">Delete</g:link>
 </g:else>
-Nr of PCs: ${user.pcCount}
+-
+<g:if test="${user.isCurrentUser}">
+    <g:link controller="characters" action="index">Nr of PCs: ${user.pcCount}</g:link>
+</g:if>
+<g:else>
+    <g:link controller="characters" action="forUser"
+            params="${[username: user.name]}">Nr of PCs: ${user.pcCount}</g:link>
+</g:else>
 <br/>
 </html>
