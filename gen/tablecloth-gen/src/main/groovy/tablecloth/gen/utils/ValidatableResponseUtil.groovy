@@ -1,4 +1,4 @@
-package tablecloth.gen.utils.random
+package tablecloth.gen.utils
 
 import grails.validation.Validateable
 

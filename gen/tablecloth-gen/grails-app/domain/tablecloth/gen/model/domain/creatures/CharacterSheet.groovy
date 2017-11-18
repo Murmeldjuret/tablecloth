@@ -10,8 +10,6 @@ class CharacterSheet {
     @GeneratedValue(strategy=GenerationType.IDENTITY)
     Long id
 
-    String name
-
     int strength
 
     int dexterity
