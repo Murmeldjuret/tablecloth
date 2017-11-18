@@ -5,7 +5,7 @@ import tablecloth.gen.commands.AddPersonCommand
 import tablecloth.gen.commands.DeletePersonCommand
 import tablecloth.gen.security.SecurityService
 import tablecloth.gen.security.UserService
-import tablecloth.gen.utils.random.ValidatableResponseUtil
+import tablecloth.gen.utils.ValidatableResponseUtil
 
 @Secured('ROLE_USER')
 class CharactersController {
