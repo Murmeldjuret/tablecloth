@@ -31,5 +31,6 @@ class GeneratorService {
         )
         PlayerCharacter pc = new PlayerCharacter(name: cmd.name, sheet: sheet, owner: user)
         databaseService.save(pc, user)
+        return true
     }
 }

@@ -1,5 +1,6 @@
 package tablecloth.gen
 
+import tablecloth.gen.exceptions.TableclothDomainException
 import tablecloth.gen.model.domain.creatures.CharacterSheet
 import tablecloth.gen.model.domain.creatures.PlayerCharacter
 import tablecloth.gen.model.domain.users.User
@@ -20,13 +21,13 @@ class CharactersService {
         }
     }
 
-    boolean deleteCharacter(int id) {
+    void deleteCharacter(Integer id) {
         PlayerCharacter pc = PlayerCharacter.findById(id)
         if (!pc) {
-            return false
+            throw new TableclothDomainException("Failed to delete character with id: $id" +
+                ", no character with that id exists.")
         }
         databaseService.delete(pc)
-        return true
     }
 
     private static PersonViewmodel playerCharacterToViewmodel(PlayerCharacter playerCharacter) {

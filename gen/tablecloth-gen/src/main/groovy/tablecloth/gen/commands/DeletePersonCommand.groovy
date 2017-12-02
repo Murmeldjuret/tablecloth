@@ -6,7 +6,7 @@ class DeletePersonCommand implements Validateable {
 
     String characterName
     String returntoUser
-    int charId
+    Integer charId
 
     static constraints = {
         characterName nullable: true

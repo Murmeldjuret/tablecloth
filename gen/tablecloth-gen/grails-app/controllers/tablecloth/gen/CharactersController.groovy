@@ -25,39 +25,36 @@ class CharactersController {
         def user = userService.getUser(username)
         if (!user) {
             flash.message = "Could not find user by username $username"
-            render view: 'error'
-        } else {
-            def characters = charactersService.getCharsOfUser(username)
-            render view: 'characters', model: [user: user, chars: characters, readonly: true]
+            redirect controller: 'user'
+            return
         }
+        def characters = charactersService.getCharsOfUser(username)
+        render view: 'characters', model: [user: user, chars: characters, readonly: true]
     }
 
     def addPerson(AddPersonCommand cmd) {
         if (!cmd.validate()) {
             flash.message = "Failed to add character, reason: ${ValidatableResponseUtil.errorcount(cmd)}"
             render view: 'characters'
-        } else {
-            redirect controller: 'generator', action: 'person', params: [name: cmd.characterName]
+            return
         }
+        redirect controller: 'generator', action: 'person', params: [name: cmd.characterName]
     }
 
     def delete(DeletePersonCommand cmd) {
         if (!cmd.validate()) {
             flash.message = "Failed to add character, reason: ${ValidatableResponseUtil.errorcount(cmd)}"
             redirect action: 'index'
-        } else {
-            boolean success = charactersService.deleteCharacter(cmd.charId)
-            if (!success) {
-                flash.message = "Failed to delete character!"
-                render view: 'error'
-            } else {
-                flash.message = "Deleted character ${cmd.characterName ?: ''}!"
-                if (cmd.returntoUser) {
-                    redirect action: 'forUser', params: [username: cmd.returntoUser]
-                } else {
-                    redirect action: 'index'
-                }
-            }
+            return
         }
+
+        charactersService.deleteCharacter(cmd.charId)
+
+        flash.message = "Deleted character ${cmd.characterName ?: ''}!"
+        if (cmd.returntoUser) {
+            redirect action: 'forUser', params: [username: cmd.returntoUser]
+            return
+        }
+        redirect action: 'index'
     }
 }
