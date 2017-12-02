@@ -43,6 +43,11 @@
                 </g:each>
             </ul>
         </li>
+        <sec:ifLoggedIn>
+            <li>
+                <g:link controller="logoff">- LOGOUT -</g:link>
+            </li>
+        </sec:ifLoggedIn>
     </content>
 
     <div class="svg" role="presentation">

@@ -1,13 +1,9 @@
 package tablecloth.gen
 
-import tablecloth.gen.model.domain.users.Role
-import tablecloth.gen.model.domain.users.User
-import tablecloth.gen.model.domain.users.UserRole
-
 class BootStrap {
 
     def init = { servletContext ->
-
+        /*
         if (User.count() == 0) {
             def adminRole = new Role(authority: 'ROLE_ADMIN').save()
             def userRole = new Role(authority: 'ROLE_USER').save()
@@ -22,7 +18,7 @@ class BootStrap {
             assert User.count() == 2
             assert Role.count() == 2
             assert UserRole.count() == 3
-        }
+        }*/
     }
     def destroy = {
     }
