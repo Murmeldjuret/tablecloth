@@ -30,7 +30,7 @@ class User implements Serializable {
     }
 
     static hasMany = [
-            characters: PlayerCharacter
+        characters: PlayerCharacter
     ]
 
     static constraints = {
@@ -40,5 +40,6 @@ class User implements Serializable {
 
     static mapping = {
         password column: '`password`'
+        characters column: 'chars'
     }
 }
