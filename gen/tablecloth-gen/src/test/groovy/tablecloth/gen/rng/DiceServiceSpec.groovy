@@ -35,6 +35,15 @@ class DiceServiceSpec extends Specification implements ServiceUnitTest<DiceServi
         [12, 12, 12]    | 12    | 3        || 36          | 3
     }
 
+    def "test default roll is single die"() {
+        when:
+        List<Integer> sum = service.rollDice()
+
+        then:
+        1 * service.randomService.getInt(6) >> 4
+        sum.first() == 4
+    }
+
     def "test exploding dice explode"() {
         given:
         DiceCommand cmd = new DiceCommand(

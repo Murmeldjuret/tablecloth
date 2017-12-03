@@ -2,10 +2,10 @@ package tablecloth.gen.model.domain.creatures
 
 import tablecloth.gen.model.domain.users.User
 
-class PlayerCharacter extends StattedCreature {
+class PlayerCharacter extends Creature {
 
     static belongsTo = [
-            owner: User
+        owner: User
     ]
 
     static constraints = {

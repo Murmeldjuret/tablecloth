@@ -7,7 +7,7 @@ import javax.persistence.Id
 class CharacterSheet {
 
     @Id
-    @GeneratedValue(strategy=GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     Long id
 
     int strength
@@ -17,7 +17,7 @@ class CharacterSheet {
     int intelligence
 
     static belongsTo = [
-            owner: StattedCreature
+        owner: Creature
     ]
 
 }

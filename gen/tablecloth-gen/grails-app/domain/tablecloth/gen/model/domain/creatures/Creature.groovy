@@ -12,6 +12,10 @@ class Creature {
 
     String name
 
+    static hasOne = [
+        sheet: CharacterSheet
+    ]
+
     static constraints = {
     }
 }

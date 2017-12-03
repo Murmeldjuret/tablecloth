@@ -16,7 +16,7 @@ class CharactersService {
             return null
         }
         List<PlayerCharacter> chars = user.characters?.toArray() as List<PlayerCharacter> ?: []
-        return chars?.collect {
+        return chars.collect {
             playerCharacterToViewmodel(it)
         }
     }
