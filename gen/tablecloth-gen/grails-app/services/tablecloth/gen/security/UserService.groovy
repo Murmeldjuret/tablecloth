@@ -21,7 +21,7 @@ class UserService {
 
     UserViewmodel getUser(String username) {
         User user = User.findByUsername(username)
-        return getUser(user)
+        return getUser(user as User)
     }
 
     UserViewmodel getUser(User user) {
@@ -29,18 +29,6 @@ class UserService {
             return null
         }
         return createViewmodel(user, null)
-    }
-
-    private UserViewmodel createViewmodel(User user, User currentUser) {
-        int pcCount = PlayerCharacter.countByOwner(user) ?: 0
-        boolean isAdmin = user.authorities.find { it.authority == 'ROLE_ADMIN' }
-        boolean isCurrentUser = currentUser ? user == currentUser : false
-        return new UserViewmodel(
-            name: user.username,
-            isAdmin: isAdmin,
-            pcCount: pcCount,
-            isCurrentUser: isCurrentUser,
-        )
     }
 
     @Transactional
@@ -59,11 +47,22 @@ class UserService {
         User user = User.findByUsername(name)
         if (!user) {
             throw new TableclothDomainException("No user with the name: $name exists.")
-        } else {
-            UserRole.removeAll(user)
-            user.delete(flush: true)
-            log.info("Deleted $user")
         }
+        UserRole.removeAll(user)
+        user.delete(flush: true)
+        log.info("Deleted $user")
+    }
+
+    private UserViewmodel createViewmodel(User user, User currentUser) {
+        int pcCount = PlayerCharacter.countByOwner(user)
+        boolean isAdmin = user.authorities.find { it.authority == 'ROLE_ADMIN' }
+        boolean isCurrentUser = currentUser ? user == currentUser : false
+        return new UserViewmodel(
+            name: user.username,
+            isAdmin: isAdmin,
+            pcCount: pcCount,
+            isCurrentUser: isCurrentUser,
+        )
     }
 
 }
