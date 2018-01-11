@@ -7,7 +7,7 @@ import javax.persistence.Id
 class Creature {
 
     @Id
-    @GeneratedValue(strategy=GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     Long id
 
     String name

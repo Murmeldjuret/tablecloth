@@ -2,6 +2,7 @@ package tablecloth.gen.model.domain.users
 
 import groovy.transform.EqualsAndHashCode
 import groovy.transform.ToString
+import tablecloth.gen.model.domain.campaign.Campaign
 import tablecloth.gen.model.domain.creatures.PlayerCharacter
 
 import javax.persistence.GeneratedValue
@@ -30,7 +31,8 @@ class User implements Serializable {
     }
 
     static hasMany = [
-        characters: PlayerCharacter
+        characters: PlayerCharacter,
+        campaigns: Campaign
     ]
 
     static constraints = {

@@ -9,12 +9,10 @@ import tablecloth.gen.model.domain.creatures.PlayerCharacter
 import tablecloth.gen.model.domain.users.User
 import tablecloth.gen.viewmodel.PersonViewmodel
 
-class CharactersServiceTest extends Specification implements ServiceUnitTest<CharactersService>, DataTest {
+class CharactersServiceSpec extends Specification implements ServiceUnitTest<CharactersService>, DataTest {
 
     void setupSpec() {
-        mockDomain User
-        mockDomain PlayerCharacter
-        mockDomain CharacterSheet
+        mockDomains(User, PlayerCharacter, CharacterSheet)
     }
 
     void setup() {
