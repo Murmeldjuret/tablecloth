@@ -8,6 +8,8 @@ import tablecloth.gen.MockObjects
 import tablecloth.gen.commands.AddCampaignCommand
 import tablecloth.gen.model.domain.campaign.Campaign
 import tablecloth.gen.model.domain.users.User
+import tablecloth.gen.modelData.CampaignPermission
+import tablecloth.gen.modelData.ParticipantStatus
 import tablecloth.gen.security.SecurityService
 
 class CampaignServiceSpec extends Specification implements ServiceUnitTest<CampaignService>, DataTest {
@@ -37,6 +39,11 @@ class CampaignServiceSpec extends Specification implements ServiceUnitTest<Campa
         1 * service.securityService.user >> user
         result
         User.findAll().first().campaigns.count { it.name == 'Middle Earth 2.0' } == 1
+        User.findAll().first().campaigns.first().participants.each {
+            it.status == ParticipantStatus.OWNER &&
+                it.user == user &&
+                it.permissions.contains(CampaignPermission.EDIT_CAMPAIGN)
+        }
     }
 
     void "test add new player to campaign"() {
@@ -51,6 +58,10 @@ class CampaignServiceSpec extends Specification implements ServiceUnitTest<Campa
         1 * service.securityService.user >> User.findByUsername('owner')
         result
         User.findAll().first().campaigns.count { it.name == 'Middle Earth 2.0' } == 1
-        Campaign.findAll().first().participants.first().user == user
+        Campaign.findAll().first().participants.find {
+            it.user.username == 'user' &&
+                it.status == ParticipantStatus.PENDING_INVITATION &&
+                it.permissions.contains(CampaignPermission.VIEW)
+        }
     }
 }

@@ -8,6 +8,7 @@ import tablecloth.gen.model.domain.campaign.Campaign
 import tablecloth.gen.model.domain.campaign.Participant
 import tablecloth.gen.model.domain.users.User
 import tablecloth.gen.modelData.CampaignPermission
+import tablecloth.gen.modelData.ParticipantStatus
 import tablecloth.gen.security.SecurityService
 
 @Transactional
@@ -29,6 +30,7 @@ class CampaignService {
         User user = securityService.user
         Participant participant = new Participant(
             user: user,
+            status: ParticipantStatus.OWNER,
             permissions: CampaignPermission.masterPermissions(),
         )
         camp.participants.add(participant)
@@ -51,6 +53,7 @@ class CampaignService {
         } else {
             Participant participant = new Participant(
                 user: user,
+                status: ParticipantStatus.PENDING_INVITATION,
                 permissions: camp.defaultPermissions
             )
             user.campaigns.add(camp)

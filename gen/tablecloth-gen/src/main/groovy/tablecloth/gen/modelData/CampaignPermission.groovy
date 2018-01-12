@@ -6,8 +6,6 @@ enum CampaignPermission {
     EDIT_PC('Edit player character'),
     EDIT_PARTY_PROPERTIES('Edit party properties'),
     EDIT_JOURNAL('Edit player journal'),
-    ACCEPTED_INVITATION('Player'),
-    FORMER_PLAYER('Former player'),
     VIEW('View rights')
 
     String desc

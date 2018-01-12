@@ -1,10 +1,12 @@
 package tablecloth.gen
 
 import tablecloth.gen.model.domain.campaign.Campaign
+import tablecloth.gen.model.domain.campaign.Participant
 import tablecloth.gen.model.domain.creatures.CharacterSheet
 import tablecloth.gen.model.domain.creatures.PlayerCharacter
 import tablecloth.gen.model.domain.users.User
 import tablecloth.gen.modelData.CampaignPermission
+import tablecloth.gen.modelData.ParticipantStatus
 
 class MockObjects {
 
@@ -31,13 +33,22 @@ class MockObjects {
     }
 
     static Campaign genericCampaign() {
+        User owner = campaignOwner()
         Campaign camp = new Campaign(
-            owner: campaignOwner(),
+            owner: owner,
             name: 'Middle Earth 2.0',
             description: 'Not stolen from Tolkien',
             defaultPermissions: CampaignPermission.defaultPermissions(),
-            participants: [].toSet()
+            participants: [
+                new Participant(
+                    status: ParticipantStatus.OWNER,
+                    user: owner,
+                    permissions: CampaignPermission.masterPermissions()
+                )
+            ]
         )
+        owner.campaigns.add(camp)
+        owner.save()
         camp.save(flush: true)
         return camp
     }
