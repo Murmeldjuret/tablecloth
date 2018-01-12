@@ -6,7 +6,7 @@ import tablecloth.gen.model.domain.creatures.PlayerCharacter
 import tablecloth.gen.model.domain.users.User
 import tablecloth.gen.modelData.CampaignPermission
 
-class DummyObjects {
+class MockObjects {
 
     static User genericUser() {
         User user = new User(

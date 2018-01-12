@@ -21,7 +21,7 @@ class CharactersServiceSpec extends Specification implements ServiceUnitTest<Cha
 
     void "test getCharsOfUser"() {
         given:
-        DummyObjects.genericPC()
+        MockObjects.genericPC()
         PersonViewmodel viewmodel = new PersonViewmodel(
             name: 'myPC',
             intelligence: 10,
@@ -51,7 +51,7 @@ class CharactersServiceSpec extends Specification implements ServiceUnitTest<Cha
 
     void "test getCharsOfUser user has no characters"() {
         given:
-        DummyObjects.genericUser()
+        MockObjects.genericUser()
 
         when:
         List<PersonViewmodel> views = service.getCharsOfUser('user')
@@ -62,7 +62,7 @@ class CharactersServiceSpec extends Specification implements ServiceUnitTest<Cha
 
     void "test deleteCharacter"() {
         given:
-        DummyObjects.genericPC()
+        MockObjects.genericPC()
 
         when:
         service.deleteCharacter(1)
@@ -73,7 +73,7 @@ class CharactersServiceSpec extends Specification implements ServiceUnitTest<Cha
 
     void "test deleteCharacter with invalid id"() {
         given:
-        DummyObjects.genericPC()
+        MockObjects.genericPC()
 
         when:
         service.deleteCharacter(-5)

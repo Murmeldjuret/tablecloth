@@ -4,7 +4,7 @@ import grails.testing.gorm.DataTest
 import grails.testing.services.ServiceUnitTest
 import spock.lang.Specification
 import tablecloth.gen.DatabaseService
-import tablecloth.gen.DummyObjects
+import tablecloth.gen.MockObjects
 import tablecloth.gen.commands.AddCampaignCommand
 import tablecloth.gen.model.domain.campaign.Campaign
 import tablecloth.gen.model.domain.users.User
@@ -24,7 +24,7 @@ class CampaignServiceSpec extends Specification implements ServiceUnitTest<Campa
 
     void "test add new campaign to User"() {
         given:
-        User user = DummyObjects.genericUser()
+        User user = MockObjects.genericUser()
         AddCampaignCommand cmd = new AddCampaignCommand(
             name: 'Middle Earth 2.0',
             description: 'Not stolen from Tolkien',
@@ -41,8 +41,8 @@ class CampaignServiceSpec extends Specification implements ServiceUnitTest<Campa
 
     void "test add new player to campaign"() {
         given:
-        User user = DummyObjects.genericUser()
-        Campaign camp = DummyObjects.genericCampaign()
+        User user = MockObjects.genericUser()
+        Campaign camp = MockObjects.genericCampaign()
 
         when:
         boolean result = service.addPlayerToCampaign(camp, user)
