@@ -21,7 +21,7 @@ class CharactersServiceSpec extends Specification implements ServiceUnitTest<Cha
 
     void "test getCharsOfUser"() {
         given:
-        saveDummy()
+        DummyObjects.genericPC()
         PersonViewmodel viewmodel = new PersonViewmodel(
             name: 'myPC',
             intelligence: 10,
@@ -51,11 +51,7 @@ class CharactersServiceSpec extends Specification implements ServiceUnitTest<Cha
 
     void "test getCharsOfUser user has no characters"() {
         given:
-        new User(
-            username: 'user',
-            password: 'supersecure101',
-            characters: null
-        ).save()
+        DummyObjects.genericUser()
 
         when:
         List<PersonViewmodel> views = service.getCharsOfUser('user')
@@ -66,7 +62,7 @@ class CharactersServiceSpec extends Specification implements ServiceUnitTest<Cha
 
     void "test deleteCharacter"() {
         given:
-        saveDummy()
+        DummyObjects.genericPC()
 
         when:
         service.deleteCharacter(1)
@@ -77,7 +73,7 @@ class CharactersServiceSpec extends Specification implements ServiceUnitTest<Cha
 
     void "test deleteCharacter with invalid id"() {
         given:
-        saveDummy()
+        DummyObjects.genericPC()
 
         when:
         service.deleteCharacter(-5)
@@ -87,26 +83,5 @@ class CharactersServiceSpec extends Specification implements ServiceUnitTest<Cha
         PlayerCharacter.count == 1
         CharacterSheet.count == 1
         thrown TableclothDomainException
-    }
-
-    private static void saveDummy() {
-        User user = new User(
-            username: 'user',
-            password: 'supersecure101',
-            characters: [].toSet()
-        )
-        PlayerCharacter character = new PlayerCharacter(
-            name: 'myPC',
-            owner: user,
-        )
-        CharacterSheet sheet = new CharacterSheet(
-            owner: character,
-            intelligence: 10,
-            strength: 11,
-            dexterity: 12,
-        )
-        character.sheet = sheet
-        user.characters.add(character)
-        user.save()
     }
 }

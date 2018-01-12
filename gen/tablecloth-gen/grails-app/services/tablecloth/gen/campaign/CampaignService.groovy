@@ -24,6 +24,7 @@ class CampaignService {
             name: cmd.name,
             description: cmd.description,
             defaultPermissions: CampaignPermission.defaultPermissions(),
+            participants: [].toSet(),
         )
         User user = securityService.user
         Participant participant = new Participant(
