@@ -3,19 +3,17 @@ package tablecloth.gen
 import grails.plugin.springsecurity.annotation.Secured
 import tablecloth.gen.commands.AddPersonCommand
 import tablecloth.gen.commands.DeletePersonCommand
-import tablecloth.gen.security.SecurityService
 import tablecloth.gen.security.UserService
 import tablecloth.gen.utils.ValidatableResponseUtil
 
 @Secured('ROLE_USER')
 class CharactersController {
 
-    SecurityService securityService
     UserService userService
     CharactersService charactersService
 
     def index() {
-        def user = userService.getUser(securityService.user)
+        def user = userService.getCurrentUser()
         def characters = charactersService.getCharsOfUser(user.name)
         render view: 'characters', model: [user: user, chars: characters]
     }

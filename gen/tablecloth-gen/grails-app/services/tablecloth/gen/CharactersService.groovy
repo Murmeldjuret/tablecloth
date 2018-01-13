@@ -1,7 +1,6 @@
 package tablecloth.gen
 
 import tablecloth.gen.exceptions.TableclothDomainException
-import tablecloth.gen.model.domain.creatures.CharacterSheet
 import tablecloth.gen.model.domain.creatures.PlayerCharacter
 import tablecloth.gen.model.domain.users.User
 import tablecloth.gen.viewmodel.PersonViewmodel
@@ -17,7 +16,7 @@ class CharactersService {
         }
         List<PlayerCharacter> chars = user.characters?.toArray() as List<PlayerCharacter> ?: []
         return chars.collect {
-            playerCharacterToViewmodel(it)
+            PersonViewmodel.fromDomain(it)
         }
     }
 
@@ -28,16 +27,5 @@ class CharactersService {
                 ", no character with that id exists.")
         }
         databaseService.delete(pc)
-    }
-
-    private static PersonViewmodel playerCharacterToViewmodel(PlayerCharacter playerCharacter) {
-        CharacterSheet sheet = playerCharacter.sheet
-        return new PersonViewmodel(
-            charId: playerCharacter.id,
-            name: playerCharacter.name,
-            strength: sheet.strength,
-            intelligence: sheet.intelligence,
-            dexterity: sheet.dexterity,
-        )
     }
 }

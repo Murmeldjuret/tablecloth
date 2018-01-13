@@ -24,6 +24,10 @@ class UserService {
         return getUser(user as User)
     }
 
+    UserViewmodel getCurrentUser() {
+        return getUser(securityService.user)
+    }
+
     UserViewmodel getUser(User user) {
         if (!user) {
             return null

@@ -11,6 +11,7 @@ import tablecloth.gen.model.domain.users.User
 import tablecloth.gen.modelData.CampaignPermission
 import tablecloth.gen.modelData.ParticipantStatus
 import tablecloth.gen.security.SecurityService
+import tablecloth.gen.viewmodel.CampaignViewmodel
 
 class CampaignServiceSpec extends Specification implements ServiceUnitTest<CampaignService>, DataTest {
 
@@ -33,11 +34,10 @@ class CampaignServiceSpec extends Specification implements ServiceUnitTest<Campa
         )
 
         when:
-        boolean result = service.newCampaign(cmd)
+        service.newCampaign(cmd)
 
         then:
         1 * service.securityService.user >> user
-        result
         User.findAll().first().campaigns.count { it.name == 'Middle Earth 2.0' } == 1
         User.findAll().first().campaigns.first().participants.each {
             it.status == ParticipantStatus.OWNER &&
@@ -52,16 +52,41 @@ class CampaignServiceSpec extends Specification implements ServiceUnitTest<Campa
         Campaign camp = MockObjects.genericCampaign()
 
         when:
-        boolean result = service.addPlayerToCampaign(camp, user)
+        service.addPlayerToCampaign(camp.id, user.username)
 
         then:
         1 * service.securityService.user >> User.findByUsername('owner')
-        result
         User.findAll().first().campaigns.count { it.name == 'Middle Earth 2.0' } == 1
         Campaign.findAll().first().participants.find {
             it.user.username == 'user' &&
                 it.status == ParticipantStatus.PENDING_INVITATION &&
                 it.permissions.contains(CampaignPermission.VIEW)
         }
+    }
+
+    void "test getCampaigns"() {
+        given:
+        Campaign camp = MockObjects.genericCampaign()
+
+        when:
+        List<CampaignViewmodel> camps = service.getCampaigns()
+
+        then:
+        1 * service.securityService.user >> camp.owner
+        camps.size() == 1
+        camps.first().name
+        camps.first().participants.size() == 1
+    }
+
+    void "test delete campaign"() {
+        given:
+        Campaign camp = MockObjects.genericCampaign()
+
+        when:
+        service.removeCampaign(camp.id)
+
+        then:
+        1 * service.securityService.user >> camp.owner
+        1 * service.databaseService.delete(_) >> camp.owner
     }
 }

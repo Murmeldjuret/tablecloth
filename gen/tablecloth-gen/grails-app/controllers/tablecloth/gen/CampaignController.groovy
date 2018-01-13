@@ -1,0 +1,56 @@
+package tablecloth.gen
+
+import grails.plugin.springsecurity.annotation.Secured
+import tablecloth.gen.campaign.CampaignService
+import tablecloth.gen.commands.AddCampaignCommand
+import tablecloth.gen.exceptions.TableclothAccessException
+import tablecloth.gen.exceptions.TableclothDomainException
+import tablecloth.gen.security.UserService
+
+@Secured('ROLE_USER')
+class CampaignController {
+
+    CampaignService campaignService
+    UserService userService
+
+    def index() {
+        def user = userService.getCurrentUser()
+        def campaigns = campaignService.getCampaigns()
+        render view: 'campaigns', model: [campaigns: campaigns, user: user]
+    }
+
+    def create(AddCampaignCommand cmd) {
+        if (!cmd.validate()) {
+            flash.message = "Campaign creation failed due to error $cmd.errors"
+            redirect action: 'index'
+            return
+        }
+        campaignService.newCampaign(cmd)
+        flash.message = "Campaign successfully created!"
+        redirect action: 'index'
+    }
+
+    def inviteUser(long id, String username) {
+        try {
+            campaignService.addPlayerToCampaign(id, username)
+            flash.message = "User Successfully invited"
+        } catch (TableclothDomainException ex) {
+            flash.message = "Error with input: $ex.message"
+        } catch (TableclothAccessException ex) {
+            flash.message = "Error with permissions: $ex.message"
+        }
+        redirect action: 'index'
+    }
+
+    def delete(long id) {
+        try {
+            campaignService.removeCampaign(id)
+            flash.message = "Campaign deleted successfully!"
+        } catch (TableclothDomainException ex) {
+            flash.message = "Error with input: $ex.message"
+        } catch (TableclothAccessException ex) {
+            flash.message = "Error with permissions: $ex.message"
+        }
+        redirect action: 'index'
+    }
+}
