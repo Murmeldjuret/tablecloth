@@ -4,21 +4,24 @@ import grails.testing.gorm.DataTest
 import grails.testing.services.ServiceUnitTest
 import spock.lang.Specification
 import tablecloth.gen.exceptions.TableclothDomainException
+import tablecloth.gen.model.domain.messages.Inbox
 import tablecloth.gen.model.domain.users.Role
 import tablecloth.gen.model.domain.users.User
 import tablecloth.gen.model.domain.users.UserRole
 import tablecloth.gen.viewmodel.UserViewmodel
 
-class UserServiceTest extends Specification implements ServiceUnitTest<UserService>, DataTest {
+class UserServiceSpec extends Specification implements ServiceUnitTest<UserService>, DataTest {
 
     void setupSpec() {
         mockDomain User
         mockDomain Role
         mockDomain UserRole
+        mockDomain Inbox
     }
 
     void setup() {
         service.securityService = Mock(SecurityService)
+        service.securityService.isAdmin(_) >> { args -> args[0].authorities.find { it.authority == 'ROLE_ADMIN' } }
         saveDummyUsers()
     }
 
@@ -72,6 +75,11 @@ class UserServiceTest extends Specification implements ServiceUnitTest<UserServi
             username: 'user1',
             password: 'supersecure101'
         )
+        Inbox inbox = new Inbox(
+            owner: user,
+            messages: [].toSet()
+        )
+        user.inbox = inbox
 
         when:
         UserViewmodel viewmodel = service.getUser(user)
@@ -84,7 +92,7 @@ class UserServiceTest extends Specification implements ServiceUnitTest<UserServi
 
     void "test addUser"() {
         when:
-        service.addUser('user3','123456')
+        service.addUser('user3', '123456')
 
         then:
         UserViewmodel viewmodel = service.getUser('user3')
@@ -95,7 +103,7 @@ class UserServiceTest extends Specification implements ServiceUnitTest<UserServi
 
     void "test addUser not unique"() {
         when:
-        service.addUser('user2','123456')
+        service.addUser('user2', '123456')
 
         then:
         thrown TableclothDomainException
@@ -122,22 +130,37 @@ class UserServiceTest extends Specification implements ServiceUnitTest<UserServi
     private static void saveDummyUsers() {
         Role adminRole = new Role(
             authority: 'ROLE_ADMIN'
-        ).save()
+        ).save(failOnError: true)
         Role userRole = new Role(
             authority: 'ROLE_USER'
-        ).save()
+        ).save(failOnError: true)
         User admin = new User(
             username: 'admin',
             password: 'supersecure101'
-        ).save()
+        )
+        admin.inbox = new Inbox(
+            owner: admin,
+            messages: [].toSet()
+        )
+        admin.save(failOnError: true)
         User user1 = new User(
             username: 'user1',
             password: 'supersecure101'
-        ).save()
+        )
+        user1.inbox = new Inbox(
+            owner: user1,
+            messages: [].toSet()
+        )
+        user1.save(failOnError: true)
         User user2 = new User(
             username: 'user2',
             password: 'supersecure101'
-        ).save()
+        )
+        user2.inbox = new Inbox(
+            owner: user2,
+            messages: [].toSet()
+        )
+        user2.save(failOnError: true)
 
         UserRole.create admin, adminRole, true
         UserRole.create admin, userRole, true

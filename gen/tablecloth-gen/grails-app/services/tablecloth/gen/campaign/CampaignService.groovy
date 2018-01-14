@@ -48,17 +48,12 @@ class CampaignService {
     }
 
     void addPlayerToCampaign(long id, String username) {
-        Campaign camp = Campaign.findById(id)
-        if (!camp) {
-            throw new TableclothDomainException("Campaign with id $id not found")
-        }
+        Campaign camp = fetchCampaign(id)
         User user = User.findByUsername(username)
         if (!user) {
             throw new TableclothDomainException("User with username $username not found")
         }
-        if (camp.owner != securityService.user) {
-            throw new TableclothAccessException("Only owner can add players to campaign!")
-        }
+        assertOwner(camp, "Only owner can add players to campaign!")
         if (!camp.defaultPermissions) {
             log.error("No permissions assigned to campaign $camp")
         }
@@ -73,13 +68,36 @@ class CampaignService {
     }
 
     void removeCampaign(long id) {
-        Campaign camp = Campaign.findById(id)
+        Campaign camp = fetchCampaign(id)
+        assertOwner(camp, "Only owner may remove their campaign.")
+        databaseService.delete(camp)
+    }
+
+    void handleInvitation(boolean accepted, long id, User user) {
+        Campaign camp = fetchCampaign(id)
+        Participant participant = camp.participants.find { it.user == user }
+        if (!participant) {
+            throw new TableclothDomainException("User with $user.username is not participating in campaign with id $id")
+        }
+        if (accepted) {
+            participant.status = ParticipantStatus.ACCEPTED_INVITATION
+        } else {
+            camp.participants.remove(participant)
+        }
+        databaseService.save(camp)
+    }
+
+    private Campaign fetchCampaign(long id) {
+        Campaign camp = Campaign.get(id)
         if (!camp) {
             throw new TableclothDomainException("Campaign with id $id not found")
         }
+        return camp
+    }
+
+    private void assertOwner(Campaign camp, String msg) {
         if (camp.owner != securityService.user) {
-            throw new TableclothAccessException("Only owner may remove their campaign.")
+            throw new TableclothAccessException(msg)
         }
-        databaseService.delete(camp)
     }
 }

@@ -3,6 +3,7 @@ package tablecloth.gen.security
 import grails.gorm.transactions.Transactional
 import tablecloth.gen.exceptions.TableclothDomainException
 import tablecloth.gen.model.domain.creatures.PlayerCharacter
+import tablecloth.gen.model.domain.messages.Inbox
 import tablecloth.gen.model.domain.users.Role
 import tablecloth.gen.model.domain.users.User
 import tablecloth.gen.model.domain.users.UserRole
@@ -41,7 +42,13 @@ class UserService {
         if (user) {
             throw new TableclothDomainException("A user with the name $name already exists.")
         }
-        User newUser = new User(username: name, password: pw).save()
+        User newUser = new User(username: name, password: pw)
+        Inbox inbox = new Inbox(
+            owner: newUser,
+            messages: [].toSet()
+        )
+        newUser.inbox = inbox
+        newUser.save()
         UserRole.create(newUser, Role.findByAuthority('ROLE_USER') as Role, true)
         log.info("Added new $newUser")
     }
@@ -59,7 +66,7 @@ class UserService {
 
     private UserViewmodel createViewmodel(User user, User currentUser) {
         int pcCount = PlayerCharacter.countByOwner(user)
-        boolean isAdmin = user.authorities.find { it.authority == 'ROLE_ADMIN' }
+        boolean isAdmin = securityService.isAdmin(user)
         boolean isCurrentUser = currentUser ? user == currentUser : false
         return new UserViewmodel(
             name: user.username,

@@ -7,6 +7,7 @@ import tablecloth.gen.DatabaseService
 import tablecloth.gen.MockObjects
 import tablecloth.gen.commands.AddCampaignCommand
 import tablecloth.gen.model.domain.campaign.Campaign
+import tablecloth.gen.model.domain.campaign.Participant
 import tablecloth.gen.model.domain.users.User
 import tablecloth.gen.modelData.CampaignPermission
 import tablecloth.gen.modelData.ParticipantStatus
@@ -23,6 +24,8 @@ class CampaignServiceSpec extends Specification implements ServiceUnitTest<Campa
     void setup() {
         service.securityService = Mock(SecurityService)
         service.databaseService = Mock(DatabaseService)
+        service.databaseService.save(_) >> { args -> args[0].each { it.save(failOnError: true) } }
+        service.databaseService.delete(_) >> { args -> args[0].each { it.delete(failOnError: true) } }
     }
 
     void "test add new campaign to User"() {
@@ -87,6 +90,44 @@ class CampaignServiceSpec extends Specification implements ServiceUnitTest<Campa
 
         then:
         1 * service.securityService.user >> camp.owner
-        1 * service.databaseService.delete(_) >> camp.owner
+    }
+
+    void "test accept invitation"() {
+        given:
+        Campaign camp = MockObjects.genericCampaign()
+        User user = MockObjects.genericUser()
+        camp.participants.add(
+            new Participant(
+                user: user,
+                permissions: camp.defaultPermissions,
+                status: ParticipantStatus.PENDING_INVITATION,
+            )
+        )
+
+        when:
+        service.handleInvitation(true, camp.id, user)
+
+        then:
+        camp.participants.size() == 2
+        camp.participants.any { it.status == ParticipantStatus.ACCEPTED_INVITATION }
+    }
+
+    void "test reject invitation"() {
+        given:
+        Campaign camp = MockObjects.genericCampaign()
+        User user = MockObjects.genericUser()
+        camp.participants.add(
+            new Participant(
+                user: user,
+                permissions: camp.defaultPermissions,
+                status: ParticipantStatus.PENDING_INVITATION,
+            )
+        )
+
+        when:
+        service.handleInvitation(false, camp.id, user)
+
+        then:
+        camp.participants.size() == 1
     }
 }

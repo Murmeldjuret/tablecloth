@@ -4,6 +4,8 @@ import tablecloth.gen.model.domain.campaign.Campaign
 
 class CampaignViewmodel {
 
+    long id
+
     String name
     String desc
 
@@ -12,6 +14,7 @@ class CampaignViewmodel {
 
     static CampaignViewmodel fromDomain(Campaign camp) {
         return new CampaignViewmodel(
+            id: camp.id,
             name: camp.name,
             desc: camp.description,
             party: camp.party.collect { PersonViewmodel.fromDomain(it) }.toList(),

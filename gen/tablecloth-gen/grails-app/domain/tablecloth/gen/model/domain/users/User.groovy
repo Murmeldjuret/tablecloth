@@ -4,6 +4,7 @@ import groovy.transform.EqualsAndHashCode
 import groovy.transform.ToString
 import tablecloth.gen.model.domain.campaign.Campaign
 import tablecloth.gen.model.domain.creatures.PlayerCharacter
+import tablecloth.gen.model.domain.messages.Inbox
 
 import javax.persistence.GeneratedValue
 import javax.persistence.GenerationType
@@ -16,7 +17,7 @@ class User implements Serializable {
     private static final long serialVersionUID = 1
 
     @Id
-    @GeneratedValue(strategy=GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     Long id
 
     String username
@@ -32,7 +33,11 @@ class User implements Serializable {
 
     static hasMany = [
         characters: PlayerCharacter,
-        campaigns: Campaign
+        campaigns : Campaign
+    ]
+
+    static hasOne = [
+        inbox: Inbox
     ]
 
     static constraints = {

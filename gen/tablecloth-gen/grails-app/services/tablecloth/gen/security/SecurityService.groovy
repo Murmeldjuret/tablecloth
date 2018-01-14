@@ -9,4 +9,8 @@ class SecurityService {
         String username = SecurityContextHolder?.getContext()?.getAuthentication()?.getPrincipal()?.username ?: ''
         return User.findByUsername(username)
     }
+
+    boolean isAdmin(User user) {
+        return user.authorities.find { it.authority == 'ROLE_ADMIN' }
+    }
 }

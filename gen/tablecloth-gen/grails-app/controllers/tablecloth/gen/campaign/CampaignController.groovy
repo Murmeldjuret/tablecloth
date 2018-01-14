@@ -1,7 +1,6 @@
-package tablecloth.gen
+package tablecloth.gen.campaign
 
 import grails.plugin.springsecurity.annotation.Secured
-import tablecloth.gen.campaign.CampaignService
 import tablecloth.gen.commands.AddCampaignCommand
 import tablecloth.gen.exceptions.TableclothAccessException
 import tablecloth.gen.exceptions.TableclothDomainException
@@ -14,8 +13,8 @@ class CampaignController {
     UserService userService
 
     def index() {
-        def user = userService.getCurrentUser()
-        def campaigns = campaignService.getCampaigns()
+        def user = userService.currentUser
+        def campaigns = campaignService.campaigns
         render view: 'campaigns', model: [campaigns: campaigns, user: user]
     }
 

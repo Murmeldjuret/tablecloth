@@ -21,7 +21,7 @@ class CharactersService {
     }
 
     void deleteCharacter(Integer id) {
-        PlayerCharacter pc = PlayerCharacter.findById(id)
+        PlayerCharacter pc = PlayerCharacter.get(id)
         if (!pc) {
             throw new TableclothDomainException("Failed to delete character with id: $id" +
                 ", no character with that id exists.")
