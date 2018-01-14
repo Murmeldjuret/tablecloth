@@ -21,7 +21,7 @@ class MessageService {
     void sendMessageToUser(String username, String body) {
         User currentUser = securityService.user
         if (!currentUser) {
-            throw new TableclothAccessException("Must be logged in to send messages!")
+            throw new TableclothAccessException("Must be logged in to send messaging!")
         }
         User receiver = fetchReceiver(username)
         Message message = new Message(

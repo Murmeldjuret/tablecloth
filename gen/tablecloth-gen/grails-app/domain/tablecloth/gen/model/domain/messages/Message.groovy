@@ -39,6 +39,5 @@ class Message {
             }
             return val == null
         }
-        body maxSize: 1024
     }
 }

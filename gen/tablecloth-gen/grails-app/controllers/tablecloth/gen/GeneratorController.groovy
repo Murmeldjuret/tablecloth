@@ -1,7 +1,7 @@
 package tablecloth.gen
 
 import grails.plugin.springsecurity.annotation.Secured
-import tablecloth.gen.commands.GenerateCharacterCommand
+import tablecloth.gen.commands.SingleStringCommand
 import tablecloth.gen.security.SecurityService
 import tablecloth.gen.utils.ValidatableResponseUtil
 
@@ -15,7 +15,7 @@ class GeneratorController {
         redirect controller: 'characters'
     }
 
-    def person(GenerateCharacterCommand cmd) {
+    def person(SingleStringCommand cmd) {
         if (!cmd?.validate()) {
             flash.message = "Could not generate character, input ${ValidatableResponseUtil.errorcount(cmd)}"
             redirect controller: 'characters'

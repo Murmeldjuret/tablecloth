@@ -53,7 +53,7 @@ class CampaignService {
         if (!user) {
             throw new TableclothDomainException("User with username $username not found")
         }
-        assertOwner(camp, "Only owner can add players to campaign!")
+        assertOwner(camp, "Only username can add players to campaign!")
         if (!camp.defaultPermissions) {
             log.error("No permissions assigned to campaign $camp")
         }
@@ -69,7 +69,7 @@ class CampaignService {
 
     void removeCampaign(long id) {
         Campaign camp = fetchCampaign(id)
-        assertOwner(camp, "Only owner may remove their campaign.")
+        assertOwner(camp, "Only username may remove their campaign.")
         databaseService.delete(camp)
     }
 

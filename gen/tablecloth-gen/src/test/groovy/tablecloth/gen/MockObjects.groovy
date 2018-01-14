@@ -63,7 +63,7 @@ class MockObjects {
 
     static User campaignOwner() {
         User user = new User(
-            username: 'owner',
+            username: 'username',
             password: 'supersecure101',
             characters: [].toSet(),
             campaigns: [].toSet()

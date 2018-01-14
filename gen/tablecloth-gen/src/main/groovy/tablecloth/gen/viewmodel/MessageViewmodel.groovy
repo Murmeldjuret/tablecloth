@@ -1,6 +1,7 @@
 package tablecloth.gen.viewmodel
 
 import tablecloth.gen.model.domain.messages.Message
+import tablecloth.gen.modelData.MessageType
 
 class MessageViewmodel {
 
@@ -10,6 +11,7 @@ class MessageViewmodel {
     boolean read
     String body
     Long invitationId
+    MessageType type
 
     static MessageViewmodel fromDomain(Message msg) {
         return new MessageViewmodel(
@@ -17,9 +19,10 @@ class MessageViewmodel {
             sender: msg.sender.username,
             sent: msg.sent,
             received: msg.received,
-            read: msg.read,
+            read: msg.read ?: false,
             body: msg.body,
             invitationId: msg.invitationId,
+            type: msg.messageType,
         )
     }
 }

@@ -4,13 +4,13 @@ import tablecloth.gen.model.domain.messages.Inbox
 
 class InboxViewmodel {
 
-    String owner
+    String username
 
     List<MessageViewmodel> messages
 
     static InboxViewmodel fromDomain(Inbox inbox) {
         return new InboxViewmodel(
-            owner: inbox.owner.username,
+            username: inbox.owner.username,
             messages: inbox.messages.collect { MessageViewmodel.fromDomain(it) }
         )
     }

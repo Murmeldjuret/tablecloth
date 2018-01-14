@@ -19,7 +19,7 @@
 <g:if test="${!readonly}">
     <g:form controller="characters" action="addPerson">
         <div>
-            <g:textField name="characterName" value="Name" id="characterName"/>
+            <g:textField name="name" value="Name" id="name"/>
         </div>
         <g:submitButton name="addPersonButton" value="RollNewCharacter"/>
     </g:form>

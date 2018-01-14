@@ -58,7 +58,7 @@ class CampaignServiceSpec extends Specification implements ServiceUnitTest<Campa
         service.addPlayerToCampaign(camp.id, user.username)
 
         then:
-        1 * service.securityService.user >> User.findByUsername('owner')
+        1 * service.securityService.user >> User.findByUsername('username')
         User.findAll().first().campaigns.count { it.name == 'Middle Earth 2.0' } == 1
         Campaign.findAll().first().participants.find {
             it.user.username == 'user' &&

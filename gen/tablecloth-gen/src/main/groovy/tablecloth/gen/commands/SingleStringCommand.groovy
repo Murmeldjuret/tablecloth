@@ -2,7 +2,7 @@ package tablecloth.gen.commands
 
 import grails.validation.Validateable
 
-class GenerateCharacterCommand implements Validateable {
+class SingleStringCommand implements Validateable {
 
     String name
 

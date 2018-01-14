@@ -1,8 +1,8 @@
 package tablecloth.gen
 
 import grails.plugin.springsecurity.annotation.Secured
-import tablecloth.gen.commands.AddPersonCommand
 import tablecloth.gen.commands.DeletePersonCommand
+import tablecloth.gen.commands.SingleStringCommand
 import tablecloth.gen.security.UserService
 import tablecloth.gen.utils.ValidatableResponseUtil
 
@@ -30,13 +30,13 @@ class CharactersController {
         render view: 'characters', model: [user: user, chars: characters, readonly: true]
     }
 
-    def addPerson(AddPersonCommand cmd) {
+    def addPerson(SingleStringCommand cmd) {
         if (!cmd.validate()) {
             flash.message = "Failed to add character, reason: ${ValidatableResponseUtil.errorcount(cmd)}"
             render view: 'characters'
             return
         }
-        redirect controller: 'generator', action: 'person', params: [name: cmd.characterName]
+        redirect controller: 'generator', action: 'person', params: [name: cmd.name]
     }
 
     def delete(DeletePersonCommand cmd) {

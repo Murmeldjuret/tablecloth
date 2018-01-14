@@ -87,7 +87,7 @@ class InboxServiceSpec extends HibernateSpec implements ServiceUnitTest<InboxSer
         then:
         1 * service.securityService.user >> inbox.owner
         viewmodel.messages.size() == 3
-        viewmodel.owner == inbox.owner.username
+        viewmodel.username == inbox.owner.username
         Inbox.findAll().first().messages.each { it.received != null }
     }
 }

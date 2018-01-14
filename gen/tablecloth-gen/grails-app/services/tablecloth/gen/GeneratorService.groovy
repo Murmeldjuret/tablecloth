@@ -1,7 +1,7 @@
 package tablecloth.gen
 
 import tablecloth.gen.commands.DiceCommand
-import tablecloth.gen.commands.GenerateCharacterCommand
+import tablecloth.gen.commands.SingleStringCommand
 import tablecloth.gen.model.domain.creatures.CharacterSheet
 import tablecloth.gen.model.domain.creatures.PlayerCharacter
 import tablecloth.gen.model.domain.users.User
@@ -12,7 +12,7 @@ class GeneratorService {
     DatabaseService databaseService
     DiceService diceService
 
-    boolean generatePerson(GenerateCharacterCommand cmd, User user) {
+    boolean generatePerson(SingleStringCommand cmd, User user) {
         assert User
         if (!cmd?.validate()) {
             return false
