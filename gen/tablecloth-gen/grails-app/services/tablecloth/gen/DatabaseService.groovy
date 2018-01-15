@@ -12,7 +12,7 @@ class DatabaseService {
         log.info("Saving ${objs.size()} objects to database.")
         objs.each { GormEntity entity ->
             log.debug("Saving $entity to database.")
-            entity.save(flush: true)
+            entity.save()
         }
     }
 
@@ -21,7 +21,7 @@ class DatabaseService {
         log.info("Deleting ${objs.size()} objects from database.")
         objs.each { GormEntity entity ->
             log.debug("Deleting $entity from database.")
-            entity.delete(flush: true)
+            entity.delete()
         }
     }
 }

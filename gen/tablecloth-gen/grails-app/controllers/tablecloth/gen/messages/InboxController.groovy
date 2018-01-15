@@ -18,7 +18,7 @@ class InboxController {
     def index() {
         def user = userService.currentUser
         def inbox = inboxService.getCurrentInbox()
-        render view: "../messages/inbox", model: [inbox: inbox, user: user]
+        render view: "/inbox/inbox", model: [inbox: inbox, user: user]
     }
 
     def send(SendMessageCommand cmd) {

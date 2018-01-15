@@ -77,10 +77,9 @@ class MessageServiceSpec extends HibernateSpec implements ServiceUnitTest<Messag
         String msgBody = "Message body ä2501sa_25"
 
         when:
-        service.sendInvitationToUser(camp, user.username, msgBody)
+        service.sendInvitationToUser(camp, user, msgBody)
 
         then:
-        User.findByUsername(user.username).inbox.messages.size() == 1
         User.findByUsername(user.username).inbox.messages.any {
             it.body == msgBody &&
                 it.messageType == MessageType.INVITATION &&

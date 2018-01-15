@@ -1,11 +1,11 @@
 package tablecloth.gen.campaign
 
-import grails.testing.gorm.DataTest
+import grails.test.hibernate.HibernateSpec
 import grails.testing.services.ServiceUnitTest
-import spock.lang.Specification
 import tablecloth.gen.DatabaseService
 import tablecloth.gen.MockObjects
 import tablecloth.gen.commands.AddCampaignCommand
+import tablecloth.gen.messages.MessageService
 import tablecloth.gen.model.domain.campaign.Campaign
 import tablecloth.gen.model.domain.campaign.Participant
 import tablecloth.gen.model.domain.users.User
@@ -14,16 +14,14 @@ import tablecloth.gen.modelData.ParticipantStatus
 import tablecloth.gen.security.SecurityService
 import tablecloth.gen.viewmodel.CampaignViewmodel
 
-class CampaignServiceSpec extends Specification implements ServiceUnitTest<CampaignService>, DataTest {
+class CampaignServiceSpec extends HibernateSpec implements ServiceUnitTest<CampaignService> {
 
-    void setupSpec() {
-        mockDomain User
-        mockDomain Campaign
-    }
+    List<Class> getDomainClasses() { [User, Campaign, Participant] }
 
     void setup() {
         service.securityService = Mock(SecurityService)
         service.databaseService = Mock(DatabaseService)
+        service.messageService = Mock(MessageService)
         service.databaseService.save(_) >> { args -> args[0].each { it.save(failOnError: true) } }
         service.databaseService.delete(_) >> { args -> args[0].each { it.delete(failOnError: true) } }
     }
@@ -59,7 +57,6 @@ class CampaignServiceSpec extends Specification implements ServiceUnitTest<Campa
 
         then:
         1 * service.securityService.user >> User.findByUsername('username')
-        User.findAll().first().campaigns.count { it.name == 'Middle Earth 2.0' } == 1
         Campaign.findAll().first().participants.find {
             it.user.username == 'user' &&
                 it.status == ParticipantStatus.PENDING_INVITATION &&
@@ -109,6 +106,7 @@ class CampaignServiceSpec extends Specification implements ServiceUnitTest<Campa
 
         then:
         camp.participants.size() == 2
+        User.findByUsername(user.username).campaigns.count { it.name == 'Middle Earth 2.0' } == 1
         camp.participants.any { it.status == ParticipantStatus.ACCEPTED_INVITATION }
     }
 

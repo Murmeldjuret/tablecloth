@@ -9,13 +9,9 @@ class BootStrap {
 
     def init = { servletContext ->
         //*
-        if (Role.count() == 0) {
+        if (User.count() == 0) {
             def adminRole = new Role(authority: 'ROLE_ADMIN').save()
             def userRole = new Role(authority: 'ROLE_USER').save()
-        }
-        if (User.count() == 0) {
-            def adminRole = Role.findByAuthority('ROLE_ADMIN')
-            def userRole = Role.findByAuthority('ROLE_USER')
 
             def user = new User(username: 'user', password: 'pw')
             new Inbox(owner: user)

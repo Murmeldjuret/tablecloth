@@ -24,7 +24,8 @@ class InboxServiceSpec extends HibernateSpec implements ServiceUnitTest<InboxSer
         service.timeService = Mock(TimeService)
         service.timeService.now >> new Date()
         service.campaignService = Mock(CampaignService)
-        service.databaseService = new DatabaseService()
+        service.databaseService.save(_) >> { args -> args[0].each { it.save(failOnError: true, flush: true) } }
+        service.databaseService.delete(_) >> { args -> args[0].each { it.delete(failOnError: true, flush: true) } }
     }
 
     void "test flagMessageAsRead"() {

@@ -53,17 +53,16 @@ class MessageService {
         }
     }
 
-    void sendInvitationToUser(Campaign camp, String username, String body = '') {
-        User receiver = fetchReceiver(username)
+    void sendInvitationToUser(Campaign camp, User user, String body = null) {
         Message message = new Message(
             sent: timeService.now,
             sender: camp.owner,
             messageType: MessageType.INVITATION,
-            body: body,
+            body: body ?: "I would like you to join my campaign: $camp.name",
             invitationId: camp.id
         )
-        receiver.inbox.addToMessages(message)
-        databaseService.save(receiver.inbox)
+        user.inbox.addToMessages(message)
+        databaseService.save(user.inbox)
     }
 
     private User fetchReceiver(String username) {

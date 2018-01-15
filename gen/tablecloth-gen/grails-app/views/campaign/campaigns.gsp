@@ -31,6 +31,21 @@
             <g:render template="/templates/dbform/participant" model="[participant: participant]"/>
             <br>
         </g:each>
+        <g:if test="${camp.hasInviteRights(user.name)}">
+            <g:form controller="campaign" action="inviteUser">
+                <g:hiddenField name="id" value="${camp.id}"/>
+                <div>
+                    Invite user: <g:textField name="username" value="Name" id="inviteField"/>
+                </div>
+            </g:form>
+        </g:if>
+        <g:if test="${camp.isOwner(user.name)}">
+            <br>
+            <g:form controller="campaign" action="delete">
+                <g:hiddenField name="id" value="${camp.id}"/>
+                <g:submitButton name="Delete"/>
+            </g:form>
+        </g:if>
         <hr>
     </g:each>
 </div>

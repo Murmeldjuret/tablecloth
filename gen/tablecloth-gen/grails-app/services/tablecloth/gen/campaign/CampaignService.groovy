@@ -5,6 +5,7 @@ import tablecloth.gen.DatabaseService
 import tablecloth.gen.commands.AddCampaignCommand
 import tablecloth.gen.exceptions.TableclothAccessException
 import tablecloth.gen.exceptions.TableclothDomainException
+import tablecloth.gen.messages.MessageService
 import tablecloth.gen.model.domain.campaign.Campaign
 import tablecloth.gen.model.domain.campaign.Participant
 import tablecloth.gen.model.domain.users.User
@@ -18,10 +19,11 @@ class CampaignService {
 
     DatabaseService databaseService
     SecurityService securityService
+    MessageService messageService
 
     List<CampaignViewmodel> getCampaigns() {
         User user = securityService.user
-        List<Campaign> campaigns = Campaign.findAllByOwner(user) ?: []
+        List<Campaign> campaigns = user.getCampaigns().toList() ?: []
         return campaigns.collect {
             CampaignViewmodel.fromDomain(it)
         }
@@ -53,23 +55,23 @@ class CampaignService {
         if (!user) {
             throw new TableclothDomainException("User with username $username not found")
         }
-        assertOwner(camp, "Only username can add players to campaign!")
+        assertOwnerIsCurrentUser(camp, "Only owner can add players to campaign!")
         if (!camp.defaultPermissions) {
-            log.error("No permissions assigned to campaign $camp")
+            log.error("No permissions assigned to campaign $camp.name")
         }
         Participant participant = new Participant(
             user: user,
             status: ParticipantStatus.PENDING_INVITATION,
-            permissions: camp.defaultPermissions
+            permissions: camp.defaultPermissions.collect()
         )
-        user.campaigns.add(camp)
         camp.participants.add(participant)
+        messageService.sendInvitationToUser(camp, user)
         databaseService.save(camp, user)
     }
 
     void removeCampaign(long id) {
         Campaign camp = fetchCampaign(id)
-        assertOwner(camp, "Only username may remove their campaign.")
+        assertOwnerIsCurrentUser(camp, "Only owner may remove their campaign.")
         databaseService.delete(camp)
     }
 
@@ -80,11 +82,12 @@ class CampaignService {
             throw new TableclothDomainException("User with $user.username is not participating in campaign with id $id")
         }
         if (accepted) {
+            user.addToCampaigns(camp)
             participant.status = ParticipantStatus.ACCEPTED_INVITATION
         } else {
             camp.participants.remove(participant)
         }
-        databaseService.save(camp)
+        databaseService.save(user, camp)
     }
 
     private Campaign fetchCampaign(long id) {
@@ -95,7 +98,7 @@ class CampaignService {
         return camp
     }
 
-    private void assertOwner(Campaign camp, String msg) {
+    private void assertOwnerIsCurrentUser(Campaign camp, String msg) {
         if (camp.owner != securityService.user) {
             throw new TableclothAccessException(msg)
         }

@@ -3,6 +3,8 @@ package tablecloth.gen.viewmodel
 import tablecloth.gen.model.domain.messages.Message
 import tablecloth.gen.modelData.MessageType
 
+import static tablecloth.gen.modelData.MessageType.*
+
 class MessageViewmodel {
 
     Long id
@@ -24,5 +26,25 @@ class MessageViewmodel {
             invitationId: msg.invitationId,
             type: msg.messageType,
         )
+    }
+
+    String getInvitationStatus() {
+        switch (type) {
+            case ACCEPTED_INVITATION:
+                return 'Accepted'
+            case REJECTED_INVITATION:
+                return 'Rejected'
+            case DELETED_INVITATION:
+                return 'Invitation deleted by campaign owner.'
+            case INVITATION:
+            case PRIVATE_MESSAGE:
+            case SERVER_MESSAGE:
+            default:
+                return ''
+        }
+    }
+
+    boolean isPending() {
+        type == INVITATION
     }
 }
