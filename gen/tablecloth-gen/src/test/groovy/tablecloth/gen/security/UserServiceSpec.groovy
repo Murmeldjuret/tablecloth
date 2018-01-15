@@ -1,8 +1,8 @@
 package tablecloth.gen.security
 
-import grails.testing.gorm.DataTest
+import grails.test.hibernate.HibernateSpec
 import grails.testing.services.ServiceUnitTest
-import spock.lang.Specification
+import spock.lang.Shared
 import tablecloth.gen.exceptions.TableclothDomainException
 import tablecloth.gen.model.domain.messages.Inbox
 import tablecloth.gen.model.domain.users.Role
@@ -10,14 +10,12 @@ import tablecloth.gen.model.domain.users.User
 import tablecloth.gen.model.domain.users.UserRole
 import tablecloth.gen.viewmodel.UserViewmodel
 
-class UserServiceSpec extends Specification implements ServiceUnitTest<UserService>, DataTest {
+class UserServiceSpec extends HibernateSpec implements ServiceUnitTest<UserService> {
 
-    void setupSpec() {
-        mockDomain User
-        mockDomain Role
-        mockDomain UserRole
-        mockDomain Inbox
-    }
+    List<Class> getDomainClasses() { [User, Inbox, Role, UserRole] }
+
+    @Shared
+    static Map saveParams = [failOnError: true, flush: true]
 
     void setup() {
         service.securityService = Mock(SecurityService)
@@ -70,19 +68,8 @@ class UserServiceSpec extends Specification implements ServiceUnitTest<UserServi
     }
 
     void "test getUser1"() {
-        given:
-        User user = new User(
-            username: 'user1',
-            password: 'supersecure101'
-        )
-        Inbox inbox = new Inbox(
-            owner: user,
-            messages: [].toSet()
-        )
-        user.inbox = inbox
-
         when:
-        UserViewmodel viewmodel = service.getUser(user)
+        UserViewmodel viewmodel = service.getUser(User.findByUsername('user1'))
 
         then:
         viewmodel.name == 'user1'
@@ -130,10 +117,10 @@ class UserServiceSpec extends Specification implements ServiceUnitTest<UserServi
     private static void saveDummyUsers() {
         Role adminRole = new Role(
             authority: 'ROLE_ADMIN'
-        ).save(failOnError: true)
+        ).save(saveParams)
         Role userRole = new Role(
             authority: 'ROLE_USER'
-        ).save(failOnError: true)
+        ).save(saveParams)
         User admin = new User(
             username: 'admin',
             password: 'supersecure101'
@@ -142,7 +129,7 @@ class UserServiceSpec extends Specification implements ServiceUnitTest<UserServi
             owner: admin,
             messages: [].toSet()
         )
-        admin.save(failOnError: true)
+        admin.save(saveParams)
         User user1 = new User(
             username: 'user1',
             password: 'supersecure101'
@@ -151,7 +138,7 @@ class UserServiceSpec extends Specification implements ServiceUnitTest<UserServi
             owner: user1,
             messages: [].toSet()
         )
-        user1.save(failOnError: true)
+        user1.save(saveParams)
         User user2 = new User(
             username: 'user2',
             password: 'supersecure101'
@@ -160,7 +147,7 @@ class UserServiceSpec extends Specification implements ServiceUnitTest<UserServi
             owner: user2,
             messages: [].toSet()
         )
-        user2.save(failOnError: true)
+        user2.save(saveParams)
 
         UserRole.create admin, adminRole, true
         UserRole.create admin, userRole, true

@@ -19,7 +19,9 @@ class MessageServiceSpec extends HibernateSpec implements ServiceUnitTest<Messag
     def setup() {
         service.timeService = Mock(TimeService)
         service.timeService.now >> new Date()
-        service.databaseService = new DatabaseService()
+        service.databaseService = Mock(DatabaseService)
+        service.databaseService.save(_) >> { args -> args[0].each { it.save(failOnError: true, flush: true) } }
+        service.databaseService.delete(_) >> { args -> args[0].each { it.delete(failOnError: true, flush: true) } }
         service.securityService = Mock(SecurityService)
         service.securityService.isAdmin(_) >> { args -> args[0].username == 'admin' }
     }

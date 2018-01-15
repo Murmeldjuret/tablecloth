@@ -72,7 +72,8 @@ class CampaignService {
     void removeCampaign(long id) {
         Campaign camp = fetchCampaign(id)
         assertOwnerIsCurrentUser(camp, "Only owner may remove their campaign.")
-        databaseService.delete(camp)
+        camp.owner.removeFromCampaigns(camp)
+        databaseService.save(camp.owner)
     }
 
     void handleInvitation(boolean accepted, long id, User user) {

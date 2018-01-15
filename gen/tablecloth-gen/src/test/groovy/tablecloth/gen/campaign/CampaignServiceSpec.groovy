@@ -22,8 +22,8 @@ class CampaignServiceSpec extends HibernateSpec implements ServiceUnitTest<Campa
         service.securityService = Mock(SecurityService)
         service.databaseService = Mock(DatabaseService)
         service.messageService = Mock(MessageService)
-        service.databaseService.save(_) >> { args -> args[0].each { it.save(failOnError: true) } }
-        service.databaseService.delete(_) >> { args -> args[0].each { it.delete(failOnError: true) } }
+        service.databaseService.save(_) >> { args -> args[0].each { it.save(failOnError: true, flush: true) } }
+        service.databaseService.delete(_) >> { args -> args[0].each { it.delete(failOnError: true, flush: true) } }
     }
 
     void "test add new campaign to User"() {
@@ -96,7 +96,7 @@ class CampaignServiceSpec extends HibernateSpec implements ServiceUnitTest<Campa
         camp.participants.add(
             new Participant(
                 user: user,
-                permissions: camp.defaultPermissions,
+                permissions: camp.defaultPermissions.collect(),
                 status: ParticipantStatus.PENDING_INVITATION,
             )
         )

@@ -1,22 +1,21 @@
 package tablecloth.gen
 
-import grails.testing.gorm.DataTest
+import grails.test.hibernate.HibernateSpec
 import grails.testing.services.ServiceUnitTest
-import spock.lang.Specification
 import tablecloth.gen.exceptions.TableclothDomainException
 import tablecloth.gen.model.domain.creatures.CharacterSheet
 import tablecloth.gen.model.domain.creatures.PlayerCharacter
 import tablecloth.gen.model.domain.users.User
 import tablecloth.gen.viewmodel.PersonViewmodel
 
-class CharactersServiceSpec extends Specification implements ServiceUnitTest<CharactersService>, DataTest {
+class CharactersServiceSpec extends HibernateSpec implements ServiceUnitTest<CharactersService> {
 
-    void setupSpec() {
-        mockDomains(User, PlayerCharacter, CharacterSheet)
-    }
+    List<Class> getDomainClasses() { [User, PlayerCharacter, CharacterSheet] }
 
     void setup() {
         service.databaseService = Mock(DatabaseService)
+        service.databaseService.save(_) >> { args -> args[0].each { it.save(failOnError: true, flush: true) } }
+        service.databaseService.delete(_) >> { args -> args[0].each { it.delete(failOnError: true, flush: true) } }
     }
 
     void "test getCharsOfUser"() {
@@ -62,10 +61,10 @@ class CharactersServiceSpec extends Specification implements ServiceUnitTest<Cha
 
     void "test deleteCharacter"() {
         given:
-        MockObjects.genericPC()
+        int id = MockObjects.genericPC().id
 
         when:
-        service.deleteCharacter(1)
+        service.deleteCharacter(id)
 
         then:
         1 * service.databaseService.delete(_)
