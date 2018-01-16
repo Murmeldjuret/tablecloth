@@ -56,13 +56,21 @@ class MessageService {
     void sendInvitationToUser(Campaign camp, User user, String body = null) {
         Message message = new Message(
             sent: timeService.now,
-            sender: camp.owner,
+            sender: securityService.user,
             messageType: MessageType.INVITATION,
             body: body ?: "I would like you to join my campaign: $camp.name",
             invitationId: camp.id
         )
         user.inbox.addToMessages(message)
         databaseService.save(user.inbox)
+    }
+
+    void deleteAssociatedInvitations(long id) {
+        List<Message> invites = Message.findAllByInvitationId(id)
+        invites.each { Message msg ->
+            msg.messageType = MessageType.DELETED_INVITATION
+            databaseService.save(msg)
+        }
     }
 
     private User fetchReceiver(String username) {

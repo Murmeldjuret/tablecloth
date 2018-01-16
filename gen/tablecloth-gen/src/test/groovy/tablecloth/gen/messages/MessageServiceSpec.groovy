@@ -82,11 +82,50 @@ class MessageServiceSpec extends HibernateSpec implements ServiceUnitTest<Messag
         service.sendInvitationToUser(camp, user, msgBody)
 
         then:
+        1 * service.securityService.user >> User.findByUsername('owner')
         User.findByUsername(user.username).inbox.messages.any {
             it.body == msgBody &&
                 it.messageType == MessageType.INVITATION &&
-                it.sender.username == camp.owner.username &&
+                it.sender.username == 'owner' &&
                 it.invitationId == camp.id
         }
+    }
+
+    void "test delete associated invitations"() {
+        given:
+        Campaign camp = MockObjects.genericCampaign()
+        User user = MockObjects.genericUser()
+        user.inbox.addToMessages(
+            new Message(
+                sent: new Date().minus(1),
+                sender: User.findByUsername('owner'),
+                messageType: MessageType.INVITATION,
+                body: 'invitation',
+                inbox: user.inbox,
+                read: false,
+                invitationId: camp.id
+            ))
+        user.inbox.save(failOnError: true, flush: true)
+        User user2 = MockObjects.genericOtherUser()
+        user2.inbox.addToMessages(
+            new Message(
+                sent: new Date().minus(1),
+                sender: User.findByUsername('owner'),
+                messageType: MessageType.INVITATION,
+                body: 'invitation',
+                inbox: user2.inbox,
+                read: false,
+                invitationId: camp.id
+            ))
+        user2.inbox.save(failOnError: true, flush: true)
+
+        when:
+        service.deleteAssociatedInvitations(camp.id)
+
+        then:
+        User.findByUsername(user.username).inbox.messages.size() == 1
+        User.findByUsername(user.username).inbox.messages.first().messageType == MessageType.DELETED_INVITATION
+        User.findByUsername(user2.username).inbox.messages.size() == 1
+        User.findByUsername(user2.username).inbox.messages.first().messageType == MessageType.DELETED_INVITATION
     }
 }

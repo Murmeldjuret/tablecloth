@@ -1,7 +1,6 @@
 package tablecloth.gen.model.domain.campaign
 
 import tablecloth.gen.model.domain.creatures.PlayerCharacter
-import tablecloth.gen.model.domain.users.User
 import tablecloth.gen.modelData.CampaignPermission
 
 import javax.persistence.GeneratedValue
@@ -22,10 +21,6 @@ class Campaign {
         party: PlayerCharacter,
         participants: Participant,
         defaultPermissions: CampaignPermission
-    ]
-
-    static belongsTo = [
-        owner: User
     ]
 
     static constraints = {

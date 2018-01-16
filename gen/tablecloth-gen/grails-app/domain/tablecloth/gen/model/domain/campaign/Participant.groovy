@@ -18,4 +18,8 @@ class Participant {
 
     static constraints = {
     }
+
+    boolean isOwner() {
+        return status == ParticipantStatus.OWNER
+    }
 }

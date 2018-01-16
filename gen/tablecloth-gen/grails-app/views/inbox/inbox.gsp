@@ -20,6 +20,7 @@
     <g:else>
         <g:render template="/templates/messages/message" model="[msg: msg, user: user, readonly: readonly]"/>
     </g:else>
+    <br>
 </g:each>
 <hr style="height:5px;border:none;color:#333;background-color:#333;">
 <br>

@@ -43,7 +43,6 @@ class CampaignService {
             status: ParticipantStatus.OWNER,
             permissions: CampaignPermission.masterPermissions(),
         )
-        camp.owner = user
         camp.participants.add(participant)
         user.campaigns.add(camp)
         databaseService.save(user)
@@ -72,8 +71,15 @@ class CampaignService {
     void removeCampaign(long id) {
         Campaign camp = fetchCampaign(id)
         assertOwnerIsCurrentUser(camp, "Only owner may remove their campaign.")
-        camp.owner.removeFromCampaigns(camp)
-        databaseService.save(camp.owner)
+        messageService.deleteAssociatedInvitations(id)
+        List<User> participants = camp.participants.user
+        participants.each { User user ->
+            user.removeFromCampaigns(camp)
+        }
+        participants.each { User user ->
+            databaseService.save(user)
+        }
+        databaseService.delete(camp)
     }
 
     void handleInvitation(boolean accepted, long id, User user) {
@@ -100,7 +106,8 @@ class CampaignService {
     }
 
     private void assertOwnerIsCurrentUser(Campaign camp, String msg) {
-        if (camp.owner != securityService.user) {
+        User current = securityService.user
+        if (!camp.participants.find {it.user.username == current.username && it.owner}) {
             throw new TableclothAccessException(msg)
         }
     }

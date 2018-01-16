@@ -21,7 +21,7 @@ enum MessageType {
     SERVER_MESSAGE
 
     boolean isInvitation() {
-        return this in [INVITATION, ACCEPTED_INVITATION, REJECTED_INVITATION]
+        return this in [INVITATION, ACCEPTED_INVITATION, REJECTED_INVITATION, DELETED_INVITATION]
     }
 
     boolean isServerMessage() {

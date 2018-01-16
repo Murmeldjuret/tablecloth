@@ -63,7 +63,7 @@ class MockObjects {
 
     static User campaignOwner() {
         User user = new User(
-            username: 'username',
+            username: 'owner',
             password: 'supersecure101',
             characters: [].toSet(),
             campaigns: [].toSet()
@@ -80,7 +80,6 @@ class MockObjects {
     static Campaign genericCampaign() {
         User owner = campaignOwner()
         Campaign camp = new Campaign(
-            owner: owner,
             name: 'Middle Earth 2.0',
             description: 'Not stolen from Tolkien',
             defaultPermissions: CampaignPermission.defaultPermissions(),

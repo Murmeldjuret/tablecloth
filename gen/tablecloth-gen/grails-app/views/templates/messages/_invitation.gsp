@@ -4,9 +4,10 @@
 <g:set var="user" value="${(UserViewmodel) user}"/>
 <g:set var="readonly" value="${(boolean) readonly}"/>
 <html>
-<h4>From: ${msg.sender}</h4>
 <br>
+<h4>From: ${msg.sender}</h4>
 sent: ${msg.sent} , received: ${msg.received}
+<br>
 <br>
 ${msg.body}
 <g:if test="${!readonly}">

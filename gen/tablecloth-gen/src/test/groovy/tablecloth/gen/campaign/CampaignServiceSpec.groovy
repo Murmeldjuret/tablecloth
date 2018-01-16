@@ -56,7 +56,7 @@ class CampaignServiceSpec extends HibernateSpec implements ServiceUnitTest<Campa
         service.addPlayerToCampaign(camp.id, user.username)
 
         then:
-        1 * service.securityService.user >> User.findByUsername('username')
+        1 * service.securityService.user >> User.findByUsername('owner')
         Campaign.findAll().first().participants.find {
             it.user.username == 'user' &&
                 it.status == ParticipantStatus.PENDING_INVITATION &&
@@ -66,13 +66,13 @@ class CampaignServiceSpec extends HibernateSpec implements ServiceUnitTest<Campa
 
     void "test getCampaigns"() {
         given:
-        Campaign camp = MockObjects.genericCampaign()
+        MockObjects.genericCampaign()
 
         when:
         List<CampaignViewmodel> camps = service.getCampaigns()
 
         then:
-        1 * service.securityService.user >> camp.owner
+        1 * service.securityService.user >> User.findByUsername('owner')
         camps.size() == 1
         camps.first().name
         camps.first().participants.size() == 1
@@ -86,7 +86,34 @@ class CampaignServiceSpec extends HibernateSpec implements ServiceUnitTest<Campa
         service.removeCampaign(camp.id)
 
         then:
-        1 * service.securityService.user >> camp.owner
+        1 * service.securityService.user >> User.findByUsername('owner')
+    }
+
+    void "test add user then accept invite then delete campaign"() {
+        given:
+        Campaign camp = MockObjects.genericCampaign()
+        User user = MockObjects.genericUser()
+
+        when:
+        service.addPlayerToCampaign(camp.id, user.username)
+
+        then:
+        1 * service.securityService.user >> User.findByUsername('owner')
+
+        when:
+        service.handleInvitation(true, camp.id, user)
+
+        then:
+        Campaign.findAll().first().participants.size() == 2
+        User.findAll().every { it.campaigns.size() == 1 }
+
+        when:
+        service.removeCampaign(camp.id)
+
+        then:
+        1 * service.securityService.user >> User.findByUsername('owner')
+        Campaign.findAll() == []
+        User.findAll().every { it.campaigns.size() == 0 }
     }
 
     void "test accept invitation"() {
