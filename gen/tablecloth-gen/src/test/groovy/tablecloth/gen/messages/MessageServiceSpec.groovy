@@ -120,7 +120,7 @@ class MessageServiceSpec extends HibernateSpec implements ServiceUnitTest<Messag
         user2.inbox.save(failOnError: true, flush: true)
 
         when:
-        service.deleteAssociatedInvitations(camp.id)
+        service.deleteAllAssociatedInvitations(camp.id)
 
         then:
         User.findByUsername(user.username).inbox.messages.size() == 1

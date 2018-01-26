@@ -41,6 +41,17 @@ class CampaignController {
         redirect action: 'index'
     }
 
+    def removeParticipant(long id, String username) {
+        try {
+            campaignService.removeParticipant(id, username)
+        } catch (TableclothDomainException ex) {
+            flash.message = "Error with input: $ex.message"
+        } catch (TableclothAccessException ex) {
+            flash.message = "Error with permissions: $ex.message"
+        }
+        redirect action: 'index'
+    }
+
     def delete(long id) {
         try {
             campaignService.removeCampaign(id)

@@ -65,12 +65,20 @@ class MessageService {
         databaseService.save(user.inbox)
     }
 
-    void deleteAssociatedInvitations(long id) {
+    void deleteAllAssociatedInvitations(long id) {
         List<Message> invites = Message.findAllByInvitationId(id)
         invites.each { Message msg ->
             msg.messageType = MessageType.DELETED_INVITATION
             databaseService.save(msg)
         }
+    }
+
+    void deleteAssociatedInvitations(long id, User user) {
+        List<Message> invites = user.inbox.messages.findAll { it.invitationId == id }
+        invites.each {
+            user.inbox.removeFromMessages(invites)
+        }
+        databaseService.save(user.inbox)
     }
 
     private User fetchReceiver(String username) {

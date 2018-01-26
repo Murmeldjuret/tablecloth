@@ -19,4 +19,8 @@ class ParticipantViewmodel {
             permissions: participant.permissions.toList()
         )
     }
+
+    boolean isOwner() {
+        return status == ParticipantStatus.OWNER
+    }
 }

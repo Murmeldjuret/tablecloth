@@ -68,10 +68,22 @@ class CampaignService {
         databaseService.save(camp, user)
     }
 
+    void removeParticipant(long id, String username) {
+        Campaign camp = fetchCampaign(id)
+        assertOwnerIsCurrentUser(camp, "Only owner can add players to campaign!")
+        Participant participant = camp.participants.find { it.user.username == username }
+        if (!participant) {
+            throw new TableclothDomainException("User with $username is not participating in campaign with id $id")
+        }
+        camp.removeFromParticipants(participant)
+        messageService.deleteAllAssociatedInvitations(id)
+        databaseService.save(camp)
+    }
+
     void removeCampaign(long id) {
         Campaign camp = fetchCampaign(id)
         assertOwnerIsCurrentUser(camp, "Only owner may remove their campaign.")
-        messageService.deleteAssociatedInvitations(id)
+        messageService.deleteAllAssociatedInvitations(id)
         List<User> participants = camp.participants.user
         participants.each { User user ->
             user.removeFromCampaigns(camp)

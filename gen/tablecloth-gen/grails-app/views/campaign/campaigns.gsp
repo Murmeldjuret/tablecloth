@@ -28,7 +28,7 @@
         Participants:
         <br>
         <g:each in="${camp.participants}" var="participant" status="j">
-            <g:render template="/templates/dbform/participant" model="[participant: participant]"/>
+            <g:render template="/templates/dbform/participant" model="[camp: camp, ownership: camp.isOwner(user.name), participant: participant]"/>
             <br>
         </g:each>
         <g:if test="${camp.hasInviteRights(user.name)}">
