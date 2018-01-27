@@ -1,11 +1,13 @@
 package tablecloth.plaza.campaign
 
+import grails.compiler.GrailsCompileStatic
 import grails.plugin.springsecurity.annotation.Secured
 import tablecloth.commands.AddCampaignCommand
 import tablecloth.exceptions.TableclothAccessException
 import tablecloth.exceptions.TableclothDomainException
 import tablecloth.security.UserService
 
+@GrailsCompileStatic
 @Secured('ROLE_USER')
 class CampaignController {
 

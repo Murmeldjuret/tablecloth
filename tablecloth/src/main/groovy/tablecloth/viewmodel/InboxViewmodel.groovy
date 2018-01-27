@@ -1,7 +1,9 @@
 package tablecloth.viewmodel
 
+import grails.compiler.GrailsCompileStatic
 import tablecloth.model.domain.messages.Inbox
 
+@GrailsCompileStatic
 class InboxViewmodel {
 
     String username

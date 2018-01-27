@@ -1,5 +1,6 @@
 package tablecloth.plaza.messages
 
+import grails.compiler.GrailsCompileStatic
 import grails.gorm.transactions.Transactional
 import tablecloth.DatabaseService
 import tablecloth.plaza.campaign.CampaignService
@@ -14,6 +15,7 @@ import tablecloth.utils.TimeService
 import tablecloth.viewmodel.InboxViewmodel
 
 @Transactional
+@GrailsCompileStatic
 class InboxService {
 
     SecurityService securityService

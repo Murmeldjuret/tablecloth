@@ -1,9 +1,11 @@
 package tablecloth.viewmodel
 
+import grails.compiler.GrailsCompileStatic
 import tablecloth.model.domain.campaign.Campaign
 import tablecloth.modelData.CampaignPermission
 import tablecloth.modelData.ParticipantStatus
 
+@GrailsCompileStatic
 class CampaignViewmodel {
 
     long id

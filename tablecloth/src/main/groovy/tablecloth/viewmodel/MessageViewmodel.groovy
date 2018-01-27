@@ -1,10 +1,12 @@
 package tablecloth.viewmodel
 
+import grails.compiler.GrailsCompileStatic
 import tablecloth.model.domain.messages.Message
 import tablecloth.modelData.MessageType
 
 import static tablecloth.modelData.MessageType.*
 
+@GrailsCompileStatic
 class MessageViewmodel {
 
     Long id

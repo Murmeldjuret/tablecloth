@@ -1,5 +1,6 @@
 package tablecloth.plaza.messages
 
+import grails.compiler.GrailsCompileStatic
 import grails.gorm.transactions.Transactional
 import tablecloth.DatabaseService
 import tablecloth.exceptions.TableclothAccessException
@@ -12,6 +13,7 @@ import tablecloth.security.SecurityService
 import tablecloth.utils.TimeService
 
 @Transactional
+@GrailsCompileStatic
 class MessageService {
 
     TimeService timeService
@@ -74,7 +76,7 @@ class MessageService {
     }
 
     void deleteAssociatedInvitations(long id, User user) {
-        List<Message> invites = user.inbox.messages.findAll { it.invitationId == id }
+        Set<Message> invites = user.inbox.messages.findAll { it.invitationId == id }
         invites.each {
             user.inbox.removeFromMessages(invites)
         }

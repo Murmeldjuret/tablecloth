@@ -1,5 +1,8 @@
 package tablecloth.modelData
 
+import grails.compiler.GrailsCompileStatic
+
+@GrailsCompileStatic
 enum CampaignPermission {
 
     EDIT_CAMPAIGN('Edit campaign'),

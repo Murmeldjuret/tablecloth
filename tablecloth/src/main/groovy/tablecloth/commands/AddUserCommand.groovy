@@ -1,7 +1,9 @@
 package tablecloth.commands
 
+import grails.compiler.GrailsCompileStatic
 import grails.validation.Validateable
 
+@GrailsCompileStatic
 class AddUserCommand implements Validateable {
 
     String name

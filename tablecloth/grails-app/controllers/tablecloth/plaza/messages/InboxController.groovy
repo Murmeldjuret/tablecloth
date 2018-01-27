@@ -1,15 +1,17 @@
 package tablecloth.plaza.messages
 
+import grails.compiler.GrailsCompileStatic
 import grails.plugin.springsecurity.annotation.Secured
 import grails.util.Holders
 import tablecloth.commands.SendMessageCommand
 import tablecloth.exceptions.TableclothDomainException
 import tablecloth.security.UserService
 
+@GrailsCompileStatic
 @Secured('ROLE_USER')
 class InboxController {
 
-    private static int MAX_MSG_LENGTH = Holders.config.tablecloth?.messaging?.messagelength ?: 1024
+    private static int MAX_MSG_LENGTH = SendMessageCommand.MAX_MSG_LENGTH
 
     UserService userService
     InboxService inboxService

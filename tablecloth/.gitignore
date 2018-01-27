@@ -12,3 +12,4 @@ build/
 .classpath
 /bin/
 /out/
+/gradle/

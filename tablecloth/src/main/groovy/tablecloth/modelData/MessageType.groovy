@@ -1,5 +1,8 @@
 package tablecloth.modelData
 
+import grails.compiler.GrailsCompileStatic
+
+@GrailsCompileStatic
 enum MessageType {
 
     // Invitee has been sent but not responded

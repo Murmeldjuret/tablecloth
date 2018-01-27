@@ -1,13 +1,15 @@
 package tablecloth.viewmodel
 
+import grails.compiler.GrailsCompileStatic
 import tablecloth.model.domain.creatures.CharacterSheet
 import tablecloth.model.domain.creatures.PlayerCharacter
 
+@GrailsCompileStatic
 class PersonViewmodel {
 
     String name
     int intelligence, strength, dexterity
-    int charId
+    long charId
 
     static PersonViewmodel fromDomain(PlayerCharacter playerCharacter) {
         CharacterSheet sheet = playerCharacter.sheet

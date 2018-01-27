@@ -1,5 +1,8 @@
 package tablecloth.modelData
 
+import grails.compiler.GrailsCompileStatic
+
+@GrailsCompileStatic
 enum ParticipantStatus {
 
     PENDING_INVITATION('Invited Player'),

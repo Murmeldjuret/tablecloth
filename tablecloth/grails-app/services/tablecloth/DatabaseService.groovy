@@ -1,10 +1,10 @@
 package tablecloth
 
+import grails.compiler.GrailsCompileStatic
 import grails.gorm.transactions.Transactional
-import groovy.transform.CompileStatic
 import org.grails.datastore.gorm.GormEntity
 
-@CompileStatic
+@GrailsCompileStatic
 class DatabaseService {
 
     @Transactional

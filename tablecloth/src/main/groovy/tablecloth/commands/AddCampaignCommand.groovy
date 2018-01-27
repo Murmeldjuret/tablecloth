@@ -1,7 +1,9 @@
 package tablecloth.commands
 
+import grails.compiler.GrailsCompileStatic
 import grails.validation.Validateable
 
+@GrailsCompileStatic
 class AddCampaignCommand implements Validateable {
 
     String name

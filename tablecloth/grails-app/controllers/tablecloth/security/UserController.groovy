@@ -1,10 +1,12 @@
 package tablecloth.security
 
+import grails.compiler.GrailsCompileStatic
 import grails.plugin.springsecurity.annotation.Secured
 import org.springframework.http.HttpStatus
 import tablecloth.commands.AddUserCommand
 import tablecloth.commands.GetUserCommand
 
+@GrailsCompileStatic
 @Secured('ROLE_ADMIN')
 class UserController {
 

@@ -5,7 +5,7 @@ import grails.validation.Validateable
 
 class SendMessageCommand implements Validateable {
 
-    private static int MAX_MSG_LENGTH = Holders.config.tablecloth?.messaging?.messagelength ?: 1024
+    static int MAX_MSG_LENGTH = Holders.config.tablecloth?.messaging?.messagelength ?: 1024i
 
     String username
     String body

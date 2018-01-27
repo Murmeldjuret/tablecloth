@@ -1,5 +1,6 @@
 package tablecloth.plaza
 
+import grails.compiler.GrailsCompileStatic
 import grails.plugin.springsecurity.annotation.Secured
 import tablecloth.gen.CharactersService
 import tablecloth.commands.DeletePersonCommand
@@ -7,6 +8,7 @@ import tablecloth.commands.SingleStringCommand
 import tablecloth.security.UserService
 import tablecloth.utils.ValidatableResponseUtil
 
+@GrailsCompileStatic
 @Secured('ROLE_USER')
 class CharactersController {
 

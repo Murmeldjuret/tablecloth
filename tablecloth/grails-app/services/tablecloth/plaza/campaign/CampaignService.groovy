@@ -1,5 +1,6 @@
 package tablecloth.plaza.campaign
 
+import grails.compiler.GrailsCompileStatic
 import grails.gorm.transactions.Transactional
 import tablecloth.DatabaseService
 import tablecloth.commands.AddCampaignCommand
@@ -15,6 +16,7 @@ import tablecloth.security.SecurityService
 import tablecloth.viewmodel.CampaignViewmodel
 
 @Transactional
+@GrailsCompileStatic
 class CampaignService {
 
     DatabaseService databaseService
@@ -23,9 +25,9 @@ class CampaignService {
 
     List<CampaignViewmodel> getCampaigns() {
         User user = securityService.user
-        List<Campaign> campaigns = user.getCampaigns().toList() ?: []
-        return campaigns.collect {
-            CampaignViewmodel.fromDomain(it)
+        Set<Campaign> campaigns = (user.getCampaigns() ?: [].toSet()) as Set<Campaign>
+        return campaigns.collect { Campaign c ->
+            CampaignViewmodel.fromDomain(c)
         }
     }
 
@@ -84,7 +86,7 @@ class CampaignService {
         Campaign camp = fetchCampaign(id)
         assertOwnerIsCurrentUser(camp, "Only owner may remove their campaign.")
         messageService.deleteAllAssociatedInvitations(id)
-        List<User> participants = camp.participants.user
+        List<User> participants = camp.participants*.user
         participants.each { User user ->
             user.removeFromCampaigns(camp)
         }

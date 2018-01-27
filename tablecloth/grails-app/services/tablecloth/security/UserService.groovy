@@ -1,5 +1,6 @@
 package tablecloth.security
 
+import grails.compiler.GrailsCompileStatic
 import grails.gorm.transactions.Transactional
 import tablecloth.exceptions.TableclothDomainException
 import tablecloth.model.domain.creatures.PlayerCharacter
@@ -9,6 +10,7 @@ import tablecloth.model.domain.users.User
 import tablecloth.model.domain.users.UserRole
 import tablecloth.viewmodel.UserViewmodel
 
+@GrailsCompileStatic
 class UserService {
 
     SecurityService securityService

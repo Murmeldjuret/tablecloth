@@ -1,7 +1,9 @@
 package tablecloth.commands
 
+import grails.compiler.GrailsCompileStatic
 import grails.validation.Validateable
 
+@GrailsCompileStatic
 class DiceCommand implements Validateable {
 
     Integer sides
@@ -15,7 +17,7 @@ class DiceCommand implements Validateable {
     static constraints = {
         sides nullable: false, range: 1..10000
         nrOfDice nullable: false, range: 1..100
-        nrOfRolls nullable: true, range: 1..100, validator: { val ->
+        nrOfRolls nullable: true, range: 1..100, validator: { Integer val ->
             return val > dropNHighest + dropNLowest
         }
         exploding nullable: true

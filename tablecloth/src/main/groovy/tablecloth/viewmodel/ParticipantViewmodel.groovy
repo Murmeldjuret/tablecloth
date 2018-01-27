@@ -1,9 +1,11 @@
 package tablecloth.viewmodel
 
+import grails.compiler.GrailsCompileStatic
 import tablecloth.model.domain.campaign.Participant
 import tablecloth.modelData.CampaignPermission
 import tablecloth.modelData.ParticipantStatus
 
+@GrailsCompileStatic
 class ParticipantViewmodel {
 
     String username
