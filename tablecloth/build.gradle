@@ -12,7 +12,7 @@ buildscript {
 }
 
 version "0.1"
-group "tablecloth.gen"
+group "tablecloth"
 
 apply plugin: "eclipse"
 apply plugin: "idea"
