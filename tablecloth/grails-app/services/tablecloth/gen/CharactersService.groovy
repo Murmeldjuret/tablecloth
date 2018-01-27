@@ -1,9 +1,10 @@
 package tablecloth.gen
 
-import tablecloth.gen.exceptions.TableclothDomainException
-import tablecloth.gen.model.domain.creatures.PlayerCharacter
-import tablecloth.gen.model.domain.users.User
-import tablecloth.gen.viewmodel.PersonViewmodel
+import tablecloth.DatabaseService
+import tablecloth.exceptions.TableclothDomainException
+import tablecloth.model.domain.creatures.PlayerCharacter
+import tablecloth.model.domain.users.User
+import tablecloth.viewmodel.PersonViewmodel
 
 class CharactersService {
 

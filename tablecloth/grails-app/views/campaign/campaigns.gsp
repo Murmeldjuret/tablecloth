@@ -1,4 +1,4 @@
-<%@ page import="tablecloth.gen.viewmodel.CampaignViewmodel; tablecloth.gen.viewmodel.UserViewmodel" %>
+<%@ page import="tablecloth.viewmodel.CampaignViewmodel; tablecloth.viewmodel.UserViewmodel" %>
 <!DOCTYPE html>
 <g:set var="user" value="${(UserViewmodel) user}"/>
 <g:set var="camps" value="${(List<CampaignViewmodel>) campaigns}"/>

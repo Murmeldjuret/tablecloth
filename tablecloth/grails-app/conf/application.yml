@@ -7,7 +7,7 @@ tablecloth:
 grails:
     profile: web
     codegen:
-        defaultPackage: tablecloth.gen
+        defaultPackage: tablecloth
     spring:
         transactionManagement:
             proxies: false

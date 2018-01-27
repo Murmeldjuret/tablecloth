@@ -1,11 +1,12 @@
 package tablecloth.gen
 
-import tablecloth.gen.commands.DiceCommand
-import tablecloth.gen.commands.SingleStringCommand
-import tablecloth.gen.model.domain.creatures.CharacterSheet
-import tablecloth.gen.model.domain.creatures.PlayerCharacter
-import tablecloth.gen.model.domain.users.User
-import tablecloth.gen.rng.DiceService
+import tablecloth.DatabaseService
+import tablecloth.commands.DiceCommand
+import tablecloth.commands.SingleStringCommand
+import tablecloth.model.domain.creatures.CharacterSheet
+import tablecloth.model.domain.creatures.PlayerCharacter
+import tablecloth.model.domain.users.User
+import tablecloth.rng.DiceService
 
 class GeneratorService {
 

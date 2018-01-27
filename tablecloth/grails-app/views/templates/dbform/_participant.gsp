@@ -1,4 +1,4 @@
-<%@ page import="tablecloth.gen.viewmodel.CampaignViewmodel; tablecloth.gen.viewmodel.UserViewmodel; tablecloth.gen.viewmodel.ParticipantViewmodel; tablecloth.gen.viewmodel.PersonViewmodel" %>
+<%@ page import="tablecloth.viewmodel.CampaignViewmodel; tablecloth.viewmodel.UserViewmodel; tablecloth.viewmodel.ParticipantViewmodel; tablecloth.viewmodel.PersonViewmodel" %>
 <!DOCTYPE html>
 <g:set var="ownership" value="${(boolean) ownership}"/>
 <g:set var="participant" value="${(ParticipantViewmodel) participant}"/>

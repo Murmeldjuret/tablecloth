@@ -1,4 +1,4 @@
-<%@ page import="tablecloth.gen.viewmodel.UserViewmodel" %>
+<%@ page import="tablecloth.viewmodel.UserViewmodel" %>
 <!DOCTYPE html>
 <g:set var="users" value="${(List<UserViewmodel>) users}"/>
 <html>

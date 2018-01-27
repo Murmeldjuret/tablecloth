@@ -1,4 +1,4 @@
-<%@ page import="tablecloth.gen.viewmodel.UserViewmodel; tablecloth.gen.viewmodel.InboxViewmodel" %>
+<%@ page import="tablecloth.viewmodel.UserViewmodel; tablecloth.viewmodel.InboxViewmodel" %>
 <!DOCTYPE html>
 <g:set var="inbox" value="${(InboxViewmodel) inbox}"/>
 <g:set var="user" value="${(UserViewmodel) user}"/>

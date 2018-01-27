@@ -1,9 +1,9 @@
 package tablecloth.gen
 
 import grails.plugin.springsecurity.annotation.Secured
-import tablecloth.gen.commands.SingleStringCommand
-import tablecloth.gen.security.SecurityService
-import tablecloth.gen.utils.ValidatableResponseUtil
+import tablecloth.commands.SingleStringCommand
+import tablecloth.security.SecurityService
+import tablecloth.utils.ValidatableResponseUtil
 
 @Secured('ROLE_USER')
 class GeneratorController {

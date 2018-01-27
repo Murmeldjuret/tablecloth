@@ -1,9 +1,9 @@
 
 
 // Added by the Spring Security Core plugin:
-grails.plugin.springsecurity.userLookup.userDomainClassName = 'tablecloth.gen.model.domain.users.User'
-grails.plugin.springsecurity.userLookup.authorityJoinClassName = 'tablecloth.gen.model.domain.users.UserRole'
-grails.plugin.springsecurity.authority.className = 'tablecloth.gen.model.domain.users.Role'
+grails.plugin.springsecurity.userLookup.userDomainClassName = 'tablecloth.model.domain.users.User'
+grails.plugin.springsecurity.userLookup.authorityJoinClassName = 'tablecloth.model.domain.users.UserRole'
+grails.plugin.springsecurity.authority.className = 'tablecloth.model.domain.users.Role'
 grails.plugin.springsecurity.controllerAnnotations.staticRules = [
 	[pattern: '/',               access: ['permitAll']],
 	[pattern: '/error',          access: ['permitAll']],
