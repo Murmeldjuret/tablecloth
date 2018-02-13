@@ -3,7 +3,7 @@ package tablecloth.plaza
 import grails.compiler.GrailsCompileStatic
 import grails.plugin.springsecurity.annotation.Secured
 import tablecloth.commands.DeletePersonCommand
-import tablecloth.commands.SingleStringCommand
+import tablecloth.commands.PersonNameCommand
 import tablecloth.gen.CharactersService
 import tablecloth.security.UserService
 import tablecloth.utils.ValidatableResponseUtil
@@ -33,7 +33,7 @@ class CharactersController {
         render view: 'characters', model: [user: user, chars: characters, readonly: true]
     }
 
-    def addPerson(SingleStringCommand cmd) {
+    def addPerson(PersonNameCommand cmd) {
         if (!cmd.validate()) {
             flash.message = "Failed to add character, reason: ${ValidatableResponseUtil.errorcount(cmd)}"
             render view: 'characters'

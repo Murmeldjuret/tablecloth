@@ -4,7 +4,7 @@ import grails.compiler.GrailsCompileStatic
 import grails.validation.Validateable
 
 @GrailsCompileStatic
-class SingleStringCommand implements Validateable {
+class PersonNameCommand implements Validateable {
 
     String name
 
