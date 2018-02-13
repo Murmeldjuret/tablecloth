@@ -23,7 +23,7 @@ class GeneratorController {
             redirect controller: 'characters'
             return
         }
-        boolean success = generatorService.generatePerson(cmd, securityService.user)
+        boolean success = generatorService.generatePerson(cmd, securityService.loggedInUser)
         if (success) {
             flash.message = "Character $cmd.name successfully created!"
         } else {

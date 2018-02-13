@@ -2,6 +2,7 @@ buildscript {
     repositories {
         mavenLocal()
         maven { url "https://repo.grails.org/grails/core" }
+        jcenter()
     }
     dependencies {
         classpath "org.grails:grails-gradle-plugin:$grailsVersion"
@@ -20,7 +21,7 @@ apply plugin: "war"
 apply plugin: "org.grails.grails-web"
 apply plugin: "asset-pipeline"
 apply plugin: "org.grails.grails-gsp"
-apply from: "${project.projectDir}/gradle-scripts/clover.gradle"
+//apply from: "${project.projectDir}/gradle-scripts/clover.gradle"
 
 repositories {
     mavenLocal()

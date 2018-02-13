@@ -28,7 +28,7 @@ class UserServiceSpec extends HibernateSpec implements ServiceUnitTest<UserServi
         List<UserViewmodel> users = service.getUsers()
 
         then:
-        1 * service.securityService.getUser() >> new User(username: 'user1')
+        1 * service.securityService.getLoggedInUser() >> new User(username: 'user1')
         users.any { UserViewmodel viewmodel ->
             viewmodel.name == 'admin' &&
                 !viewmodel.isCurrentUser &&
@@ -51,7 +51,7 @@ class UserServiceSpec extends HibernateSpec implements ServiceUnitTest<UserServi
 
     void "test getUser"() {
         when:
-        UserViewmodel viewmodel = service.getUser('user1')
+        UserViewmodel viewmodel = service.getCurrentUserViewmodel('user1')
 
         then:
         viewmodel.name == 'user1'
@@ -61,7 +61,7 @@ class UserServiceSpec extends HibernateSpec implements ServiceUnitTest<UserServi
 
     void "test getUser missing"() {
         when:
-        UserViewmodel viewmodel = service.getUser('notfound')
+        UserViewmodel viewmodel = service.getCurrentUserViewmodel('notfound')
 
         then:
         viewmodel == null
@@ -69,7 +69,7 @@ class UserServiceSpec extends HibernateSpec implements ServiceUnitTest<UserServi
 
     void "test getUser1"() {
         when:
-        UserViewmodel viewmodel = service.getUser(User.findByUsername('user1'))
+        UserViewmodel viewmodel = service.getCurrentUserViewmodel(User.findByUsername('user1'))
 
         then:
         viewmodel.name == 'user1'
@@ -82,7 +82,7 @@ class UserServiceSpec extends HibernateSpec implements ServiceUnitTest<UserServi
         service.addUser('user3', '123456')
 
         then:
-        UserViewmodel viewmodel = service.getUser('user3')
+        UserViewmodel viewmodel = service.getCurrentUserViewmodel('user3')
         viewmodel.name == 'user3'
         !viewmodel.isAdmin
         viewmodel.pcCount == 0
@@ -98,16 +98,16 @@ class UserServiceSpec extends HibernateSpec implements ServiceUnitTest<UserServi
 
     void "test removeUser"() {
         when:
-        assert service.getUser('user2')
+        assert service.getCurrentUserViewmodel('user2')
         service.removeUser('user2')
 
         then:
-        service.getUser('user2') == null
+        service.getCurrentUserViewmodel('user2') == null
     }
 
     void "test removeUser missing"() {
         when:
-        assert !service.getUser('user3')
+        assert !service.getCurrentUserViewmodel('user3')
         service.removeUser('user3')
 
         then:

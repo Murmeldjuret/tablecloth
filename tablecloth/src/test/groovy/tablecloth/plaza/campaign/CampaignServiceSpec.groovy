@@ -5,12 +5,12 @@ import grails.testing.services.ServiceUnitTest
 import tablecloth.DatabaseService
 import tablecloth.MockObjects
 import tablecloth.commands.AddCampaignCommand
-import tablecloth.plaza.messages.MessageService
 import tablecloth.model.domain.campaign.Campaign
 import tablecloth.model.domain.campaign.Participant
 import tablecloth.model.domain.users.User
 import tablecloth.modelData.CampaignPermission
 import tablecloth.modelData.ParticipantStatus
+import tablecloth.plaza.messages.MessageService
 import tablecloth.security.SecurityService
 import tablecloth.viewmodel.CampaignViewmodel
 
@@ -38,7 +38,7 @@ class CampaignServiceSpec extends HibernateSpec implements ServiceUnitTest<Campa
         service.newCampaign(cmd)
 
         then:
-        1 * service.securityService.user >> user
+        1 * service.securityService.loggedInUser >> user
         User.findAll().first().campaigns.count { it.name == 'Middle Earth 2.0' } == 1
         User.findAll().first().campaigns.first().participants.each {
             it.status == ParticipantStatus.OWNER &&
@@ -56,7 +56,7 @@ class CampaignServiceSpec extends HibernateSpec implements ServiceUnitTest<Campa
         service.addPlayerToCampaign(camp.id, user.username)
 
         then:
-        1 * service.securityService.user >> User.findByUsername('owner')
+        1 * service.securityService.loggedInUser >> User.findByUsername('owner')
         Campaign.findAll().first().participants.find {
             it.user.username == 'user' &&
                 it.status == ParticipantStatus.PENDING_INVITATION &&
@@ -72,7 +72,7 @@ class CampaignServiceSpec extends HibernateSpec implements ServiceUnitTest<Campa
         List<CampaignViewmodel> camps = service.getCampaigns()
 
         then:
-        1 * service.securityService.user >> User.findByUsername('owner')
+        1 * service.securityService.loggedInUser >> User.findByUsername('owner')
         camps.size() == 1
         camps.first().name
         camps.first().participants.size() == 1
@@ -86,7 +86,7 @@ class CampaignServiceSpec extends HibernateSpec implements ServiceUnitTest<Campa
         service.removeCampaign(camp.id)
 
         then:
-        1 * service.securityService.user >> User.findByUsername('owner')
+        1 * service.securityService.loggedInUser >> User.findByUsername('owner')
     }
 
     void "test add user then accept invite then delete campaign"() {
@@ -98,10 +98,10 @@ class CampaignServiceSpec extends HibernateSpec implements ServiceUnitTest<Campa
         service.addPlayerToCampaign(camp.id, user.username)
 
         then:
-        1 * service.securityService.user >> User.findByUsername('owner')
+        1 * service.securityService.loggedInUser >> User.findByUsername('owner')
 
         when:
-        service.handleInvitation(true, camp.id, user)
+        service.acceptInvitation(camp.id, user)
 
         then:
         Campaign.findAll().first().participants.size() == 2
@@ -111,7 +111,7 @@ class CampaignServiceSpec extends HibernateSpec implements ServiceUnitTest<Campa
         service.removeCampaign(camp.id)
 
         then:
-        1 * service.securityService.user >> User.findByUsername('owner')
+        1 * service.securityService.loggedInUser >> User.findByUsername('owner')
         Campaign.findAll() == []
         User.findAll().every { it.campaigns.size() == 0 }
     }
@@ -129,7 +129,7 @@ class CampaignServiceSpec extends HibernateSpec implements ServiceUnitTest<Campa
         )
 
         when:
-        service.handleInvitation(true, camp.id, user)
+        service.acceptInvitation(camp.id, user)
 
         then:
         camp.participants.size() == 2
@@ -150,7 +150,7 @@ class CampaignServiceSpec extends HibernateSpec implements ServiceUnitTest<Campa
         )
 
         when:
-        service.handleInvitation(false, camp.id, user)
+        service.rejectInvitation(camp.id, user)
 
         then:
         camp.participants.size() == 1

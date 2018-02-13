@@ -21,7 +21,7 @@ class CampaignViewmodel {
             id: camp.id,
             name: camp.name,
             desc: camp.description,
-            party: camp.party.collect { PersonViewmodel.fromDomain(it) }.toList(),
+            party: camp.party?.collect { PersonViewmodel.fromDomain(it) } ?: [] as List<PersonViewmodel>,
             participants: camp.participants.collect { ParticipantViewmodel.fromDomain(it) }.toList(),
         )
     }

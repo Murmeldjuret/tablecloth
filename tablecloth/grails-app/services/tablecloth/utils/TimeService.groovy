@@ -7,7 +7,7 @@ import grails.gorm.transactions.Transactional
 @Transactional
 class TimeService {
 
-    def getNow() {
+    Date getNow() {
         return new Date()
     }
 }

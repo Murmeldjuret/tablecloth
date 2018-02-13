@@ -2,6 +2,7 @@ package tablecloth.model.domain.users
 
 import groovy.transform.EqualsAndHashCode
 import groovy.transform.ToString
+import tablecloth.exceptions.TableclothDomainReferenceException
 import tablecloth.model.domain.campaign.Campaign
 import tablecloth.model.domain.creatures.PlayerCharacter
 import tablecloth.model.domain.messages.Inbox
@@ -49,5 +50,13 @@ class User implements Serializable {
         password column: '`password`'
         characters column: 'chars'
         inbox cascade: "all-delete-orphan"
+    }
+
+    static User getUserByNameAssertExists(String username) {
+        User user = findByUsername(username)
+        if (!user) {
+            throw new TableclothDomainReferenceException("User with username $username not found")
+        }
+        return user
     }
 }

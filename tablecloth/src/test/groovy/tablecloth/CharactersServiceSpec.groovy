@@ -43,10 +43,10 @@ class CharactersServiceSpec extends HibernateSpec implements ServiceUnitTest<Cha
 
     void "test getCharsOfUser user not found"() {
         when:
-        List<PersonViewmodel> views = service.getCharsOfUser('invalid')
+        service.getCharsOfUser('invalid')
 
         then:
-        views == null
+        thrown(TableclothDomainException)
     }
 
     void "test getCharsOfUser user has no characters"() {

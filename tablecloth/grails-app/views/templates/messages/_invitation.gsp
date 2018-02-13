@@ -12,9 +12,9 @@ sent: ${msg.sent} , received: ${msg.received}
 ${msg.body}
 <g:if test="${!readonly}">
     <g:if test="${msg.pending}">
-        <g:link controller="inbox" action="handleInvitation" params="${[accepted: true, id: msg.id]}">Accept</g:link>
+        <g:link controller="inbox" action="acceptInvitation" params="${[id: msg.id]}">Accept</g:link>
         -
-        <g:link controller="inbox" action="handleInvitation" params="${[accepted: false, id: msg.id]}">Decline</g:link>
+        <g:link controller="inbox" action="rejectInvitation" params="${[id: msg.id]}">Decline</g:link>
         -
     </g:if>
     <g:else>

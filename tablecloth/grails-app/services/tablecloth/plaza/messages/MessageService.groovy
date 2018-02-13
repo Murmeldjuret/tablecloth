@@ -4,7 +4,7 @@ import grails.compiler.GrailsCompileStatic
 import grails.gorm.transactions.Transactional
 import tablecloth.DatabaseService
 import tablecloth.exceptions.TableclothAccessException
-import tablecloth.exceptions.TableclothDomainException
+import tablecloth.exceptions.TableclothDomainReferenceException
 import tablecloth.model.domain.campaign.Campaign
 import tablecloth.model.domain.messages.Message
 import tablecloth.model.domain.users.User
@@ -21,11 +21,8 @@ class MessageService {
     SecurityService securityService
 
     void sendMessageToUser(String username, String body) {
-        User currentUser = securityService.user
-        if (!currentUser) {
-            throw new TableclothAccessException("Must be logged in to send messaging!")
-        }
-        User receiver = fetchReceiver(username)
+        User currentUser = securityService.loggedInUser
+        User receiver = getUserByNameAsserted(username)
         Message message = new Message(
             sent: timeService.now,
             sender: currentUser,
@@ -37,16 +34,15 @@ class MessageService {
     }
 
     void broadcastMessageToAllUsers(String body) {
-        User user = securityService.user
-        if (!user || !securityService.isAdmin(user)) {
+        User currentUser = securityService.loggedInUser
+        if (currentUser == null || !securityService.isAdmin(currentUser)) {
             throw new TableclothAccessException("Must be logged in as admin to send broadcast!")
         }
-        List<User> users = User.findAll()
-        users.remove(user)
+        List<User> users = getAllUsersExcept(currentUser)
         users.each { User receiver ->
             Message message = new Message(
                 sent: timeService.now,
-                sender: user,
+                sender: currentUser,
                 messageType: MessageType.SERVER_MESSAGE,
                 body: body,
             )
@@ -58,7 +54,7 @@ class MessageService {
     void sendInvitationToUser(Campaign camp, User user, String body = null) {
         Message message = new Message(
             sent: timeService.now,
-            sender: securityService.user,
+            sender: securityService.loggedInUser,
             messageType: MessageType.INVITATION,
             body: body ?: "I would like you to join my campaign: $camp.name",
             invitationId: camp.id
@@ -67,27 +63,25 @@ class MessageService {
         databaseService.save(user.inbox)
     }
 
-    void deleteAllAssociatedInvitations(long id) {
-        List<Message> invites = Message.findAllByInvitationId(id)
+    void deleteAllInvitationsToCampaign(long campId) {
+        List<Message> invites = Message.findAllByInvitationId(campId)
         invites.each { Message msg ->
             msg.messageType = MessageType.DELETED_INVITATION
             databaseService.save(msg)
         }
     }
 
-    void deleteAssociatedInvitations(long id, User user) {
-        Set<Message> invites = user.inbox.messages.findAll { it.invitationId == id }
-        invites.each {
-            user.inbox.removeFromMessages(invites)
-        }
-        databaseService.save(user.inbox)
+    private static List<User> getAllUsersExcept(User user) {
+        List<User> users = User.findAll()
+        users.remove(user)
+        return users
     }
 
-    private User fetchReceiver(String username) {
-        User receiver = User.findByUsername(username)
-        if (!receiver) {
-            throw new TableclothDomainException("Target username does not exist!")
+    private static User getUserByNameAsserted(String username) {
+        User user = User.findByUsername(username)
+        if (!user) {
+            throw new TableclothDomainReferenceException("Target username does not exist!")
         }
-        return receiver
+        return user
     }
 }

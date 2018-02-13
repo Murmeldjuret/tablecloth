@@ -36,7 +36,7 @@ class MessageServiceSpec extends HibernateSpec implements ServiceUnitTest<Messag
         service.sendMessageToUser(receiver.username, msgBody)
 
         then:
-        1 * service.securityService.user >> sender
+        1 * service.securityService.loggedInUser >> sender
         User.findByUsername(receiver.username).inbox.messages.any {
             it.body == msgBody &&
                 it.messageType == MessageType.PRIVATE_MESSAGE &&
@@ -56,7 +56,7 @@ class MessageServiceSpec extends HibernateSpec implements ServiceUnitTest<Messag
         service.broadcastMessageToAllUsers(msgBody)
 
         then:
-        1 * service.securityService.user >> admin
+        1 * service.securityService.loggedInUser >> admin
         User.findByUsername(user1.username).inbox.messages.any {
             it.body == msgBody &&
                 it.messageType == MessageType.SERVER_MESSAGE &&
@@ -82,7 +82,7 @@ class MessageServiceSpec extends HibernateSpec implements ServiceUnitTest<Messag
         service.sendInvitationToUser(camp, user, msgBody)
 
         then:
-        1 * service.securityService.user >> User.findByUsername('owner')
+        1 * service.securityService.loggedInUser >> User.findByUsername('owner')
         User.findByUsername(user.username).inbox.messages.any {
             it.body == msgBody &&
                 it.messageType == MessageType.INVITATION &&
@@ -120,7 +120,7 @@ class MessageServiceSpec extends HibernateSpec implements ServiceUnitTest<Messag
         user2.inbox.save(failOnError: true, flush: true)
 
         when:
-        service.deleteAllAssociatedInvitations(camp.id)
+        service.deleteAllInvitationsToCampaign(camp.id)
 
         then:
         User.findByUsername(user.username).inbox.messages.size() == 1

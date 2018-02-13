@@ -26,4 +26,12 @@ class Inbox {
 
     static constraints = {
     }
+
+    boolean isAnyMessageDirty() {
+        return messages.any { it.dirty }
+    }
+
+    void receiveAllMessages(Date receiveTime) {
+        messages.findAll { it.received == null }.each { it.received == receiveTime }
+    }
 }

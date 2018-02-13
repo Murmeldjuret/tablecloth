@@ -5,11 +5,11 @@ import grails.testing.services.ServiceUnitTest
 import spock.lang.Unroll
 import tablecloth.DatabaseService
 import tablecloth.MockObjects
-import tablecloth.plaza.campaign.CampaignService
 import tablecloth.model.domain.messages.Inbox
 import tablecloth.model.domain.messages.Message
 import tablecloth.model.domain.users.User
 import tablecloth.modelData.MessageType
+import tablecloth.plaza.campaign.CampaignService
 import tablecloth.security.SecurityService
 import tablecloth.utils.TimeService
 import tablecloth.viewmodel.InboxViewmodel
@@ -37,7 +37,7 @@ class InboxServiceSpec extends HibernateSpec implements ServiceUnitTest<InboxSer
         service.flagMessageAsRead(id)
 
         then:
-        1 * service.securityService.user >> inbox.owner
+        1 * service.securityService.loggedInUser >> inbox.owner
         Message.findByRead(true).body == 'testname'
         !Message.findAllByRead(false).body.contains('testname')
     }
@@ -50,31 +50,39 @@ class InboxServiceSpec extends HibernateSpec implements ServiceUnitTest<InboxSer
         service.deleteMessage(Message.findByBody('testname').id)
 
         then:
-        1 * service.securityService.user >> inbox.owner
+        1 * service.securityService.loggedInUser >> inbox.owner
         Message.count == 2
         Inbox.findAll().first().messages.size() == 2
         !Inbox.findAll().first().messages.find { it.body == 'testname' }
         !Inbox.findAll().first().messages.find { it.body == 'othermessage' }.read
     }
 
-    @Unroll
-    void "test handleInvitation"() {
+    void "test acceptInvitation"() {
         given:
         Inbox inbox = MockObjects.genericInbox()
 
         when:
-        service.handleInvitation(accepted, Message.findByBody('invitation').id)
+        service.acceptInvitation(Message.findByBody('invitation').id)
 
         then:
-        1 * service.securityService.user >> inbox.owner
-        1 * service.campaignService.handleInvitation(accepted, 66, _)
+        1 * service.securityService.loggedInUser >> inbox.owner
+        1 * service.campaignService.acceptInvitation(66, _)
         Inbox.findAll().first().messages.size() == 3
-        Inbox.findAll().first().messages.any { it.body == 'invitation' && it.messageType == expectedType }
+        Inbox.findAll().first().messages.any { it.body == 'invitation' && it.messageType == MessageType.ACCEPTED_INVITATION }
+    }
 
-        where:
-        accepted || expectedType
-        true     || MessageType.ACCEPTED_INVITATION
-        false    || MessageType.REJECTED_INVITATION
+    void "test rejectInvitation"() {
+        given:
+        Inbox inbox = MockObjects.genericInbox()
+
+        when:
+        service.rejectInvitation(Message.findByBody('invitation').id)
+
+        then:
+        1 * service.securityService.loggedInUser >> inbox.owner
+        1 * service.campaignService.rejectInvitation(66, _)
+        Inbox.findAll().first().messages.size() == 3
+        Inbox.findAll().first().messages.any { it.body == 'invitation' && it.messageType == MessageType.REJECTED_INVITATION }
     }
 
     void "test getInbox"() {
@@ -86,7 +94,7 @@ class InboxServiceSpec extends HibernateSpec implements ServiceUnitTest<InboxSer
         InboxViewmodel viewmodel = service.getCurrentInbox()
 
         then:
-        1 * service.securityService.user >> inbox.owner
+        1 * service.securityService.loggedInUser >> inbox.owner
         viewmodel.messages.size() == 3
         viewmodel.username == inbox.owner.username
         Inbox.findAll().first().messages.each { it.received != null }

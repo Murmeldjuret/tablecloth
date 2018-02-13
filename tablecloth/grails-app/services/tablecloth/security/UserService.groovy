@@ -2,7 +2,7 @@ package tablecloth.security
 
 import grails.compiler.GrailsCompileStatic
 import grails.gorm.transactions.Transactional
-import tablecloth.exceptions.TableclothDomainException
+import tablecloth.exceptions.TableclothDomainValidationException
 import tablecloth.model.domain.creatures.PlayerCharacter
 import tablecloth.model.domain.messages.Inbox
 import tablecloth.model.domain.users.Role
@@ -16,35 +16,32 @@ class UserService {
     SecurityService securityService
 
     List<UserViewmodel> getUsers() {
-        User currentUser = securityService.user
+        User currentUser = securityService.loggedInUser
         return User.getAll().collect { User user ->
-            createViewmodel(user, currentUser)
+            createViewmodel(user, user == currentUser)
         }
     }
 
-    UserViewmodel getUser(String username) {
+    UserViewmodel getCurrentUserViewmodel(String username) {
         User user = User.findByUsername(username)
-        return getUser(user as User)
+        return getCurrentUserViewmodel(user as User)
     }
 
-    UserViewmodel getCurrentUser() {
-        return getUser(securityService.user)
+    UserViewmodel getCurrentUserViewmodel() {
+        return getCurrentUserViewmodel(securityService.loggedInUser)
     }
 
-    UserViewmodel getUser(User user) {
+    UserViewmodel getCurrentUserViewmodel(User user) {
         if (!user) {
             return null
         }
-        return createViewmodel(user, null)
+        return createViewmodel(user, true)
     }
 
     @Transactional
-    void addUser(String name, String pw) {
-        User user = User.findByUsername(name)
-        if (user) {
-            throw new TableclothDomainException("A user with the name $name already exists.")
-        }
-        User newUser = new User(username: name, password: pw)
+    void addUser(String username, String pw) {
+        assertUserDoesNotAlreadyExist(username)
+        User newUser = new User(username: username, password: pw)
         Inbox inbox = new Inbox(
             owner: newUser,
             messages: [].toSet()
@@ -56,20 +53,23 @@ class UserService {
     }
 
     @Transactional
-    void removeUser(String name) {
-        User user = User.findByUsername(name)
-        if (!user) {
-            throw new TableclothDomainException("No user with the name: $name exists.")
-        }
+    void removeUser(String username) {
+        User user = User.getUserByNameAssertExists(username)
         UserRole.removeAll(user)
         user.delete(flush: true)
         log.info("Deleted $user")
     }
 
-    private UserViewmodel createViewmodel(User user, User currentUser) {
+    private static void assertUserDoesNotAlreadyExist(String username) {
+        User user = User.findByUsername(username)
+        if (user) {
+            throw new TableclothDomainValidationException("A user with the name $username already exists.")
+        }
+    }
+
+    private UserViewmodel createViewmodel(User user, boolean isCurrentUser) {
         int pcCount = PlayerCharacter.countByOwner(user)
         boolean isAdmin = securityService.isAdmin(user)
-        boolean isCurrentUser = currentUser ? user == currentUser : false
         return new UserViewmodel(
             name: user.username,
             isAdmin: isAdmin,

@@ -15,7 +15,7 @@ class CampaignController {
     UserService userService
 
     def index() {
-        def user = userService.currentUser
+        def user = userService.currentUserViewmodel
         def campaigns = campaignService.campaigns
         render view: 'campaigns', model: [campaigns: campaigns, user: user]
     }
@@ -31,9 +31,9 @@ class CampaignController {
         redirect action: 'index'
     }
 
-    def inviteUser(long id, String username) {
+    def inviteUser(long campId, String username) {
         try {
-            campaignService.addPlayerToCampaign(id, username)
+            campaignService.addPlayerToCampaign(campId, username)
             flash.message = "User Successfully invited"
         } catch (TableclothDomainException ex) {
             flash.message = "Error with input: $ex.message"
@@ -43,9 +43,9 @@ class CampaignController {
         redirect action: 'index'
     }
 
-    def removeParticipant(long id, String username) {
+    def removeParticipant(long campId, String username) {
         try {
-            campaignService.removeParticipant(id, username)
+            campaignService.removeParticipant(campId, username)
         } catch (TableclothDomainException ex) {
             flash.message = "Error with input: $ex.message"
         } catch (TableclothAccessException ex) {
@@ -54,9 +54,9 @@ class CampaignController {
         redirect action: 'index'
     }
 
-    def delete(long id) {
+    def delete(long campId) {
         try {
-            campaignService.removeCampaign(id)
+            campaignService.removeCampaign(campId)
             flash.message = "Campaign deleted successfully!"
         } catch (TableclothDomainException ex) {
             flash.message = "Error with input: $ex.message"

@@ -2,7 +2,6 @@ package tablecloth.plaza.messages
 
 import grails.compiler.GrailsCompileStatic
 import grails.plugin.springsecurity.annotation.Secured
-import grails.util.Holders
 import tablecloth.commands.SendMessageCommand
 import tablecloth.exceptions.TableclothDomainException
 import tablecloth.security.UserService
@@ -18,7 +17,7 @@ class InboxController {
     MessageService messageService
 
     def index() {
-        def user = userService.currentUser
+        def user = userService.currentUserViewmodel
         def inbox = inboxService.getCurrentInbox()
         render view: "/inbox/inbox", model: [inbox: inbox, user: user]
     }
@@ -31,32 +30,37 @@ class InboxController {
                 messageService.sendMessageToUser(cmd.username, cmd.body)
                 flash.message = 'Message sent!'
             } catch (TableclothDomainException ex) {
-                flash.message = 'Error, username not found'
+                flash.message = "Error, $ex.message"
             }
         }
         redirect action: 'index'
     }
 
     @Secured('ROLE_ADMIN')
-    def broadcast(String msg) {
-        if (!msg) {
+    def broadcast(String messageText) {
+        if (!messageText) {
             flash.message = "Invalid message"
-        } else if (msg.length() > MAX_MSG_LENGTH) {
-            flash.message = "Message too long"
+        } else if (messageText.length() > MAX_MSG_LENGTH) {
+            flash.message = "Message was too long, maximum of $MAX_MSG_LENGTH characters allowed."
         } else {
-            messageService.broadcastMessageToAllUsers(msg)
+            messageService.broadcastMessageToAllUsers(messageText)
             flash.message = 'Broadcast sent!'
         }
         redirect action: 'index'
     }
 
-    def delete(long id) {
-        inboxService.deleteMessage(id)
+    def delete(long messageId) {
+        inboxService.deleteMessage(messageId)
         redirect action: 'index'
     }
 
-    def handleInvitation(boolean accepted, long id) {
-        inboxService.handleInvitation(accepted, id)
+    def rejectInvitation(long messageId) {
+        inboxService.acceptInvitation(messageId)
+        redirect action: 'index'
+    }
+
+    def acceptInvitation(long messageId) {
+        inboxService.rejectInvitation(messageId)
         redirect action: 'index'
     }
 

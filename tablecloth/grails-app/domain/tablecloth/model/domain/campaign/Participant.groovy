@@ -19,6 +19,14 @@ class Participant {
     static constraints = {
     }
 
+    static Participant fromMasterUser(User user) {
+        return new Participant(
+            user: user,
+            status: ParticipantStatus.OWNER,
+            permissions: CampaignPermission.masterPermissions(),
+        )
+    }
+
     boolean isOwner() {
         return status == ParticipantStatus.OWNER
     }
