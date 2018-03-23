@@ -8,8 +8,8 @@ import tablecloth.commands.AddCampaignCommand
 import tablecloth.model.domain.campaign.Campaign
 import tablecloth.model.domain.campaign.Participant
 import tablecloth.model.domain.users.User
-import tablecloth.modelData.CampaignPermission
-import tablecloth.modelData.ParticipantStatus
+import tablecloth.model.CampaignPermission
+import tablecloth.model.ParticipantStatus
 import tablecloth.plaza.messages.MessageService
 import tablecloth.security.SecurityService
 import tablecloth.viewmodel.CampaignViewmodel

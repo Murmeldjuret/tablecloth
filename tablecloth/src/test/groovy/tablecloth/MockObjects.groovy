@@ -7,9 +7,9 @@ import tablecloth.model.domain.creatures.PlayerCharacter
 import tablecloth.model.domain.messages.Inbox
 import tablecloth.model.domain.messages.Message
 import tablecloth.model.domain.users.User
-import tablecloth.modelData.CampaignPermission
-import tablecloth.modelData.MessageType
-import tablecloth.modelData.ParticipantStatus
+import tablecloth.model.CampaignPermission
+import tablecloth.model.MessageType
+import tablecloth.model.ParticipantStatus
 
 class MockObjects {
 

@@ -1,4 +1,4 @@
-package tablecloth.modelData
+package tablecloth.model
 
 import grails.compiler.GrailsCompileStatic
 

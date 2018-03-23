@@ -1,7 +1,7 @@
 package tablecloth.model.domain.messages
 
 import tablecloth.model.domain.users.User
-import tablecloth.modelData.MessageType
+import tablecloth.model.MessageType
 
 import javax.persistence.GeneratedValue
 import javax.persistence.GenerationType

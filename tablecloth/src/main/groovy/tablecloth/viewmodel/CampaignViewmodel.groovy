@@ -2,8 +2,8 @@ package tablecloth.viewmodel
 
 import grails.compiler.GrailsCompileStatic
 import tablecloth.model.domain.campaign.Campaign
-import tablecloth.modelData.CampaignPermission
-import tablecloth.modelData.ParticipantStatus
+import tablecloth.model.CampaignPermission
+import tablecloth.model.ParticipantStatus
 
 @GrailsCompileStatic
 class CampaignViewmodel {

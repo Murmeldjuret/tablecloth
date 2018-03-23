@@ -4,8 +4,8 @@ import tablecloth.commands.AddCampaignCommand
 import tablecloth.exceptions.TableclothDomainReferenceException
 import tablecloth.model.domain.creatures.PlayerCharacter
 import tablecloth.model.domain.users.User
-import tablecloth.modelData.CampaignPermission
-import tablecloth.modelData.ParticipantStatus
+import tablecloth.model.CampaignPermission
+import tablecloth.model.ParticipantStatus
 
 import javax.persistence.GeneratedValue
 import javax.persistence.GenerationType

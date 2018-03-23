@@ -2,13 +2,12 @@ package tablecloth.plaza.messages
 
 import grails.test.hibernate.HibernateSpec
 import grails.testing.services.ServiceUnitTest
-import spock.lang.Unroll
 import tablecloth.DatabaseService
 import tablecloth.MockObjects
 import tablecloth.model.domain.messages.Inbox
 import tablecloth.model.domain.messages.Message
 import tablecloth.model.domain.users.User
-import tablecloth.modelData.MessageType
+import tablecloth.model.MessageType
 import tablecloth.plaza.campaign.CampaignService
 import tablecloth.security.SecurityService
 import tablecloth.utils.TimeService

@@ -9,7 +9,7 @@ import tablecloth.exceptions.TableclothDomainReferenceException
 import tablecloth.model.domain.campaign.Campaign
 import tablecloth.model.domain.campaign.Participant
 import tablecloth.model.domain.users.User
-import tablecloth.modelData.ParticipantStatus
+import tablecloth.model.ParticipantStatus
 import tablecloth.plaza.messages.MessageService
 import tablecloth.security.SecurityService
 import tablecloth.viewmodel.CampaignViewmodel

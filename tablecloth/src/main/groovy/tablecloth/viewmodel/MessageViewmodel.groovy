@@ -2,9 +2,9 @@ package tablecloth.viewmodel
 
 import grails.compiler.GrailsCompileStatic
 import tablecloth.model.domain.messages.Message
-import tablecloth.modelData.MessageType
+import tablecloth.model.MessageType
 
-import static tablecloth.modelData.MessageType.*
+import static tablecloth.model.MessageType.*
 
 @GrailsCompileStatic
 class MessageViewmodel {

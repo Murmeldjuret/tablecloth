@@ -8,7 +8,7 @@ import tablecloth.exceptions.TableclothDomainReferenceException
 import tablecloth.model.domain.campaign.Campaign
 import tablecloth.model.domain.messages.Message
 import tablecloth.model.domain.users.User
-import tablecloth.modelData.MessageType
+import tablecloth.model.MessageType
 import tablecloth.security.SecurityService
 import tablecloth.utils.TimeService
 

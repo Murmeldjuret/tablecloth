@@ -1,8 +1,8 @@
 package tablecloth.model.domain.campaign
 
 import tablecloth.model.domain.users.User
-import tablecloth.modelData.CampaignPermission
-import tablecloth.modelData.ParticipantStatus
+import tablecloth.model.CampaignPermission
+import tablecloth.model.ParticipantStatus
 
 class Participant {
 
