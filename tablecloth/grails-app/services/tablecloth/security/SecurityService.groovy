@@ -6,7 +6,7 @@ import tablecloth.model.domain.users.User
 class SecurityService {
 
     User getLoggedInUser() {
-        String username = SecurityContextHolder?.getContext()?.getAuthentication()?.getPrincipal()?.username ?: ''
+        String username = SecurityContextHolder?.context?.authentication?.principal?.username ?: ''
         return User.findByUsername(username)
     }
 
