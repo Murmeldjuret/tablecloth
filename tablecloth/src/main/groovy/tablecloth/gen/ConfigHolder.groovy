@@ -9,7 +9,7 @@ abstract class ConfigHolder<TData> implements Validateable {
     Integer version
 
     @JsonProperty
-    Map<String, Integer> tags
+    Map<String, Double> tags
 
     @JsonProperty
     List<TData> data

@@ -1,0 +1,686 @@
+{
+  "version": 2,
+  "tags": {
+    "EVIL": 2,
+    "GOOD": 2,
+    "CORRUPT": 2,
+    "LAWLESS": 2,
+    "ORDERLY": 2,
+    "MAGICAL": 2,
+    "MUNDANE": 2,
+    "NATURAL": 2,
+    "ARTIFICIAL": 2,
+    "MERCHANT": 2,
+    "COMMERCE": 2,
+    "POPULAR": 2,
+    "DIVINE": 2,
+    "RELIGIOUS": 2,
+    "ROYAL": 2,
+    "AUTHORITY": 2,
+    "DESPOTISM": 2,
+    "NOBLES": 2,
+    "SLAVERY": 2.0,
+    "ELECTIONS": 2.0,
+    "AGRARIAN": 2.0,
+    "MINERALS": 2.0,
+    "PASTURE": 2.0,
+    "PACIFIST": 2.0,
+    "MILITARY": 2.0,
+    "POVERTY": 2.0,
+    "PROSPERITY": 2.0,
+    "REPRESSIVE": 2.0,
+    "EDUCATED": 2.0,
+    "ILLITERATE": 2.0,
+    "CULTURAL": 2.0,
+    "DARK_AGE": 2.0,
+    "MEDEIVAL": 2.0,
+    "RENAISSANCE": 2.0,
+    "MODERN": 2.0,
+    "NAVAL": 2.0,
+    "ALLOW_MAGIC": 2
+  },
+  "data": [
+    {
+      "type": "CLASSES",
+      "name": "Traders",
+      "code": "cls.traders",
+      "desc": "People who make a living by transporting goods by boat or land.",
+      "newTags": [
+        "COMMERCE",
+        "MERCHANT",
+        "PROSPERITY"
+      ],
+      "baseweight": 1000,
+      "basesize": 200,
+      "basechance": 1.0,
+      "urbanization": 0.80,
+      "lovesTags": [
+        "NAVAL",
+        "RENAISSANCE"
+      ],
+      "likesTags": [
+        "COMMERCE",
+        "MERCHANT",
+        "POPULAR",
+        "GOOD",
+        "PROSPERITY",
+        "MEDEIVAL",
+        "MODERN"
+      ],
+      "dislikesTags": [
+        "CORRUPT",
+        "LAWLESS",
+        "DARK_AGE"
+      ],
+      "hatesTags": [
+        "DESPOTISM",
+        "POVERTY"
+      ],
+      "requiresTags": []
+    },
+    {
+      "type": "CLASSES",
+      "name": "Magnates",
+      "code": "cls.magnates",
+      "desc": "People who live away from vast holdings and partially involve themselves with their own income.",
+      "newTags": [
+        "NOBLES"
+      ],
+      "baseweight": 5000,
+      "basesize": 50,
+      "basechance": 0.95,
+      "urbanization": 0.50,
+      "lovesTags": [
+        "NOBLES",
+        "REPRESSIVE",
+        "MEDEIVAL",
+        "DARK_AGE"
+      ],
+      "likesTags": [
+        "ORDERLY",
+        "ROYAL",
+        "AGRARIAN",
+        "ILLITERATE",
+        "RENAISSANCE"
+      ],
+      "dislikesTags": [
+        "LAWLESS",
+        "ELECTIONS",
+        "MERCHANT"
+      ],
+      "hatesTags": [
+        "POPULAR",
+        "MODERN"
+      ],
+      "requiresTags": []
+    },
+    {
+      "type": "CLASSES",
+      "name": "Freeholders",
+      "code": "cls.freeholders",
+      "desc": "People who live near smaller holdings of land and take active part in their use.",
+      "newTags": [
+        "AGRARIAN"
+      ],
+      "baseweight": 1000,
+      "basesize": 1000,
+      "basechance": 1.0,
+      "urbanization": 0.05,
+      "lovesTags": [
+        "DARK_AGE"
+      ],
+      "likesTags": [
+        "ORDERLY",
+        "POPULAR",
+        "PROSPERITY",
+        "POPULAR"
+      ],
+      "dislikesTags": [
+        "LAWLESS",
+        "DESPOTISM",
+        "REPRESSIVE",
+        "MEDEIVAL"
+      ],
+      "hatesTags": [
+        "DESPOTISM"
+      ],
+      "requiresTags": []
+    },
+    {
+      "type": "CLASSES",
+      "name": "Capitalists",
+      "code": "cls.capitalists",
+      "desc": "People who own money and production and make money by finance or industry.",
+      "newTags": [
+        "COMMERCE",
+        "URBAN"
+      ],
+      "baseweight": 2500,
+      "basesize": 100,
+      "basechance": 0.5,
+      "urbanization": 1.0,
+      "lovesTags": [
+        "MODERN",
+        "MERCHANT"
+      ],
+      "likesTags": [
+        "ORDERLY",
+        "COMMERCE",
+        "MERCHANT",
+        "PROSPERITY",
+        "RENAISSANCE"
+      ],
+      "dislikesTags": [
+        "LAWLESS",
+        "DESPOTISM",
+        "MEDEIVAL"
+      ],
+      "hatesTags": [
+        "POVERTY",
+        "DARK_AGE"
+      ],
+      "requiresTags": []
+    },
+    {
+      "type": "CLASSES",
+      "name": "Slaves",
+      "code": "cls.slaves",
+      "desc": "People owned by others and work in large estates, mines, or entertainment.",
+      "newTags": [
+        "SLAVERY"
+      ],
+      "baseweight": 2000,
+      "basesize": 100,
+      "basechance": 0.5,
+      "urbanization": 0.02,
+      "lovesTags": [
+        "DESPOTISM",
+        "SLAVERY"
+      ],
+      "likesTags": [
+        "EVIL",
+        "POVERTY",
+        "MILITARY",
+        "PROSPERITY",
+        "MERCHANT"
+      ],
+      "dislikesTags": [
+        "PACIFIST"
+      ],
+      "hatesTags": [
+        "POPULAR",
+        "GOOD"
+      ],
+      "requiresTags": [
+        "SLAVERY"
+      ]
+    },
+    {
+      "type": "CLASSES",
+      "name": "Peasants",
+      "code": "cls.peasants",
+      "desc": "People who live by meagre farming as serfs or poor free landholders.",
+      "newTags": [
+        "AGRARIAN"
+      ],
+      "baseweight": 100,
+      "basesize": 10000,
+      "basechance": 1.0,
+      "urbanization": 0.01,
+      "lovesTags": [
+        "AGRARIAN"
+      ],
+      "likesTags": [
+        "ILLITERATE",
+        "REPRESSIVE",
+        "DESPOTISM",
+        "DARK_AGE"
+      ],
+      "dislikesTags": [
+        "POPULAR",
+        "PROSPERITY",
+        "MODERN"
+      ],
+      "hatesTags": [
+        "COMMERCE"
+      ],
+      "requiresTags": []
+    },
+    {
+      "type": "CLASSES",
+      "name": "Royalty",
+      "code": "cls.royalty",
+      "desc": "People who are closely connected to the royal courts and live from state money.",
+      "newTags": [
+        "ROYAL"
+      ],
+      "baseweight": 10000,
+      "basesize": 5,
+      "basechance": 0.25,
+      "urbanization": 0.90,
+      "lovesTags": [
+        "ROYAL",
+        "AUTHORITY",
+        "ORDERLY"
+      ],
+      "likesTags": [
+        "DESPOTISM",
+        "MEDEIVAL",
+        "DARK_AGE"
+      ],
+      "dislikesTags": [
+        "PROSPERITY",
+        "MODERN"
+      ],
+      "hatesTags": [
+        "POPULAR",
+        "ELECTIONS"
+      ],
+      "requiresTags": []
+    },
+    {
+      "type": "CLASSES",
+      "name": "Clergy",
+      "code": "cls.clergy",
+      "desc": "People who work for one or more religious institutions.",
+      "newTags": [
+        "DIVINE"
+      ],
+      "baseweight": 1500,
+      "basesize": 250,
+      "basechance": 0.95,
+      "urbanization": 0.2,
+      "lovesTags": [
+        "RELIGIOUS",
+        "DIVINE"
+      ],
+      "likesTags": [
+        "ORDERLY",
+        "GOOD",
+        "EVIL"
+      ],
+      "dislikesTags": [
+        "POPULAR"
+      ],
+      "hatesTags": [
+        "LAWLESS"
+      ],
+      "requiresTags": []
+    },
+    {
+      "type": "CLASSES",
+      "name": "Criminals",
+      "code": "cls.criminals",
+      "desc": "People who make a living outside the law, in various levels of organization.",
+      "newTags": [
+        "LAWLESS"
+      ],
+      "baseweight": 150,
+      "basesize": 150,
+      "basechance": 0.95,
+      "urbanization": 0.50,
+      "lovesTags": [
+        "CORRUPT",
+        "EVIL",
+        "LAWLESS"
+      ],
+      "likesTags": [
+        "PROSPERITY",
+        "POVERTY",
+        "COMMERCE",
+        "MERCHANT"
+      ],
+      "dislikesTags": [
+        "DESPOTISM",
+        "POPULAR"
+      ],
+      "hatesTags": [
+        "ORDERLY",
+        "AUTHORITY",
+        "GOOD"
+      ],
+      "requiresTags": []
+    },
+    {
+      "type": "CLASSES",
+      "name": "Magi",
+      "code": "cls.magi",
+      "desc": "People who make a living by studying and using magic or magic items.",
+      "newTags": [
+        "MAGICAL"
+      ],
+      "baseweight": 2000,
+      "basesize": 100,
+      "basechance": 0.8,
+      "urbanization": 0.95,
+      "lovesTags": [
+        "MAGICAL"
+      ],
+      "likesTags": [
+        "GOOD",
+        "EVIL"
+      ],
+      "dislikesTags": [
+        "POPULAR"
+      ],
+      "hatesTags": [
+        "MUNDANE"
+      ],
+      "requiresTags": [
+        "ALLOW_MAGIC"
+      ]
+    },
+    {
+      "type": "CLASSES",
+      "name": "Servicers",
+      "code": "cls.servicers",
+      "desc": "People who make a living as servants, assistants, housemaids, cooks, entertainment, and similar.",
+      "newTags": [],
+      "baseweight": 150,
+      "basesize": 500,
+      "basechance": 1.0,
+      "urbanization": 0.95,
+      "lovesTags": [
+        "URBAN"
+      ],
+      "likesTags": [
+        "COMMERCE",
+        "ROYAL",
+        "AUTHORITY",
+        "PROSPERITY"
+      ],
+      "dislikesTags": [
+        "POPULAR"
+      ],
+      "hatesTags": [
+        "POVERTY",
+        "SLAVERY"
+      ],
+      "requiresTags": []
+    },
+    {
+      "type": "CLASSES",
+      "name": "Craftsmen",
+      "code": "cls.craftsmen",
+      "desc": "People who work in skilled manufacture: bakers, smiths, and shipwrights.",
+      "newTags": [
+        "COMMERCE"
+      ],
+      "baseweight": 500,
+      "basesize": 400,
+      "basechance": 1.0,
+      "urbanization": 0.70,
+      "lovesTags": [
+        "URBAN",
+        "PROSPERITY"
+      ],
+      "likesTags": [
+        "COMMERCE",
+        "MINERALS"
+      ],
+      "dislikesTags": [
+        "POPULAR"
+      ],
+      "hatesTags": [
+        "LAWLESS",
+        "DESPOTISM",
+        "POVERTY"
+      ],
+      "requiresTags": []
+    },
+    {
+      "type": "CLASSES",
+      "name": "Officials",
+      "code": "cls.officials",
+      "desc": "People employed by the government or legal system.",
+      "newTags": [
+        "ORDERLY"
+      ],
+      "baseweight": 1000,
+      "basesize": 150,
+      "basechance": 1.0,
+      "urbanization": 0.85,
+      "lovesTags": [
+        "URBAN",
+        "AUTHORITY",
+        "ROYAL"
+      ],
+      "likesTags": [
+        "CORRUPT",
+        "URBAN",
+        "ORDERLY",
+        "PROSPERITY",
+        "COMMERCE"
+      ],
+      "dislikesTags": [
+        "EVIL",
+        "NATURAL"
+      ],
+      "hatesTags": [
+        "LAWLESS",
+        "POVERTY"
+      ],
+      "requiresTags": []
+    },
+    {
+      "type": "CLASSES",
+      "name": "Foreigners",
+      "code": "cls.foreigners",
+      "desc": "People of other countires who have temporary accomodation or no legal rights.",
+      "newTags": [],
+      "baseweight": 1,
+      "basesize": 50,
+      "basechance": 0.9,
+      "urbanization": 0.5,
+      "lovesTags": [
+        "MILITARY"
+      ],
+      "likesTags": [
+        "LAWLESS",
+        "POVERTY",
+        "PROSPERITY",
+        "GOOD"
+      ],
+      "dislikesTags": [
+        "EVIL"
+      ],
+      "hatesTags": [
+        "DESPOTISM"
+      ],
+      "requiresTags": []
+    },
+    {
+      "type": "CLASSES",
+      "name": "Soldiers",
+      "code": "cls.soldiers",
+      "desc": "People who make a living fighting, either mercenaries or regular soldiers.",
+      "newTags": [
+        "MILITARY",
+        "AUTHORITY"
+      ],
+      "baseweight": 1000,
+      "basesize": 100,
+      "basechance": 0.95,
+      "urbanization": 0.95,
+      "lovesTags": [
+        "MILITARY",
+        "NAVAL"
+      ],
+      "likesTags": [
+        "AUTHORITY",
+        "DESPOTISM",
+        "EVIL"
+      ],
+      "dislikesTags": [
+        "POPULAR",
+        "LAWLESS"
+      ],
+      "hatesTags": [
+        "PACIFIST"
+      ],
+      "requiresTags": []
+    },
+    {
+      "type": "CLASSES",
+      "name": "Nomads",
+      "code": "cls.nomads",
+      "desc": "People who roam for pastureland, and fight as necessary.",
+      "newTags": [],
+      "baseweight": 100,
+      "basesize": 1500,
+      "basechance": 0.5,
+      "urbanization": 0.0,
+      "lovesTags": [
+        "PASTURE"
+      ],
+      "likesTags": [
+        "MILITARY",
+        "LAWLESS",
+        "AGRARIAN",
+        "POVERTY"
+      ],
+      "dislikesTags": [
+        "ROYAL",
+        "MINERALS"
+      ],
+      "hatesTags": [
+        "URBAN",
+        "ORDERLY",
+        "COMMERCE",
+        "EDUCATED"
+      ],
+      "requiresTags": []
+    },
+    {
+      "type": "CLASSES",
+      "name": "Labourers",
+      "code": "cls.labourers",
+      "desc": "People who earn meagre money by working in mines or cities with unskilled labour.",
+      "newTags": [],
+      "baseweight": 50,
+      "basesize": 500,
+      "basechance": 1.0,
+      "urbanization": 0.9,
+      "lovesTags": [
+        "MINERALS"
+      ],
+      "likesTags": [
+        "COMMERCE",
+        "URBAN",
+        "EDUCATED",
+        "PROSPERITY",
+        "MODERN"
+      ],
+      "dislikesTags": [
+        "POVERTY",
+        "REPRESSIVE"
+      ],
+      "hatesTags": [
+        "LAWLESS",
+        "SLAVERY",
+        "DARK_AGE"
+      ],
+      "requiresTags": []
+    },
+    {
+      "type": "CLASSES",
+      "name": "Academics",
+      "code": "cls.academics",
+      "desc": "People with specialist or university education like lawyers, doctors, and engineers.",
+      "newTags": [
+        "EDUCATED"
+      ],
+      "baseweight": 1000,
+      "basesize": 100,
+      "basechance": 0.7,
+      "urbanization": 0.99,
+      "lovesTags": [
+        "EDUCATED",
+        "MODERN"
+      ],
+      "likesTags": [
+        "PROSPERITY",
+        "NOBLES",
+        "CULTURAL",
+        "RENAISSANCE"
+      ],
+      "dislikesTags": [
+        "REPRESSIVE",
+        "LAWLESS",
+        "DESPOTISM"
+      ],
+      "hatesTags": [
+        "ILLITERATE",
+        "POVERTY",
+        "MEDEIVAL",
+        "DARK_AGE"
+      ],
+      "requiresTags": []
+    },
+    {
+      "type": "CLASSES",
+      "name": "Destitute",
+      "code": "cls.destitute",
+      "desc": "People who earn no income and must live off charity.",
+      "newTags": [
+        "POVERTY"
+      ],
+      "baseweight": 1,
+      "basesize": 500,
+      "basechance": 1.0,
+      "urbanization": 0.75,
+      "lovesTags": [
+        "POVERTY"
+      ],
+      "likesTags": [
+        "REPRESSIVE",
+        "DESPOTISM",
+        "LAWLESS",
+        "CORRUPT"
+      ],
+      "dislikesTags": [
+        "GOOD",
+        "ORDERLY",
+        "COMMERCE",
+        "CULTURAL"
+      ],
+      "hatesTags": [
+        "PROSPERITY"
+      ],
+      "requiresTags": []
+    },
+    {
+      "type": "CLASSES",
+      "name": "Levy Farmer",
+      "code": "cls.levy",
+      "desc": "People who earn money as farmer in peace and soldier in times of war.",
+      "newTags": [],
+      "baseweight": 100,
+      "basesize": 100,
+      "basechance": 0.8,
+      "urbanization": 0.02,
+      "lovesTags": [
+        "MILITARY",
+        "AGRARIAN",
+        "MEDEIVAL",
+        "DARK_AGE"
+      ],
+      "likesTags": [
+        "AUTHORITY",
+        "ORDERLY"
+      ],
+      "dislikesTags": [
+        "PROSPERITY",
+        "MERCHANT",
+        "CULTURAL",
+        "RENAISSANCE"
+      ],
+      "hatesTags": [
+        "EDUCATED",
+        "CORRUPT",
+        "MODERN"
+      ],
+      "requiresTags": []
+    }
+  ]
+}

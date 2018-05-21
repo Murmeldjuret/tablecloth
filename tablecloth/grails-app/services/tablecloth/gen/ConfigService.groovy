@@ -2,6 +2,7 @@ package tablecloth.gen
 
 import com.fasterxml.jackson.databind.ObjectMapper
 import grails.gorm.transactions.Transactional
+import tablecloth.gen.country.CountryConfig
 import tablecloth.gen.country.GovConfig
 
 import javax.annotation.PostConstruct
@@ -10,12 +11,19 @@ import javax.annotation.PostConstruct
 class ConfigService {
 
     private static String govPath = "gendata/govcfg.json"
+    private static String countryPath = "gendata/countrycfg.json"
 
     private static GovConfig govCfgDefault
+    private static CountryConfig countryCfgDefault
 
     @PostConstruct
     init() {
         govCfgDefault = readConfig(govPath, GovConfig)
+        countryCfgDefault = readConfig(countryPath, CountryConfig)
+    }
+
+    CountryConfig getCountry() {
+        return countryCfgDefault
     }
 
     GovConfig getGovernment() {
