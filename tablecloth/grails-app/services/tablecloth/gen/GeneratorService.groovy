@@ -3,6 +3,7 @@ package tablecloth.gen
 import tablecloth.DatabaseService
 import tablecloth.commands.DiceCommand
 import tablecloth.commands.PersonNameCommand
+import tablecloth.gen.country.CountryGeneratorService
 import tablecloth.model.domain.creatures.CharacterSheet
 import tablecloth.model.domain.creatures.PlayerCharacter
 import tablecloth.model.domain.users.User
@@ -12,6 +13,8 @@ class GeneratorService {
 
     DatabaseService databaseService
     DiceService diceService
+
+    CountryGeneratorService countryGeneratorService
 
     boolean generatePerson(PersonNameCommand cmd, User user) {
         assert User
@@ -33,5 +36,9 @@ class GeneratorService {
         PlayerCharacter pc = new PlayerCharacter(name: cmd.name, sheet: sheet, owner: user)
         databaseService.save(pc, user)
         return true
+    }
+
+    String generateCountry() {
+        countryGeneratorService.generate()
     }
 }

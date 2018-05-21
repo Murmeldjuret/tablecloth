@@ -31,4 +31,9 @@ class GeneratorController {
         }
         redirect controller: 'characters'
     }
+
+    def country() {
+        String text = generatorService.generateCountry()
+        render text: text
+    }
 }
