@@ -13,4 +13,14 @@ class RandomService {
         return rnd.nextInt(roof)
     }
 
+    boolean rollPercent(double val) {
+        if(val >= 1) {
+            return true
+        }
+        if(val <= 0) {
+            return false
+        }
+        return rnd.nextDouble() <= val
+    }
+
 }

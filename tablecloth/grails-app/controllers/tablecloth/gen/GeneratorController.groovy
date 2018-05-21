@@ -5,6 +5,7 @@ import grails.plugin.springsecurity.annotation.Secured
 import tablecloth.commands.PersonNameCommand
 import tablecloth.security.SecurityService
 import tablecloth.utils.ValidatableResponseUtil
+import tablecloth.viewmodel.gen.ClassListViewmodel
 
 @GrailsCompileStatic
 @Secured('ROLE_USER')
@@ -33,7 +34,10 @@ class GeneratorController {
     }
 
     def country() {
-        String text = generatorService.generateCountry()
-        render text: text
+        Collection<String> tags = params.list('tags')
+        Collection<ClassListViewmodel> list = generatorService.generateCountry(tags).sort(true) { ClassListViewmodel cls -> 0 - cls.wealth }
+        Long totalSize = list.sum { ClassListViewmodel cls -> cls.size } as Long
+        Long totalUrban = list.sum { ClassListViewmodel cls -> cls.urban } as Long
+        render view: '/country/country', model: [classes: list, tags: tags, totalSize: totalSize, totalUrban: totalUrban]
     }
 }

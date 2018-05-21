@@ -8,6 +8,7 @@ import tablecloth.model.domain.creatures.CharacterSheet
 import tablecloth.model.domain.creatures.PlayerCharacter
 import tablecloth.model.domain.users.User
 import tablecloth.rng.DiceService
+import tablecloth.viewmodel.gen.ClassListViewmodel
 
 class GeneratorService {
 
@@ -38,7 +39,7 @@ class GeneratorService {
         return true
     }
 
-    String generateCountry() {
-        countryGeneratorService.generate()
+    Collection<ClassListViewmodel> generateCountry(Collection<String> tags) {
+        countryGeneratorService.generate(tags)
     }
 }
