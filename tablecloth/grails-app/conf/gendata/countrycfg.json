@@ -31,6 +31,8 @@
     "PROSPERITY": 1.2,
     "REPRESSIVE": 1.2,
     "EDUCATED": 1.4,
+    "SMALL_STATE": 1.3,
+    "EMPIRE": 1.3,
     "ILLITERATE": 1.4,
     "CULTURAL": 1.2,
     "DARK_AGE": 1.2,
@@ -102,12 +104,14 @@
         "ROYAL",
         "AGRARIAN",
         "ILLITERATE",
-        "RENAISSANCE"
+        "RENAISSANCE",
+        "EMPIRE"
       ],
       "dislikesTags": [
         "LAWLESS",
         "ELECTIONS",
-        "MERCHANT"
+        "MERCHANT",
+        "SMALL_STATE"
       ],
       "hatesTags": [
         "POPULAR",
@@ -134,7 +138,8 @@
         "ORDERLY",
         "POPULAR",
         "PROSPERITY",
-        "POPULAR"
+        "POPULAR",
+        "EMPIRE"
       ],
       "dislikesTags": [
         "LAWLESS",
@@ -262,7 +267,8 @@
       "lovesTags": [
         "ROYAL",
         "AUTHORITY",
-        "ORDERLY"
+        "ORDERLY",
+        "EMPIRE"
       ],
       "likesTags": [
         "DESPOTISM",
@@ -329,7 +335,8 @@
         "PROSPERITY",
         "POVERTY",
         "COMMERCE",
-        "MERCHANT"
+        "MERCHANT",
+        "EMPIRE"
       ],
       "dislikesTags": [
         "DESPOTISM",
@@ -338,7 +345,8 @@
       "hatesTags": [
         "ORDERLY",
         "AUTHORITY",
-        "GOOD"
+        "GOOD",
+        "SMALL_STATE"
       ],
       "requiresTags": []
     },
@@ -438,24 +446,25 @@
         "ORDERLY"
       ],
       "baseweight": 1000,
-      "basesize": 1000,
+      "basesize": 600,
       "basechance": 1.0,
       "urbanization": 0.85,
       "lovesTags": [
         "URBAN",
-        "AUTHORITY",
-        "ROYAL"
+        "AUTHORITY"
       ],
       "likesTags": [
         "CORRUPT",
         "URBAN",
         "ORDERLY",
         "PROSPERITY",
-        "COMMERCE"
+        "COMMERCE",
+        "ROYAL"
       ],
       "dislikesTags": [
         "EVIL",
-        "NATURAL"
+        "NATURAL",
+        "NOBLES"
       ],
       "hatesTags": [
         "LAWLESS",
@@ -603,7 +612,8 @@
         "PROSPERITY",
         "NOBLES",
         "CULTURAL",
-        "RENAISSANCE"
+        "RENAISSANCE",
+        "EMPIRE"
       ],
       "dislikesTags": [
         "REPRESSIVE",
@@ -629,7 +639,7 @@
       "baseweight": 1,
       "basesize": 500,
       "basechance": 1.0,
-      "urbanization": 0.75,
+      "urbanization": 0.5,
       "lovesTags": [
         "POVERTY"
       ],
@@ -637,7 +647,8 @@
         "REPRESSIVE",
         "DESPOTISM",
         "LAWLESS",
-        "CORRUPT"
+        "CORRUPT",
+        "EVIL"
       ],
       "dislikesTags": [
         "GOOD",
@@ -657,14 +668,15 @@
       "desc": "People who earn money as farmer in peace and soldier in times of war.",
       "newTags": [],
       "baseweight": 100,
-      "basesize": 100,
+      "basesize": 400,
       "basechance": 0.8,
       "urbanization": 0.02,
       "lovesTags": [
         "MILITARY",
         "AGRARIAN",
         "MEDEIVAL",
-        "DARK_AGE"
+        "DARK_AGE",
+        "EMPIRE"
       ],
       "likesTags": [
         "AUTHORITY",
@@ -679,7 +691,8 @@
       "hatesTags": [
         "EDUCATED",
         "CORRUPT",
-        "MODERN"
+        "MODERN",
+        "SMALL_STATE"
       ],
       "requiresTags": []
     }
