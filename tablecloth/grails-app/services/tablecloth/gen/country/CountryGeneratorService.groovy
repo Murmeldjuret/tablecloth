@@ -43,13 +43,13 @@ class CountryGeneratorService {
         return randomService.rollPercent(chance)
     }
 
-    static
     private ClassListViewmodel buildViewmodel(Collection<String> tags, CountryData data, CountryConfig cfg) {
         double factor = 1.0
         factor *= getValueOfTags(tags, data.likesTags, cfg.tags)
         factor /= getValueOfTags(tags, data.dislikesTags, cfg.tags)
         factor *= Math.pow(getValueOfTags(tags, data.lovesTags, cfg.tags), 2)
         factor /= Math.pow(getValueOfTags(tags, data.hatesTags, cfg.tags), 2)
+        factor *= randomService.noise()
         return new ClassListViewmodel(
             name: data.name,
             desc: data.desc,

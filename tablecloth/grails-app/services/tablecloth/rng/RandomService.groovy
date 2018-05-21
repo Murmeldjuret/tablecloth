@@ -13,6 +13,15 @@ class RandomService {
         return rnd.nextInt(roof)
     }
 
+    double noise(int iterations = 25) {
+        double factor = 1.0
+        (1..iterations).each {
+            factor += rnd.nextDouble()
+        }
+        factor *= 2 / iterations
+        return factor
+    }
+
     boolean rollPercent(double val) {
         if(val >= 1) {
             return true
