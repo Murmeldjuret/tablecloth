@@ -49,13 +49,12 @@ class CountryGeneratorService {
         factor /= getValueOfTags(tags, data.dislikesTags, cfg.tags)
         factor *= Math.pow(getValueOfTags(tags, data.lovesTags, cfg.tags), 2)
         factor /= Math.pow(getValueOfTags(tags, data.hatesTags, cfg.tags), 2)
-        factor *= randomService.noise()
         return new ClassListViewmodel(
             name: data.name,
             desc: data.desc,
-            size: (data.basesize * factor).round(),
-            wealth: (data.baseweight * factor).round(),
-            urban: (data.basesize * factor * data.urbanization).round(),
+            size: (data.basesize * factor * randomService.noise()).round(),
+            wealth: (data.baseweight * factor * randomService.noise()).round(),
+            urban: (data.basesize * factor * randomService.noise() * data.urbanization).round(),
         )
     }
 
