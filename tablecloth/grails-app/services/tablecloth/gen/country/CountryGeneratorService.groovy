@@ -26,6 +26,8 @@ class CountryGeneratorService {
         classes.each { CountryData data ->
             if (shouldIncludeClass(tags, data, cfg)) {
                 response += buildViewmodel(tags, data, cfg)
+            } else if (data.mandatory) {
+                response += buildMarginalViewmodel(tags, data, cfg)
             } else {
                 response += emptyViewmodel(data)
             }
@@ -34,8 +36,8 @@ class CountryGeneratorService {
     }
 
     private boolean shouldIncludeClass(Collection<String> tags, CountryData data, CountryConfig cfg) {
-        if (data.basechance >= 1.0) {
-            return true
+        if (!requiredTagsFulfilled(data.requiresTags, tags)) {
+            return false
         }
         double chance = data.basechance
         chance *= getValueOfTags(tags, data.lovesTags, cfg.tags)
@@ -49,13 +51,31 @@ class CountryGeneratorService {
         factor /= getValueOfTags(tags, data.dislikesTags, cfg.tags)
         factor *= Math.pow(getValueOfTags(tags, data.lovesTags, cfg.tags), 2)
         factor /= Math.pow(getValueOfTags(tags, data.hatesTags, cfg.tags), 2)
+        double size = (data.basesize * factor * randomService.noise()).round()
+        if (size < 1) {
+            size = 1d
+        }
         return new ClassListViewmodel(
             name: data.name,
             desc: data.desc,
-            size: (data.basesize * factor * randomService.noise()).round(),
+            size: size.toLong(),
             wealth: (data.baseweight * factor * randomService.noise()).round(),
             urban: (data.basesize * factor * randomService.noise() * data.urbanization).round(),
         )
+    }
+
+    private ClassListViewmodel buildMarginalViewmodel(Collection<String> tags, CountryData data, CountryConfig cfg) {
+        ClassListViewmodel model = buildViewmodel(tags, data, cfg)
+        model.wealth = (model.wealth * 0.05d).round()
+        model.size *= (model.size * 0.1d).round()
+        if (model.size < 1) {
+            model.size = 1L
+        }
+        return model
+    }
+
+    private static boolean requiredTagsFulfilled(Collection<String> requirements, Collection<String> tags) {
+        requirements.every { String tag -> tags.contains(tag) }
     }
 
     static private ClassListViewmodel emptyViewmodel(CountryData data) {

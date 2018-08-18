@@ -36,7 +36,7 @@
     "ILLITERATE": 1.4,
     "CULTURAL": 1.2,
     "DARK_AGE": 1.2,
-    "MEDEIVAL": 1.2,
+    "MEDIEVAL": 1.2,
     "RENAISSANCE": 1.2,
     "MODERN": 1.5,
     "NAVAL": 1.4,
@@ -56,6 +56,7 @@
       "baseweight": 1000,
       "basesize": 200,
       "basechance": 1.0,
+      "mandatory": true,
       "urbanization": 0.80,
       "lovesTags": [
         "NAVAL",
@@ -67,7 +68,7 @@
         "POPULAR",
         "GOOD",
         "PROSPERITY",
-        "MEDEIVAL",
+        "MEDIEVAL",
         "MODERN"
       ],
       "dislikesTags": [
@@ -92,11 +93,12 @@
       "baseweight": 5000,
       "basesize": 50,
       "basechance": 0.95,
-      "urbanization": 0.50,
+      "mandatory": false,
+      "urbanization": 0.60,
       "lovesTags": [
         "NOBLES",
         "REPRESSIVE",
-        "MEDEIVAL",
+        "MEDIEVAL",
         "DARK_AGE"
       ],
       "likesTags": [
@@ -130,7 +132,8 @@
       "baseweight": 1000,
       "basesize": 1000,
       "basechance": 1.0,
-      "urbanization": 0.05,
+      "mandatory": true,
+      "urbanization": 0.01,
       "lovesTags": [
         "DARK_AGE"
       ],
@@ -145,7 +148,7 @@
         "LAWLESS",
         "DESPOTISM",
         "REPRESSIVE",
-        "MEDEIVAL"
+        "MEDIEVAL"
       ],
       "hatesTags": [
         "DESPOTISM"
@@ -164,6 +167,7 @@
       "baseweight": 2500,
       "basesize": 100,
       "basechance": 0.5,
+      "mandatory": false,
       "urbanization": 1.0,
       "lovesTags": [
         "MODERN",
@@ -179,7 +183,7 @@
       "dislikesTags": [
         "LAWLESS",
         "DESPOTISM",
-        "MEDEIVAL"
+        "MEDIEVAL"
       ],
       "hatesTags": [
         "POVERTY",
@@ -198,6 +202,7 @@
       "baseweight": 1,
       "basesize": 2000,
       "basechance": 0.5,
+      "mandatory": false,
       "urbanization": 0.10,
       "lovesTags": [
         "DESPOTISM",
@@ -232,6 +237,7 @@
       "baseweight": 100,
       "basesize": 15000,
       "basechance": 1.0,
+      "mandatory": true,
       "urbanization": 0.01,
       "lovesTags": [
         "AGRARIAN"
@@ -261,8 +267,9 @@
         "ROYAL"
       ],
       "baseweight": 10000,
-      "basesize": 5,
+      "basesize": 1,
       "basechance": 0.75,
+      "mandatory": false,
       "urbanization": 0.90,
       "lovesTags": [
         "ROYAL",
@@ -272,7 +279,7 @@
       ],
       "likesTags": [
         "DESPOTISM",
-        "MEDEIVAL",
+        "MEDIEVAL",
         "DARK_AGE"
       ],
       "dislikesTags": [
@@ -296,6 +303,7 @@
       "baseweight": 1500,
       "basesize": 250,
       "basechance": 0.95,
+      "mandatory": true,
       "urbanization": 0.2,
       "lovesTags": [
         "RELIGIOUS",
@@ -325,6 +333,7 @@
       "baseweight": 150,
       "basesize": 150,
       "basechance": 0.95,
+      "mandatory": true,
       "urbanization": 0.50,
       "lovesTags": [
         "CORRUPT",
@@ -361,6 +370,7 @@
       "baseweight": 2000,
       "basesize": 100,
       "basechance": 0.8,
+      "mandatory": false,
       "urbanization": 0.95,
       "lovesTags": [
         "MAGICAL"
@@ -381,18 +391,22 @@
     },
     {
       "type": "CLASSES",
-      "name": "Servicers",
+      "name": "Servants",
       "code": "cls.servicers",
       "desc": "People who make a living as servants, assistants, housemaids, cooks, entertainment, and similar.",
       "newTags": [],
       "baseweight": 150,
-      "basesize": 500,
+      "basesize": 1000,
       "basechance": 1.0,
+      "mandatory": true,
       "urbanization": 0.95,
       "lovesTags": [
-        "URBAN"
+        "NOBLES",
+        "RENAISSANCE",
+        "MODERN"
       ],
       "likesTags": [
+        "URBAN",
         "COMMERCE",
         "ROYAL",
         "AUTHORITY",
@@ -403,6 +417,8 @@
       ],
       "hatesTags": [
         "POVERTY",
+        "AGRARIAN",
+        "PASTURE",
         "SLAVERY"
       ],
       "requiresTags": []
@@ -418,6 +434,7 @@
       "baseweight": 500,
       "basesize": 400,
       "basechance": 1.0,
+      "mandatory": true,
       "urbanization": 0.70,
       "lovesTags": [
         "URBAN",
@@ -448,6 +465,7 @@
       "baseweight": 1000,
       "basesize": 600,
       "basechance": 1.0,
+      "mandatory": true,
       "urbanization": 0.85,
       "lovesTags": [
         "URBAN",
@@ -481,6 +499,7 @@
       "baseweight": 1,
       "basesize": 50,
       "basechance": 0.9,
+      "mandatory": true,
       "urbanization": 0.5,
       "lovesTags": [
         "MILITARY"
@@ -501,7 +520,7 @@
     },
     {
       "type": "CLASSES",
-      "name": "Soldiers",
+      "name": "Professional Soldiers",
       "code": "cls.soldiers",
       "desc": "People who make a living fighting, either mercenaries or regular soldiers.",
       "newTags": [
@@ -511,6 +530,7 @@
       "baseweight": 1000,
       "basesize": 500,
       "basechance": 0.95,
+      "mandatory": false,
       "urbanization": 0.95,
       "lovesTags": [
         "MILITARY",
@@ -539,6 +559,7 @@
       "baseweight": 100,
       "basesize": 1500,
       "basechance": 0.5,
+      "mandatory": false,
       "urbanization": 0.0,
       "lovesTags": [
         "PASTURE"
@@ -565,11 +586,12 @@
       "type": "CLASSES",
       "name": "Labourers",
       "code": "cls.labourers",
-      "desc": "People who earn meagre money by working in mines or cities with unskilled labour.",
+      "desc": "People who earn meagre money by working in mines or cities as unskilled labour.",
       "newTags": [],
       "baseweight": 50,
       "basesize": 500,
       "basechance": 1.0,
+      "mandatory": true,
       "urbanization": 0.9,
       "lovesTags": [
         "MINERALS"
@@ -603,6 +625,7 @@
       "baseweight": 1000,
       "basesize": 100,
       "basechance": 0.7,
+      "mandatory": false,
       "urbanization": 0.99,
       "lovesTags": [
         "EDUCATED",
@@ -623,7 +646,7 @@
       "hatesTags": [
         "ILLITERATE",
         "POVERTY",
-        "MEDEIVAL",
+        "MEDIEVAL",
         "DARK_AGE"
       ],
       "requiresTags": []
@@ -639,6 +662,7 @@
       "baseweight": 1,
       "basesize": 500,
       "basechance": 1.0,
+      "mandatory": true,
       "urbanization": 0.5,
       "lovesTags": [
         "POVERTY"
@@ -670,11 +694,12 @@
       "baseweight": 100,
       "basesize": 400,
       "basechance": 0.8,
+      "mandatory": false,
       "urbanization": 0.02,
       "lovesTags": [
         "MILITARY",
         "AGRARIAN",
-        "MEDEIVAL",
+        "MEDIEVAL",
         "DARK_AGE",
         "EMPIRE"
       ],

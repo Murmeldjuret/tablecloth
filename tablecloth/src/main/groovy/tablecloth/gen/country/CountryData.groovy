@@ -20,6 +20,8 @@ class CountryData {
     @JsonProperty
     Double basechance
     @JsonProperty
+    Boolean mandatory
+    @JsonProperty
     Double urbanization
 
     @JsonProperty
