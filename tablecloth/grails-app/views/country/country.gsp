@@ -1,9 +1,12 @@
 <%@ page import="tablecloth.viewmodel.gen.ClassListViewmodel" %>
 <!DOCTYPE html>
 <g:set var="classes" value="${(List<ClassListViewmodel>) classes}"/>
-<g:set var="tags" value="${(List<String>) tags}"/>
+<g:set var="chosenTags" value="${(Collection<String>) chosenTags}"/>
+<g:set var="availableTags" value="${(Collection<String>) availableTags}"/>
 <g:set var="totalSize" value="${(Long) totalSize}"/>
 <g:set var="totalUrban" value="${(Long) totalUrban}"/>
+<asset:javascript src="countrygen.js"/>
+<asset:javascript src="select2.min.js"/>
 <html>
 <head>
     <meta name="layout" content="main"/>
@@ -11,9 +14,23 @@
 </head>
 
 <body>
+<asset:stylesheet src="select2.css"/>
 <g:if test="${flash.message}"><h2>${flash.message}</h2></g:if>
 <h3>Country:</h3>
-With tags = ${tags.join(', ')}
+<hline></hline>
+<div>
+    With Tags: ${chosenTags}
+    <g:form controller="generator" action="country" id="tag_select_form">
+        <g:select from="${availableTags.sort()}"
+                  value="${chosenTags}"
+                  id="tags"
+                  class="select2-country select2-selection--multiple form-control select2-search--inline"
+                  multiple="multiple"
+                  name="tags"/>
+        <g:submitButton name="GENERATE"/>
+    </g:form>
+</>
+<hline></hline>
 <br>
 Total number of households is ${totalSize} where ${totalUrban} are urban.
 The country has about ${totalSize * 7} residents.

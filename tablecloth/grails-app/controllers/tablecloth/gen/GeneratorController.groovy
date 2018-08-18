@@ -11,6 +11,7 @@ import tablecloth.viewmodel.gen.ClassListViewmodel
 @Secured('ROLE_USER')
 class GeneratorController {
 
+    ConfigService configService
     GeneratorService generatorService
     SecurityService securityService
 
@@ -34,10 +35,18 @@ class GeneratorController {
     }
 
     def country() {
-        Collection<String> tags = params.list('tags')
-        Collection<ClassListViewmodel> list = generatorService.generateCountry(tags).sort(true) { ClassListViewmodel cls -> 0 - cls.wealth }
+        Collection<String> chosen = params.list('tags')
+        Collection<String> available = (configService.getCountry()?.tags?.keySet()?.toList() ?: []) as List<String>
+        Collection<ClassListViewmodel> list = generatorService.generateCountry(chosen)
+        list.sort(true) { ClassListViewmodel cls -> 0 - cls.wealth }
         Long totalSize = list.sum { ClassListViewmodel cls -> cls.size } as Long
         Long totalUrban = list.sum { ClassListViewmodel cls -> cls.urban } as Long
-        render view: '/country/country', model: [classes: list, tags: tags, totalSize: totalSize, totalUrban: totalUrban]
+        render view: '/country/country', model: [
+            classes      : list,
+            availableTags: available,
+            chosenTags   : chosen,
+            totalSize    : totalSize,
+            totalUrban   : totalUrban
+        ]
     }
 }
