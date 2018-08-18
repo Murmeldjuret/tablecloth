@@ -1,5 +1,5 @@
 {
-  "version": 2,
+  "version": 3,
   "tags": {
     "EVIL": 1.5,
     "GOOD": 1.5,
@@ -31,16 +31,21 @@
     "PROSPERITY": 1.2,
     "REPRESSIVE": 1.2,
     "EDUCATED": 1.4,
+    "CITY_STATE": 1.6,
     "SMALL_STATE": 1.3,
-    "EMPIRE": 1.3,
+    "LARGE_STATE": 1.3,
+    "EMPIRE": 1.4,
     "ILLITERATE": 1.4,
     "CULTURAL": 1.2,
+    "DECENTRALIZED": 1.2,
+    "FRAGMENTED": 1.6,
     "DARK_AGE": 1.2,
     "MEDIEVAL": 1.2,
     "RENAISSANCE": 1.2,
     "MODERN": 1.5,
     "NAVAL": 1.4,
-    "ALLOW_MAGIC": 2
+    "ALLOW_MAGIC": 2,
+    "NO_SLAVERY": 1.5
   },
   "data": [
     {
@@ -53,8 +58,8 @@
         "MERCHANT",
         "PROSPERITY"
       ],
-      "baseweight": 1000,
-      "basesize": 200,
+      "baseweight": 6.0,
+      "basesize": 400,
       "basechance": 1.0,
       "mandatory": true,
       "urbanization": 0.80,
@@ -69,6 +74,9 @@
         "GOOD",
         "PROSPERITY",
         "MEDIEVAL",
+        "LARGE_STATE",
+        "DECENTRALIZED",
+        "CITY_STATE",
         "MODERN"
       ],
       "dislikesTags": [
@@ -78,9 +86,11 @@
       ],
       "hatesTags": [
         "DESPOTISM",
+        "FRAGMENTED",
         "POVERTY"
       ],
-      "requiresTags": []
+      "requiresTags": [],
+      "blockerTags": []
     },
     {
       "type": "CLASSES",
@@ -90,7 +100,7 @@
       "newTags": [
         "NOBLES"
       ],
-      "baseweight": 5000,
+      "baseweight": 100.0,
       "basesize": 50,
       "basechance": 0.95,
       "mandatory": false,
@@ -99,6 +109,9 @@
         "NOBLES",
         "REPRESSIVE",
         "MEDIEVAL",
+        "EMPIRE",
+        "DECENTRALIZED",
+        "LARGE_STATE",
         "DARK_AGE"
       ],
       "likesTags": [
@@ -106,20 +119,22 @@
         "ROYAL",
         "AGRARIAN",
         "ILLITERATE",
-        "RENAISSANCE",
-        "EMPIRE"
+        "FRAGMENTED",
+        "RENAISSANCE"
       ],
       "dislikesTags": [
         "LAWLESS",
         "ELECTIONS",
         "MERCHANT",
+        "CITY_STATE",
         "SMALL_STATE"
       ],
       "hatesTags": [
         "POPULAR",
         "MODERN"
       ],
-      "requiresTags": []
+      "requiresTags": [],
+      "blockerTags": []
     },
     {
       "type": "CLASSES",
@@ -129,12 +144,13 @@
       "newTags": [
         "AGRARIAN"
       ],
-      "baseweight": 1000,
+      "baseweight": 1.0,
       "basesize": 1000,
       "basechance": 1.0,
       "mandatory": true,
       "urbanization": 0.01,
       "lovesTags": [
+        "FRAGMENTED",
         "DARK_AGE"
       ],
       "likesTags": [
@@ -142,6 +158,8 @@
         "POPULAR",
         "PROSPERITY",
         "POPULAR",
+        "DECENTRALIZED",
+        "LARGE_STATE",
         "EMPIRE"
       ],
       "dislikesTags": [
@@ -153,7 +171,8 @@
       "hatesTags": [
         "DESPOTISM"
       ],
-      "requiresTags": []
+      "requiresTags": [],
+      "blockerTags": []
     },
     {
       "type": "CLASSES",
@@ -164,7 +183,7 @@
         "COMMERCE",
         "URBAN"
       ],
-      "baseweight": 2500,
+      "baseweight": 25.0,
       "basesize": 100,
       "basechance": 0.5,
       "mandatory": false,
@@ -178,18 +197,23 @@
         "COMMERCE",
         "MERCHANT",
         "PROSPERITY",
+        "LARGE_STATE",
+        "CITY_STATE",
         "RENAISSANCE"
       ],
       "dislikesTags": [
         "LAWLESS",
-        "DESPOTISM",
-        "MEDIEVAL"
+        "DESPOTISM"
       ],
       "hatesTags": [
         "POVERTY",
-        "DARK_AGE"
+        "DECENTRALIZED"
       ],
-      "requiresTags": []
+      "requiresTags": [],
+      "blockerTags": [
+        "DARK_AGE",
+        "MEDIEVAL"
+      ]
     },
     {
       "type": "CLASSES",
@@ -199,13 +223,14 @@
       "newTags": [
         "SLAVERY"
       ],
-      "baseweight": 1,
+      "baseweight": 0.01,
       "basesize": 2000,
       "basechance": 0.5,
       "mandatory": false,
       "urbanization": 0.10,
       "lovesTags": [
         "DESPOTISM",
+        "CITY_STATE",
         "SLAVERY"
       ],
       "likesTags": [
@@ -213,6 +238,7 @@
         "POVERTY",
         "MILITARY",
         "PROSPERITY",
+        "DECENTRALIZED",
         "MERCHANT"
       ],
       "dislikesTags": [
@@ -222,8 +248,9 @@
         "POPULAR",
         "GOOD"
       ],
-      "requiresTags": [
-        "SLAVERY"
+      "requiresTags": [],
+      "blockerTags": [
+        "NO_SLAVERY"
       ]
     },
     {
@@ -234,7 +261,7 @@
       "newTags": [
         "AGRARIAN"
       ],
-      "baseweight": 100,
+      "baseweight": 0.15,
       "basesize": 15000,
       "basechance": 1.0,
       "mandatory": true,
@@ -254,9 +281,11 @@
         "MODERN"
       ],
       "hatesTags": [
+        "CITY_STATE",
         "COMMERCE"
       ],
-      "requiresTags": []
+      "requiresTags": [],
+      "blockerTags": []
     },
     {
       "type": "CLASSES",
@@ -266,7 +295,7 @@
       "newTags": [
         "ROYAL"
       ],
-      "baseweight": 10000,
+      "baseweight": 10000.0,
       "basesize": 1,
       "basechance": 0.75,
       "mandatory": false,
@@ -280,17 +309,24 @@
       "likesTags": [
         "DESPOTISM",
         "MEDIEVAL",
+        "LARGE_STATE",
         "DARK_AGE"
       ],
       "dislikesTags": [
         "PROSPERITY",
+        "FRAGMENTED",
         "MODERN"
       ],
       "hatesTags": [
         "POPULAR",
+        "DECENTRALIZED",
+        "CITY_STATE",
         "ELECTIONS"
       ],
-      "requiresTags": []
+      "requiresTags": [],
+      "blockerTags": [
+        "REPUBLIC"
+      ]
     },
     {
       "type": "CLASSES",
@@ -300,8 +336,8 @@
       "newTags": [
         "DIVINE"
       ],
-      "baseweight": 1500,
-      "basesize": 250,
+      "baseweight": 3.5,
+      "basesize": 450,
       "basechance": 0.95,
       "mandatory": true,
       "urbanization": 0.2,
@@ -311,6 +347,8 @@
       ],
       "likesTags": [
         "ORDERLY",
+        "FRAGMENTED",
+        "DECENTRALIZED",
         "GOOD",
         "EVIL"
       ],
@@ -320,7 +358,8 @@
       "hatesTags": [
         "LAWLESS"
       ],
-      "requiresTags": []
+      "requiresTags": [],
+      "blockerTags": []
     },
     {
       "type": "CLASSES",
@@ -330,21 +369,24 @@
       "newTags": [
         "LAWLESS"
       ],
-      "baseweight": 150,
+      "baseweight": 0.75,
       "basesize": 150,
       "basechance": 0.95,
       "mandatory": true,
       "urbanization": 0.50,
       "lovesTags": [
         "CORRUPT",
+        "FRAGMENTED",
         "EVIL",
         "LAWLESS"
       ],
       "likesTags": [
         "PROSPERITY",
+        "DECENTRALIZED",
         "POVERTY",
         "COMMERCE",
         "MERCHANT",
+        "LARGE_STATE",
         "EMPIRE"
       ],
       "dislikesTags": [
@@ -354,10 +396,12 @@
       "hatesTags": [
         "ORDERLY",
         "AUTHORITY",
+        "CITY_STATE",
         "GOOD",
         "SMALL_STATE"
       ],
-      "requiresTags": []
+      "requiresTags": [],
+      "blockerTags": []
     },
     {
       "type": "CLASSES",
@@ -367,7 +411,7 @@
       "newTags": [
         "MAGICAL"
       ],
-      "baseweight": 2000,
+      "baseweight": 25.0,
       "basesize": 100,
       "basechance": 0.8,
       "mandatory": false,
@@ -387,7 +431,8 @@
       ],
       "requiresTags": [
         "ALLOW_MAGIC"
-      ]
+      ],
+      "blockerTags": []
     },
     {
       "type": "CLASSES",
@@ -395,8 +440,8 @@
       "code": "cls.servicers",
       "desc": "People who make a living as servants, assistants, housemaids, cooks, entertainment, and similar.",
       "newTags": [],
-      "baseweight": 150,
-      "basesize": 1000,
+      "baseweight": 0.6,
+      "basesize": 1250,
       "basechance": 1.0,
       "mandatory": true,
       "urbanization": 0.95,
@@ -410,6 +455,8 @@
         "COMMERCE",
         "ROYAL",
         "AUTHORITY",
+        "LARGE_STATE",
+        "CITY_STATE",
         "PROSPERITY"
       ],
       "dislikesTags": [
@@ -421,7 +468,8 @@
         "PASTURE",
         "SLAVERY"
       ],
-      "requiresTags": []
+      "requiresTags": [],
+      "blockerTags": []
     },
     {
       "type": "CLASSES",
@@ -431,8 +479,8 @@
       "newTags": [
         "COMMERCE"
       ],
-      "baseweight": 500,
-      "basesize": 400,
+      "baseweight": 1.25,
+      "basesize": 800,
       "basechance": 1.0,
       "mandatory": true,
       "urbanization": 0.70,
@@ -442,6 +490,7 @@
       ],
       "likesTags": [
         "COMMERCE",
+        "CITY_STATE",
         "MINERALS"
       ],
       "dislikesTags": [
@@ -452,7 +501,8 @@
         "DESPOTISM",
         "POVERTY"
       ],
-      "requiresTags": []
+      "requiresTags": [],
+      "blockerTags": []
     },
     {
       "type": "CLASSES",
@@ -462,13 +512,15 @@
       "newTags": [
         "ORDERLY"
       ],
-      "baseweight": 1000,
+      "baseweight": 3.0,
       "basesize": 600,
       "basechance": 1.0,
       "mandatory": true,
       "urbanization": 0.85,
       "lovesTags": [
         "URBAN",
+        "LARGE_STATE",
+        "EMPIRE",
         "AUTHORITY"
       ],
       "likesTags": [
@@ -486,9 +538,13 @@
       ],
       "hatesTags": [
         "LAWLESS",
+        "FRAGMENTED",
+        "CITY_STATE",
+        "DECENTRALIZED",
         "POVERTY"
       ],
-      "requiresTags": []
+      "requiresTags": [],
+      "blockerTags": []
     },
     {
       "type": "CLASSES",
@@ -496,18 +552,23 @@
       "code": "cls.foreigners",
       "desc": "People of other countires who have temporary accomodation or no legal rights.",
       "newTags": [],
-      "baseweight": 1,
+      "baseweight": 0.5,
       "basesize": 50,
       "basechance": 0.9,
       "mandatory": true,
       "urbanization": 0.5,
       "lovesTags": [
+        "FRAGMENTED",
+        "EMPIRE",
         "MILITARY"
       ],
       "likesTags": [
         "LAWLESS",
         "POVERTY",
         "PROSPERITY",
+        "DECENTRALIZED",
+        "LARGE_STATE",
+        "CITY_STATE",
         "GOOD"
       ],
       "dislikesTags": [
@@ -516,7 +577,8 @@
       "hatesTags": [
         "DESPOTISM"
       ],
-      "requiresTags": []
+      "requiresTags": [],
+      "blockerTags": []
     },
     {
       "type": "CLASSES",
@@ -527,8 +589,8 @@
         "MILITARY",
         "AUTHORITY"
       ],
-      "baseweight": 1000,
-      "basesize": 500,
+      "baseweight": 4.0,
+      "basesize": 400,
       "basechance": 0.95,
       "mandatory": false,
       "urbanization": 0.95,
@@ -538,17 +600,21 @@
       ],
       "likesTags": [
         "AUTHORITY",
+        "CITY_STATE",
         "DESPOTISM",
         "EVIL"
       ],
       "dislikesTags": [
         "POPULAR",
+        "DECENTRALIZED",
         "LAWLESS"
       ],
       "hatesTags": [
+        "FRAGMENTED",
         "PACIFIST"
       ],
-      "requiresTags": []
+      "requiresTags": [],
+      "blockerTags": []
     },
     {
       "type": "CLASSES",
@@ -556,18 +622,21 @@
       "code": "cls.nomads",
       "desc": "People who roam for pastureland, and fight as necessary.",
       "newTags": [],
-      "baseweight": 100,
+      "baseweight": 0.5,
       "basesize": 1500,
       "basechance": 0.5,
       "mandatory": false,
       "urbanization": 0.0,
       "lovesTags": [
+        "FRAGMENTED",
+        "DECENTRALIZED",
         "PASTURE"
       ],
       "likesTags": [
         "MILITARY",
         "LAWLESS",
         "AGRARIAN",
+        "LARGE_STATE",
         "POVERTY"
       ],
       "dislikesTags": [
@@ -580,7 +649,11 @@
         "COMMERCE",
         "EDUCATED"
       ],
-      "requiresTags": []
+      "requiresTags": [],
+      "blockerTags": [
+        "CITY_STATE",
+        "MODERN"
+      ]
     },
     {
       "type": "CLASSES",
@@ -588,8 +661,8 @@
       "code": "cls.labourers",
       "desc": "People who earn meagre money by working in mines or cities as unskilled labour.",
       "newTags": [],
-      "baseweight": 50,
-      "basesize": 500,
+      "baseweight": 0.25,
+      "basesize": 800,
       "basechance": 1.0,
       "mandatory": true,
       "urbanization": 0.9,
@@ -601,6 +674,7 @@
         "URBAN",
         "EDUCATED",
         "PROSPERITY",
+        "CITY_STATE",
         "MODERN"
       ],
       "dislikesTags": [
@@ -612,7 +686,8 @@
         "SLAVERY",
         "DARK_AGE"
       ],
-      "requiresTags": []
+      "requiresTags": [],
+      "blockerTags": []
     },
     {
       "type": "CLASSES",
@@ -622,13 +697,14 @@
       "newTags": [
         "EDUCATED"
       ],
-      "baseweight": 1000,
+      "baseweight": 10.0,
       "basesize": 100,
       "basechance": 0.7,
       "mandatory": false,
       "urbanization": 0.99,
       "lovesTags": [
         "EDUCATED",
+        "CITY_STATE",
         "MODERN"
       ],
       "likesTags": [
@@ -641,15 +717,19 @@
       "dislikesTags": [
         "REPRESSIVE",
         "LAWLESS",
+        "DECENTRALIZED",
         "DESPOTISM"
       ],
       "hatesTags": [
-        "ILLITERATE",
         "POVERTY",
-        "MEDIEVAL",
-        "DARK_AGE"
+        "FRAGMENTED",
+        "MEDIEVAL"
       ],
-      "requiresTags": []
+      "requiresTags": [],
+      "blockerTags": [
+        "ILLITERATE",
+        "DARK_AGE"
+      ]
     },
     {
       "type": "CLASSES",
@@ -659,8 +739,8 @@
       "newTags": [
         "POVERTY"
       ],
-      "baseweight": 1,
-      "basesize": 500,
+      "baseweight": 0.025,
+      "basesize": 1000,
       "basechance": 1.0,
       "mandatory": true,
       "urbanization": 0.5,
@@ -683,7 +763,8 @@
       "hatesTags": [
         "PROSPERITY"
       ],
-      "requiresTags": []
+      "requiresTags": [],
+      "blockerTags": []
     },
     {
       "type": "CLASSES",
@@ -691,8 +772,8 @@
       "code": "cls.levy",
       "desc": "People who earn money as farmer in peace and soldier in times of war.",
       "newTags": [],
-      "baseweight": 100,
-      "basesize": 400,
+      "baseweight": 1.5,
+      "basesize": 700,
       "basechance": 0.8,
       "mandatory": false,
       "urbanization": 0.02,
@@ -701,6 +782,8 @@
         "AGRARIAN",
         "MEDIEVAL",
         "DARK_AGE",
+        "LARGE_STATE",
+        "DECENTRALIZED",
         "EMPIRE"
       ],
       "likesTags": [
@@ -711,15 +794,20 @@
         "PROSPERITY",
         "MERCHANT",
         "CULTURAL",
+        "FRAGMENTED",
+        "SMALL_STATE",
         "RENAISSANCE"
       ],
       "hatesTags": [
         "EDUCATED",
-        "CORRUPT",
-        "MODERN",
-        "SMALL_STATE"
+        "EVIL",
+        "CORRUPT"
       ],
-      "requiresTags": []
+      "requiresTags": [],
+      "blockerTags": [
+        "CITY_STATE",
+        "MODERN"
+      ]
     }
   ]
 }

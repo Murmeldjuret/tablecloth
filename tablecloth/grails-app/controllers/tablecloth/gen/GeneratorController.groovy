@@ -40,12 +40,14 @@ class GeneratorController {
         Collection<ClassListViewmodel> list = generatorService.generateCountry(chosen)
         list.sort(true) { ClassListViewmodel cls -> 0 - cls.wealth }
         Long totalSize = list.sum { ClassListViewmodel cls -> cls.size } as Long
+        Long totalWealth = list.sum { ClassListViewmodel cls -> cls.wealth } as Long
         Long totalUrban = list.sum { ClassListViewmodel cls -> cls.urban } as Long
         render view: '/country/country', model: [
             classes      : list,
             availableTags: available,
             chosenTags   : chosen,
             totalSize    : totalSize,
+            totalWealth  : totalWealth,
             totalUrban   : totalUrban
         ]
     }

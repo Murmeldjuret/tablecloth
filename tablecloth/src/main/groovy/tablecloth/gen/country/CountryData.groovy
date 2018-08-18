@@ -14,7 +14,7 @@ class CountryData {
     @JsonProperty
     String desc
     @JsonProperty
-    Integer baseweight
+    Double baseweight
     @JsonProperty
     Integer basesize
     @JsonProperty
@@ -36,6 +36,8 @@ class CountryData {
     List<String> hatesTags
     @JsonProperty
     List<String> requiresTags
+    @JsonProperty
+    List<String> blockerTags
 
     @JsonProperty
     List<String> requiresChoices

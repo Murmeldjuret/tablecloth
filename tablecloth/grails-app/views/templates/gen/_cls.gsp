@@ -1,7 +1,8 @@
 <%@ page import="tablecloth.viewmodel.gen.ClassListViewmodel" %>
 <!DOCTYPE html>
 <g:set var="cls" value="${(ClassListViewmodel) cls}"/>
-<g:set var="percent" value="${(Double) cls.size / totalSize}"/>
+<g:set var="percentSize" value="${(Double) cls.size / totalSize}"/>
+<g:set var="percentWealth" value="${(Double) cls.wealth / totalWealth}"/>
 <html>
 <tr>
     <td>
@@ -11,10 +12,10 @@
         ${cls.size}
     </td>
     <td>
-        ${cls.wealth}
+        ${(percentWealth * 100).trunc(1)}%
     </td>
     <td>
-        ${(percent * 100).trunc(1)}%
+        ${(percentSize * 100).trunc(1)}%
     </td>
 </tr>
 </html>
