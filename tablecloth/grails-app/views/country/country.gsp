@@ -15,6 +15,7 @@
 </head>
 
 <body>
+<asset:stylesheet src="tooltip.css"/>
 <asset:stylesheet src="select2.css"/>
 <g:if test="${flash.message}"><h2>${flash.message}</h2></g:if>
 <h3>Country:</h3>
@@ -50,4 +51,9 @@ The country has about ${totalSize * 7} residents.
     </g:each>
 </table>
 </body>
+<script>
+    $(document).ready(function(){
+        $('[data-toggle="tooltip"]').tooltip();
+    });
+</script>
 </html>

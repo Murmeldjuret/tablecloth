@@ -45,7 +45,9 @@
     "MODERN": 1.5,
     "NAVAL": 1.4,
     "ALLOW_MAGIC": 2,
-    "NO_SLAVERY": 1.5
+    "NO_SLAVERY": 1.5,
+    "NO_NOMADS": 1.2,
+    "LEVIES": 1.1
   },
   "data": [
     {
@@ -65,6 +67,8 @@
       "urbanization": 0.80,
       "lovesTags": [
         "NAVAL",
+        "EMPIRE",
+        "LARGE_STATE",
         "RENAISSANCE"
       ],
       "likesTags": [
@@ -74,19 +78,18 @@
         "GOOD",
         "PROSPERITY",
         "MEDIEVAL",
-        "LARGE_STATE",
         "DECENTRALIZED",
         "CITY_STATE",
         "MODERN"
       ],
       "dislikesTags": [
         "CORRUPT",
+        "DESPOTISM",
+        "FRAGMENTED",
         "LAWLESS",
         "DARK_AGE"
       ],
       "hatesTags": [
-        "DESPOTISM",
-        "FRAGMENTED",
         "POVERTY"
       ],
       "requiresTags": [],
@@ -118,6 +121,7 @@
         "ORDERLY",
         "ROYAL",
         "AGRARIAN",
+        "NO_NOMADS",
         "ILLITERATE",
         "FRAGMENTED",
         "RENAISSANCE"
@@ -125,6 +129,7 @@
       "dislikesTags": [
         "LAWLESS",
         "ELECTIONS",
+        "NO_SLAVERY",
         "MERCHANT",
         "CITY_STATE",
         "SMALL_STATE"
@@ -145,12 +150,14 @@
         "AGRARIAN"
       ],
       "baseweight": 1.0,
-      "basesize": 1000,
+      "basesize": 750,
       "basechance": 1.0,
       "mandatory": true,
       "urbanization": 0.01,
       "lovesTags": [
         "FRAGMENTED",
+        "NO_NOMADS",
+        "NO_SLAVERY",
         "DARK_AGE"
       ],
       "likesTags": [
@@ -196,6 +203,7 @@
         "ORDERLY",
         "COMMERCE",
         "MERCHANT",
+        "NO_NOMADS",
         "PROSPERITY",
         "LARGE_STATE",
         "CITY_STATE",
@@ -203,6 +211,7 @@
       ],
       "dislikesTags": [
         "LAWLESS",
+        "NO_SLAVERY",
         "DESPOTISM"
       ],
       "hatesTags": [
@@ -235,9 +244,9 @@
       ],
       "likesTags": [
         "EVIL",
+        "PROSPERITY",
         "POVERTY",
         "MILITARY",
-        "PROSPERITY",
         "DECENTRALIZED",
         "MERCHANT"
       ],
@@ -273,6 +282,8 @@
         "ILLITERATE",
         "REPRESSIVE",
         "DESPOTISM",
+        "NO_NOMADS",
+        "NO_SLAVERY",
         "DARK_AGE"
       ],
       "dislikesTags": [
@@ -282,6 +293,7 @@
       ],
       "hatesTags": [
         "CITY_STATE",
+        "LEVIES",
         "COMMERCE"
       ],
       "requiresTags": [],
@@ -378,6 +390,7 @@
         "CORRUPT",
         "FRAGMENTED",
         "EVIL",
+        "NO_NOMADS",
         "LAWLESS"
       ],
       "likesTags": [
@@ -391,6 +404,8 @@
       ],
       "dislikesTags": [
         "DESPOTISM",
+        "NO_SLAVERY",
+        "LEVIES",
         "POPULAR"
       ],
       "hatesTags": [
@@ -444,10 +459,11 @@
       "basesize": 1250,
       "basechance": 1.0,
       "mandatory": true,
-      "urbanization": 0.95,
+      "urbanization": 0.75,
       "lovesTags": [
         "NOBLES",
         "RENAISSANCE",
+        "NO_SLAVERY",
         "MODERN"
       ],
       "likesTags": [
@@ -456,6 +472,7 @@
         "ROYAL",
         "AUTHORITY",
         "LARGE_STATE",
+        "NO_NOMADS",
         "CITY_STATE",
         "PROSPERITY"
       ],
@@ -491,9 +508,11 @@
       "likesTags": [
         "COMMERCE",
         "CITY_STATE",
+        "NO_NOMADS",
         "MINERALS"
       ],
       "dislikesTags": [
+        "NO_SLAVERY",
         "POPULAR"
       ],
       "hatesTags": [
@@ -512,8 +531,8 @@
       "newTags": [
         "ORDERLY"
       ],
-      "baseweight": 3.0,
-      "basesize": 600,
+      "baseweight": 7.0,
+      "basesize": 300,
       "basechance": 1.0,
       "mandatory": true,
       "urbanization": 0.85,
@@ -529,11 +548,13 @@
         "ORDERLY",
         "PROSPERITY",
         "COMMERCE",
+        "NO_NOMADS",
         "ROYAL"
       ],
       "dislikesTags": [
         "EVIL",
         "NATURAL",
+        "NO_SLAVERY",
         "NOBLES"
       ],
       "hatesTags": [
@@ -572,6 +593,7 @@
         "GOOD"
       ],
       "dislikesTags": [
+        "NO_NOMADS",
         "EVIL"
       ],
       "hatesTags": [
@@ -611,6 +633,7 @@
       ],
       "hatesTags": [
         "FRAGMENTED",
+        "LEVIES",
         "PACIFIST"
       ],
       "requiresTags": [],
@@ -651,6 +674,7 @@
       ],
       "requiresTags": [],
       "blockerTags": [
+        "NO_NOMADS",
         "CITY_STATE",
         "MODERN"
       ]
@@ -665,8 +689,9 @@
       "basesize": 800,
       "basechance": 1.0,
       "mandatory": true,
-      "urbanization": 0.9,
+      "urbanization": 0.5,
       "lovesTags": [
+        "NO_SLAVERY",
         "MINERALS"
       ],
       "likesTags": [
@@ -697,7 +722,7 @@
       "newTags": [
         "EDUCATED"
       ],
-      "baseweight": 10.0,
+      "baseweight": 2.5,
       "basesize": 100,
       "basechance": 0.7,
       "mandatory": false,
@@ -758,6 +783,7 @@
         "GOOD",
         "ORDERLY",
         "COMMERCE",
+        "NO_SLAVERY",
         "CULTURAL"
       ],
       "hatesTags": [
@@ -803,7 +829,9 @@
         "EVIL",
         "CORRUPT"
       ],
-      "requiresTags": [],
+      "requiresTags": [
+        "LEVIES"
+      ],
       "blockerTags": [
         "CITY_STATE",
         "MODERN"

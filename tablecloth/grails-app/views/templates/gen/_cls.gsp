@@ -6,7 +6,7 @@
 <html>
 <tr>
     <td>
-        ${cls.name}
+        <a data-toggle="tooltip" title="${cls.desc}">${cls.name}</a>
     </td>
     <td>
         ${cls.size}
