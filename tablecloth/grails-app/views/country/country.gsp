@@ -1,13 +1,9 @@
-<%@ page import="tablecloth.viewmodel.gen.ClassListViewmodel" %>
+<%@ page import="tablecloth.viewmodel.gen.CountryDataViewmodel; tablecloth.viewmodel.gen.ClassListViewmodel" %>
 <!DOCTYPE html>
 <g:set var="classes" value="${(List<ClassListViewmodel>) classes}"/>
 <g:set var="chosenTags" value="${(Collection<String>) chosenTags}"/>
 <g:set var="availableTags" value="${(Collection<String>) availableTags}"/>
-<g:set var="totalSize" value="${(Long) totalSize}"/>
-<g:set var="totalWealth" value="${(Long) totalWealth}"/>
-<g:set var="totalUrban" value="${(Long) totalUrban}"/>
-<g:set var="totalMil" value="${(Long) totalMil}"/>
-<g:set var="totalFood" value="${(Long) totalFood}"/>
+<g:set var="country" value="${(CountryDataViewmodel) countryData}"/>
 <asset:javascript src="countrygen.js"/>
 <asset:javascript src="select2.min.js"/>
 <html>
@@ -37,14 +33,14 @@
 </div>
 
 <br>
-Total number of households is ${totalSize} where ${totalUrban} are urban.
-The country has about ${totalSize * 7} residents.
-The country has a military strength of about ${(Math.sqrt(totalMil) * 100) as Long} soldiers.
-<g:if test="${totalFood > totalSize}">
-    The country exports enough food for ${totalFood - totalSize} households.
+Total number of households is ${country.totalSize} where ${country.totalUrban} are urban.
+The country has about ${country.totalSize * 7} residents.
+The country has a military strength of about ${(Math.sqrt(country.totalMil) * 100) as Long} soldiers.
+<g:if test="${country.totalFood > country.totalSize}">
+    The country exports enough food for ${country.totalFood - country.totalSize} households.
 </g:if>
-<g:if test="${totalFood < totalSize}">
-    The country must import enough food for ${totalSize - totalFood} households.
+<g:if test="${country.totalFood < country.totalSize}">
+    The country must import enough food for ${country.totalSize - country.totalFood} households.
 </g:if>
 <br>
 <table>
@@ -56,7 +52,8 @@ The country has a military strength of about ${(Math.sqrt(totalMil) * 100) as Lo
     </tr>
     <g:each in="${classes}" var="cls" status="i">
         <g:if test="${cls.size > 0}">
-            <g:render template="/templates/gen/cls" model="[cls: cls, totalSize: totalSize, totalWealth: totalWealth]"/>
+            <g:render template="/templates/gen/cls"
+                      model="[cls: cls, totalSize: country.totalSize, totalWealth: country.totalWealth]"/>
         </g:if>
     </g:each>
 </table>

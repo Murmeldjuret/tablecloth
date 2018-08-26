@@ -6,6 +6,7 @@ import tablecloth.commands.PersonNameCommand
 import tablecloth.security.SecurityService
 import tablecloth.utils.ValidatableResponseUtil
 import tablecloth.viewmodel.gen.ClassListViewmodel
+import tablecloth.viewmodel.gen.CountryDataViewmodel
 
 @GrailsCompileStatic
 @Secured('ROLE_USER')
@@ -39,20 +40,12 @@ class GeneratorController {
         Collection<String> available = (configService.tags?.tags?.keySet()?.toList() ?: []) as List<String>
         Collection<ClassListViewmodel> list = generatorService.generateCountry(chosen)
         list.sort(true) { ClassListViewmodel cls -> 0 - cls.wealth }
-        Long totalSize = list.sum { ClassListViewmodel cls -> cls.size } as Long
-        Long totalWealth = list.sum { ClassListViewmodel cls -> cls.wealth } as Long
-        Long totalUrban = list.sum { ClassListViewmodel cls -> cls.urban } as Long
-        Long totalMil = list.sum { ClassListViewmodel cls -> cls.militarization } as Long
-        Long totalFood = list.sum { ClassListViewmodel cls -> cls.food.round() } as Long
+        CountryDataViewmodel countryData = CountryDataViewmodel.build(list)
         render view: '/country/country', model: [
             classes      : list,
             availableTags: available,
             chosenTags   : chosen,
-            totalSize    : totalSize,
-            totalWealth  : totalWealth,
-            totalUrban   : totalUrban,
-            totalMil     : totalMil,
-            totalFood    : totalFood,
+            countryData  : countryData
         ]
     }
 }
