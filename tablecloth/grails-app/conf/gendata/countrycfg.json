@@ -55,11 +55,6 @@
       "name": "Traders",
       "code": "cls.traders",
       "desc": "People who make a living by transporting goods by boat or land.",
-      "newTags": [
-        "COMMERCE",
-        "MERCHANT",
-        "PROSPERITY"
-      ],
       "baseweight": 6.0,
       "basesize": 400,
       "basechance": 1.0,
@@ -100,9 +95,6 @@
       "name": "Magnates",
       "code": "cls.magnates",
       "desc": "People who live away from vast holdings and partially involve themselves with their own income.",
-      "newTags": [
-        "NOBLES"
-      ],
       "baseweight": 100.0,
       "basesize": 50,
       "basechance": 0.95,
@@ -146,9 +138,6 @@
       "name": "Freeholders",
       "code": "cls.freeholders",
       "desc": "People who live near smaller holdings of land and take active part in their use.",
-      "newTags": [
-        "AGRARIAN"
-      ],
       "baseweight": 1.0,
       "basesize": 750,
       "basechance": 1.0,
@@ -185,11 +174,7 @@
       "type": "CLASSES",
       "name": "Capitalists",
       "code": "cls.capitalists",
-      "desc": "People who own money and production and make money by finance or industry.",
-      "newTags": [
-        "COMMERCE",
-        "URBAN"
-      ],
+      "desc": "People who make money by finance services or industrial production.",
       "baseweight": 25.0,
       "basesize": 100,
       "basechance": 0.5,
@@ -228,10 +213,7 @@
       "type": "CLASSES",
       "name": "Slaves",
       "code": "cls.slaves",
-      "desc": "People owned by others and work in large estates, mines, or entertainment.",
-      "newTags": [
-        "SLAVERY"
-      ],
+      "desc": "People owned by others and work in large estates, mines, or as servants.",
       "baseweight": 0.01,
       "basesize": 2000,
       "basechance": 0.5,
@@ -266,10 +248,7 @@
       "type": "CLASSES",
       "name": "Peasants",
       "code": "cls.peasants",
-      "desc": "People who live by meagre farming as serfs or poor free landholders.",
-      "newTags": [
-        "AGRARIAN"
-      ],
+      "desc": "People who live by meagre farming as serfs or poor landholders.",
       "baseweight": 0.15,
       "basesize": 15000,
       "basechance": 1.0,
@@ -304,9 +283,6 @@
       "name": "Royalty",
       "code": "cls.royalty",
       "desc": "People who are closely connected to the royal courts and live from state money.",
-      "newTags": [
-        "ROYAL"
-      ],
       "baseweight": 10000.0,
       "basesize": 1,
       "basechance": 0.75,
@@ -344,11 +320,8 @@
       "type": "CLASSES",
       "name": "Clergy",
       "code": "cls.clergy",
-      "desc": "People who work for one or more religious institutions.",
-      "newTags": [
-        "DIVINE"
-      ],
-      "baseweight": 3.5,
+      "desc": "People who work for one or more religious institutions. Either as leaders or local administers.",
+      "baseweight": 6.0,
       "basesize": 450,
       "basechance": 0.95,
       "mandatory": true,
@@ -377,10 +350,7 @@
       "type": "CLASSES",
       "name": "Criminals",
       "code": "cls.criminals",
-      "desc": "People who make a living outside the law, in various levels of organization.",
-      "newTags": [
-        "LAWLESS"
-      ],
+      "desc": "People who make a living outside the law. Bandits, crime lords, and petty thieves.",
       "baseweight": 0.75,
       "basesize": 150,
       "basechance": 0.95,
@@ -423,9 +393,6 @@
       "name": "Magi",
       "code": "cls.magi",
       "desc": "People who make a living by studying and using magic or magic items.",
-      "newTags": [
-        "MAGICAL"
-      ],
       "baseweight": 25.0,
       "basesize": 100,
       "basechance": 0.8,
@@ -451,10 +418,9 @@
     },
     {
       "type": "CLASSES",
-      "name": "Servants",
-      "code": "cls.servicers",
+      "name": "Assistants",
+      "code": "cls.assistants",
       "desc": "People who make a living as servants, assistants, housemaids, cooks, entertainment, and similar.",
-      "newTags": [],
       "baseweight": 0.6,
       "basesize": 1250,
       "basechance": 1.0,
@@ -492,10 +458,7 @@
       "type": "CLASSES",
       "name": "Craftsmen",
       "code": "cls.craftsmen",
-      "desc": "People who work in skilled manufacture: bakers, smiths, and shipwrights.",
-      "newTags": [
-        "COMMERCE"
-      ],
+      "desc": "People who work in skilled manufacture or own business. Bakers, shopkeepers, smiths, and shipwrights.",
       "baseweight": 1.25,
       "basesize": 800,
       "basechance": 1.0,
@@ -528,9 +491,6 @@
       "name": "Officials",
       "code": "cls.officials",
       "desc": "People employed by the government or legal system.",
-      "newTags": [
-        "ORDERLY"
-      ],
       "baseweight": 7.0,
       "basesize": 300,
       "basechance": 1.0,
@@ -571,8 +531,7 @@
       "type": "CLASSES",
       "name": "Foreigners",
       "code": "cls.foreigners",
-      "desc": "People of other countires who have temporary accomodation or no legal rights.",
-      "newTags": [],
+      "desc": "People of other countries who have temporary accommodation or no legal rights.",
       "baseweight": 0.5,
       "basesize": 50,
       "basechance": 0.9,
@@ -606,11 +565,7 @@
       "type": "CLASSES",
       "name": "Professional Soldiers",
       "code": "cls.soldiers",
-      "desc": "People who make a living fighting, either mercenaries or regular soldiers.",
-      "newTags": [
-        "MILITARY",
-        "AUTHORITY"
-      ],
+      "desc": "People who make a living fighting, either as mercenaries or regular soldiers.",
       "baseweight": 4.0,
       "basesize": 400,
       "basechance": 0.95,
@@ -643,8 +598,7 @@
       "type": "CLASSES",
       "name": "Nomads",
       "code": "cls.nomads",
-      "desc": "People who roam for pastureland, and fight as necessary.",
-      "newTags": [],
+      "desc": "People who roam for pastureland and fight as necessary.",
       "baseweight": 0.5,
       "basesize": 1500,
       "basechance": 0.5,
@@ -684,7 +638,6 @@
       "name": "Labourers",
       "code": "cls.labourers",
       "desc": "People who earn meagre money by working in mines or cities as unskilled labour.",
-      "newTags": [],
       "baseweight": 0.25,
       "basesize": 800,
       "basechance": 1.0,
@@ -718,14 +671,11 @@
       "type": "CLASSES",
       "name": "Academics",
       "code": "cls.academics",
-      "desc": "People with specialist or university education like lawyers, doctors, and engineers.",
-      "newTags": [
-        "EDUCATED"
-      ],
+      "desc": "People with higher level education like lawyers, doctors, and engineers.",
       "baseweight": 2.5,
       "basesize": 100,
       "basechance": 0.7,
-      "mandatory": false,
+      "mandatory": true,
       "urbanization": 0.99,
       "lovesTags": [
         "EDUCATED",
@@ -761,9 +711,6 @@
       "name": "Destitute",
       "code": "cls.destitute",
       "desc": "People who earn no income and must live off charity.",
-      "newTags": [
-        "POVERTY"
-      ],
       "baseweight": 0.025,
       "basesize": 1000,
       "basechance": 1.0,
@@ -797,7 +744,6 @@
       "name": "Levy Farmer",
       "code": "cls.levy",
       "desc": "People who earn money as farmer in peace and soldier in times of war.",
-      "newTags": [],
       "baseweight": 1.5,
       "basesize": 700,
       "basechance": 0.8,
@@ -814,6 +760,7 @@
       ],
       "likesTags": [
         "AUTHORITY",
+        "CITY_STATE",
         "ORDERLY"
       ],
       "dislikesTags": [
@@ -833,7 +780,6 @@
         "LEVIES"
       ],
       "blockerTags": [
-        "CITY_STATE",
         "MODERN"
       ]
     }
