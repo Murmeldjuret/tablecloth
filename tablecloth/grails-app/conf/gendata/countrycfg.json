@@ -22,6 +22,7 @@
     "SLAVERY": 2.5,
     "ELECTIONS": 1.2,
     "AGRARIAN": 1.2,
+    "HORDE": 1.6,
     "URBAN": 1.2,
     "MINERALS": 1.2,
     "PASTURE": 1.2,
@@ -60,6 +61,8 @@
       "basechance": 1.0,
       "mandatory": true,
       "urbanization": 0.80,
+      "militarization": 0.0,
+      "food": 0.0,
       "lovesTags": [
         "NAVAL",
         "EMPIRE",
@@ -82,6 +85,7 @@
         "DESPOTISM",
         "FRAGMENTED",
         "LAWLESS",
+        "HORDE",
         "DARK_AGE"
       ],
       "hatesTags": [
@@ -100,6 +104,8 @@
       "basechance": 0.95,
       "mandatory": false,
       "urbanization": 0.60,
+      "militarization": 1.5,
+      "food": 1.0,
       "lovesTags": [
         "NOBLES",
         "REPRESSIVE",
@@ -123,6 +129,7 @@
         "ELECTIONS",
         "NO_SLAVERY",
         "MERCHANT",
+        "HORDE",
         "CITY_STATE",
         "SMALL_STATE"
       ],
@@ -143,6 +150,8 @@
       "basechance": 1.0,
       "mandatory": true,
       "urbanization": 0.01,
+      "militarization": 1.0,
+      "food": 1.3,
       "lovesTags": [
         "FRAGMENTED",
         "NO_NOMADS",
@@ -165,6 +174,7 @@
         "MEDIEVAL"
       ],
       "hatesTags": [
+        "HORDE",
         "DESPOTISM"
       ],
       "requiresTags": [],
@@ -180,6 +190,8 @@
       "basechance": 0.5,
       "mandatory": false,
       "urbanization": 1.0,
+      "militarization": 0.0,
+      "food": 0.0,
       "lovesTags": [
         "MODERN",
         "MERCHANT"
@@ -200,6 +212,7 @@
         "DESPOTISM"
       ],
       "hatesTags": [
+        "HORDE",
         "POVERTY",
         "DECENTRALIZED"
       ],
@@ -211,14 +224,55 @@
     },
     {
       "type": "CLASSES",
-      "name": "Slaves",
-      "code": "cls.slaves",
+      "name": "House Slaves",
+      "code": "cls.houseslaves",
+      "desc": "People owned by others and work as servants.",
+      "baseweight": 0.1,
+      "basesize": 200,
+      "basechance": 0.5,
+      "mandatory": false,
+      "urbanization": 0.9,
+      "militarization": 0.0,
+      "food": 0.0,
+      "lovesTags": [
+        "DESPOTISM",
+        "CITY_STATE",
+        "PROSPERITY",
+        "NOBLES",
+        "SLAVERY"
+      ],
+      "likesTags": [
+        "EVIL",
+        "MILITARY",
+        "DECENTRALIZED",
+        "MERCHANT"
+      ],
+      "dislikesTags": [
+        "HORDE",
+        "POVERTY",
+        "PACIFIST"
+      ],
+      "hatesTags": [
+        "POPULAR",
+        "GOOD"
+      ],
+      "requiresTags": [],
+      "blockerTags": [
+        "NO_SLAVERY"
+      ]
+    },
+    {
+      "type": "CLASSES",
+      "name": "Field Slaves",
+      "code": "cls.fieldslaves",
       "desc": "People owned by others and work in large estates, mines, or as servants.",
       "baseweight": 0.01,
       "basesize": 2000,
       "basechance": 0.5,
       "mandatory": false,
-      "urbanization": 0.10,
+      "urbanization": 0.01,
+      "militarization": 0.0,
+      "food": 1.25,
       "lovesTags": [
         "DESPOTISM",
         "CITY_STATE",
@@ -233,6 +287,7 @@
         "MERCHANT"
       ],
       "dislikesTags": [
+        "HORDE",
         "PACIFIST"
       ],
       "hatesTags": [
@@ -254,6 +309,8 @@
       "basechance": 1.0,
       "mandatory": true,
       "urbanization": 0.01,
+      "militarization": 0.05,
+      "food": 1.05,
       "lovesTags": [
         "AGRARIAN"
       ],
@@ -271,6 +328,7 @@
         "MODERN"
       ],
       "hatesTags": [
+        "HORDE",
         "CITY_STATE",
         "LEVIES",
         "COMMERCE"
@@ -288,6 +346,8 @@
       "basechance": 0.75,
       "mandatory": false,
       "urbanization": 0.90,
+      "militarization": 15.0,
+      "food": 1.05,
       "lovesTags": [
         "ROYAL",
         "AUTHORITY",
@@ -302,6 +362,7 @@
       ],
       "dislikesTags": [
         "PROSPERITY",
+        "HORDE",
         "FRAGMENTED",
         "MODERN"
       ],
@@ -326,6 +387,8 @@
       "basechance": 0.95,
       "mandatory": true,
       "urbanization": 0.2,
+      "militarization": 0.1,
+      "food": 0.25,
       "lovesTags": [
         "RELIGIOUS",
         "DIVINE"
@@ -338,6 +401,7 @@
         "EVIL"
       ],
       "dislikesTags": [
+        "HORDE",
         "POPULAR"
       ],
       "hatesTags": [
@@ -350,14 +414,17 @@
       "type": "CLASSES",
       "name": "Criminals",
       "code": "cls.criminals",
-      "desc": "People who make a living outside the law. Bandits, crime lords, and petty thieves.",
-      "baseweight": 0.75,
+      "desc": "People who make a dedicated living outside the law. Bandits and crime lords, but not petty thieves.",
+      "baseweight": 1.5,
       "basesize": 150,
-      "basechance": 0.95,
+      "basechance": 0.6,
       "mandatory": true,
       "urbanization": 0.50,
+      "militarization": 0.0,
+      "food": 0.0,
       "lovesTags": [
         "CORRUPT",
+        "DECENTRALIZED",
         "FRAGMENTED",
         "EVIL",
         "NO_NOMADS",
@@ -365,12 +432,10 @@
       ],
       "likesTags": [
         "PROSPERITY",
-        "DECENTRALIZED",
         "POVERTY",
         "COMMERCE",
         "MERCHANT",
-        "LARGE_STATE",
-        "EMPIRE"
+        "HORDE"
       ],
       "dislikesTags": [
         "DESPOTISM",
@@ -381,9 +446,7 @@
       "hatesTags": [
         "ORDERLY",
         "AUTHORITY",
-        "CITY_STATE",
-        "GOOD",
-        "SMALL_STATE"
+        "GOOD"
       ],
       "requiresTags": [],
       "blockerTags": []
@@ -398,6 +461,8 @@
       "basechance": 0.8,
       "mandatory": false,
       "urbanization": 0.95,
+      "militarization": 0.25,
+      "food": 0.0,
       "lovesTags": [
         "MAGICAL"
       ],
@@ -406,6 +471,7 @@
         "EVIL"
       ],
       "dislikesTags": [
+        "HORDE",
         "POPULAR"
       ],
       "hatesTags": [
@@ -426,6 +492,8 @@
       "basechance": 1.0,
       "mandatory": true,
       "urbanization": 0.75,
+      "militarization": 0.0,
+      "food": 0.0,
       "lovesTags": [
         "NOBLES",
         "RENAISSANCE",
@@ -446,6 +514,7 @@
         "POPULAR"
       ],
       "hatesTags": [
+        "HORDE",
         "POVERTY",
         "AGRARIAN",
         "PASTURE",
@@ -464,6 +533,8 @@
       "basechance": 1.0,
       "mandatory": true,
       "urbanization": 0.70,
+      "militarization": 0.05,
+      "food": 0.0,
       "lovesTags": [
         "URBAN",
         "PROSPERITY"
@@ -475,6 +546,7 @@
         "MINERALS"
       ],
       "dislikesTags": [
+        "HORDE",
         "NO_SLAVERY",
         "POPULAR"
       ],
@@ -496,6 +568,8 @@
       "basechance": 1.0,
       "mandatory": true,
       "urbanization": 0.85,
+      "militarization": 0.25,
+      "food": 0.0,
       "lovesTags": [
         "URBAN",
         "LARGE_STATE",
@@ -518,6 +592,7 @@
         "NOBLES"
       ],
       "hatesTags": [
+        "HORDE",
         "LAWLESS",
         "FRAGMENTED",
         "CITY_STATE",
@@ -537,6 +612,8 @@
       "basechance": 0.9,
       "mandatory": true,
       "urbanization": 0.5,
+      "militarization": 0.0,
+      "food": 0.0,
       "lovesTags": [
         "FRAGMENTED",
         "EMPIRE",
@@ -552,6 +629,7 @@
         "GOOD"
       ],
       "dislikesTags": [
+        "HORDE",
         "NO_NOMADS",
         "EVIL"
       ],
@@ -571,6 +649,8 @@
       "basechance": 0.95,
       "mandatory": false,
       "urbanization": 0.95,
+      "militarization": 2.0,
+      "food": 0.0,
       "lovesTags": [
         "MILITARY",
         "NAVAL"
@@ -587,7 +667,9 @@
         "LAWLESS"
       ],
       "hatesTags": [
+        "HORDE",
         "FRAGMENTED",
+        "DARK_AGE",
         "LEVIES",
         "PACIFIST"
       ],
@@ -604,15 +686,19 @@
       "basechance": 0.5,
       "mandatory": false,
       "urbanization": 0.0,
+      "militarization": 1.0,
+      "food": 1.0,
       "lovesTags": [
         "FRAGMENTED",
         "DECENTRALIZED",
+        "DARK_AGE",
         "PASTURE"
       ],
       "likesTags": [
         "MILITARY",
         "LAWLESS",
         "AGRARIAN",
+        "ILLITERATE",
         "LARGE_STATE",
         "POVERTY"
       ],
@@ -643,6 +729,8 @@
       "basechance": 1.0,
       "mandatory": true,
       "urbanization": 0.5,
+      "militarization": 0.05,
+      "food": 0.0,
       "lovesTags": [
         "NO_SLAVERY",
         "MINERALS"
@@ -660,6 +748,7 @@
         "REPRESSIVE"
       ],
       "hatesTags": [
+        "HORDE",
         "LAWLESS",
         "SLAVERY",
         "DARK_AGE"
@@ -677,6 +766,8 @@
       "basechance": 0.7,
       "mandatory": true,
       "urbanization": 0.99,
+      "militarization": 0.0,
+      "food": 0.0,
       "lovesTags": [
         "EDUCATED",
         "CITY_STATE",
@@ -696,6 +787,7 @@
         "DESPOTISM"
       ],
       "hatesTags": [
+        "HORDE",
         "POVERTY",
         "FRAGMENTED",
         "MEDIEVAL"
@@ -716,6 +808,8 @@
       "basechance": 1.0,
       "mandatory": true,
       "urbanization": 0.5,
+      "militarization": 0.5,
+      "food": 0.0,
       "lovesTags": [
         "POVERTY"
       ],
@@ -734,6 +828,7 @@
         "CULTURAL"
       ],
       "hatesTags": [
+        "HORDE",
         "PROSPERITY"
       ],
       "requiresTags": [],
@@ -749,6 +844,8 @@
       "basechance": 0.8,
       "mandatory": false,
       "urbanization": 0.02,
+      "militarization": 1.5,
+      "food": 1.1,
       "lovesTags": [
         "MILITARY",
         "AGRARIAN",
@@ -772,6 +869,7 @@
         "RENAISSANCE"
       ],
       "hatesTags": [
+        "HORDE",
         "EDUCATED",
         "EVIL",
         "CORRUPT"

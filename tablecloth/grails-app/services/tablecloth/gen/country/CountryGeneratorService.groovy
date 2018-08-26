@@ -64,6 +64,8 @@ class CountryGeneratorService {
             size: size.round(),
             wealth: (size * data.baseweight * randomService.noise()).round(),
             urban: (size * data.urbanization * randomService.noise()).round(),
+            militarization: (size * data.militarization * randomService.noise()).round(),
+            food: (size * data.food),
         )
     }
 
@@ -108,6 +110,8 @@ class CountryGeneratorService {
             size: 0L,
             wealth: 0L,
             urban: 0L,
+            militarization: 0L,
+            food: 0.0d,
         )
     }
 

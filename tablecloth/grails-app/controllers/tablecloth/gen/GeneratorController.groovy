@@ -42,13 +42,17 @@ class GeneratorController {
         Long totalSize = list.sum { ClassListViewmodel cls -> cls.size } as Long
         Long totalWealth = list.sum { ClassListViewmodel cls -> cls.wealth } as Long
         Long totalUrban = list.sum { ClassListViewmodel cls -> cls.urban } as Long
+        Long totalMil = list.sum { ClassListViewmodel cls -> cls.militarization } as Long
+        Long totalFood = list.sum { ClassListViewmodel cls -> cls.food.round() } as Long
         render view: '/country/country', model: [
             classes      : list,
             availableTags: available,
             chosenTags   : chosen,
             totalSize    : totalSize,
             totalWealth  : totalWealth,
-            totalUrban   : totalUrban
+            totalUrban   : totalUrban,
+            totalMil     : totalMil,
+            totalFood    : totalFood,
         ]
     }
 }

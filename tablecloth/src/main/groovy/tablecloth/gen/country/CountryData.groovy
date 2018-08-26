@@ -23,6 +23,10 @@ class CountryData {
     Boolean mandatory
     @JsonProperty
     Double urbanization
+    @JsonProperty
+    Double militarization
+    @JsonProperty
+    Double food
 
     @JsonProperty
     List<String> newTags

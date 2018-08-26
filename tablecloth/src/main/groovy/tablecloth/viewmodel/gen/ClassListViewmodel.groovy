@@ -9,5 +9,8 @@ class ClassListViewmodel {
     Long wealth
 
     Long urban
+    Long militarization
+
+    Double food
 
 }
