@@ -3,7 +3,7 @@ package tablecloth.gen.country
 import com.fasterxml.jackson.annotation.JsonIgnore
 import com.fasterxml.jackson.annotation.JsonProperty
 
-class CountryData {
+class ClassesData {
 
     @JsonProperty
     CountryType type
@@ -29,8 +29,6 @@ class CountryData {
     Double food
 
     @JsonProperty
-    List<String> newTags
-    @JsonProperty
     List<String> lovesTags
     @JsonProperty
     List<String> likesTags
@@ -43,12 +41,9 @@ class CountryData {
     @JsonProperty
     List<String> blockerTags
 
-    @JsonProperty
-    List<String> requiresChoices
-
     @JsonIgnore
     List<String> getTags() {
-        return newTags + likesTags + hatesTags + requiresTags + dislikesTags + lovesTags
+        return likesTags + hatesTags + requiresTags + dislikesTags + lovesTags + blockerTags
     }
 
     @Override

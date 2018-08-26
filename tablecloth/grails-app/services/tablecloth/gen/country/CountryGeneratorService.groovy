@@ -17,20 +17,22 @@ class CountryGeneratorService {
     RandomService randomService
 
     Collection<ClassListViewmodel> generate(Collection<String> startTags) {
-        CountryConfig cont = configService.country
+        ClassesConfig cont = configService.country
+        TagConfig tagData = configService.tags
         GovConfig gov = configService.government
-        return generateCountry(startTags, cont)
+        return generateCountry(startTags, cont, tagData)
     }
 
-    private Collection<ClassListViewmodel> generateCountry(Collection<String> startTags, CountryConfig cfg) {
+    private Collection<ClassListViewmodel> generateCountry(Collection<String> startTags, ClassesConfig cfg, TagConfig tagData) {
         Collection<String> tags = startTags
-        Collection<CountryData> classes = cfg.data.findAll { it.type == CountryType.CLASSES }
+        Map<String, Double> availableTags = tagData.tags
+        Collection<ClassesData> classes = cfg.data.findAll { it.type == CountryType.CLASSES }
         Collection<ClassListViewmodel> response = []
-        classes.each { CountryData data ->
-            if (shouldIncludeClass(tags, data, cfg)) {
-                response += buildViewmodel(tags, data, cfg)
+        classes.each { ClassesData data ->
+            if (shouldIncludeClass(tags, data, availableTags)) {
+                response += buildViewmodel(tags, data, availableTags)
             } else if (data.mandatory) {
-                response += buildMarginalViewmodel(tags, data, cfg)
+                response += buildMarginalViewmodel(tags, data, availableTags)
             } else {
                 response += emptyViewmodel(data)
             }
@@ -38,26 +40,26 @@ class CountryGeneratorService {
         return response
     }
 
-    private boolean shouldIncludeClass(Collection<String> tags, CountryData data, CountryConfig cfg) {
-        if (!requiredTagsFulfilled(data.requiresTags, tags)) {
+    private boolean shouldIncludeClass(Collection<String> chosen, ClassesData data, Map<String, Double> available) {
+        if (!requiredTagsFulfilled(data.requiresTags, chosen)) {
             return false
         }
-        if (blockerTagsFulfilled(data.blockerTags, tags)) {
+        if (blockerTagsFulfilled(data.blockerTags, chosen)) {
             return false
         }
         double chance = data.basechance
-        chance *= getValueOfTags(tags, data.lovesTags, cfg.tags)
-        chance /= getValueOfTags(tags, data.hatesTags, cfg.tags)
+        chance *= getValueOfTags(chosen, data.lovesTags, available)
+        chance /= getValueOfTags(chosen, data.hatesTags, available)
         return randomService.rollPercent(chance)
     }
 
-    private ClassListViewmodel buildViewmodel(Collection<String> tags, CountryData data, CountryConfig cfg) {
+    private ClassListViewmodel buildViewmodel(Collection<String> chosen, ClassesData data, Map<String, Double> available) {
         double factor = 1.0
-        factor *= getValueOfTags(tags, data.likesTags, cfg.tags)
-        factor /= getValueOfTags(tags, data.dislikesTags, cfg.tags)
-        factor *= Math.pow(getValueOfTags(tags, data.lovesTags, cfg.tags), 2)
-        factor /= Math.pow(getValueOfTags(tags, data.hatesTags, cfg.tags), 2)
-        double size = calculateSize(tags, data, factor, cfg)
+        factor *= getValueOfTags(chosen, data.likesTags, available)
+        factor /= getValueOfTags(chosen, data.dislikesTags, available)
+        factor *= Math.pow(getValueOfTags(chosen, data.lovesTags, available), 2)
+        factor /= Math.pow(getValueOfTags(chosen, data.hatesTags, available), 2)
+        double size = calculateSize(chosen, data, factor, available)
         return new ClassListViewmodel(
             name: data.name,
             desc: data.desc,
@@ -69,14 +71,14 @@ class CountryGeneratorService {
         )
     }
 
-    private double calculateSize(Collection<String> tags, CountryData data, double factor, CountryConfig cfg) {
+    private double calculateSize(Collection<String> chosen, ClassesData data, double factor, Map<String, Double> available) {
         double size = (data.basesize * factor * randomService.noise()).round()
-        tags.findAll { String tag ->
+        chosen.findAll { String tag ->
             if (sizeDecreaseTags.contains(tag)) {
-                size /= cfg.tags[tag]
+                size /= available[tag]
             }
             if (sizeIncreaseTags.contains(tag)) {
-                size *= cfg.tags[tag] * 10
+                size *= available[tag] * 10
             }
         }
         if (size < 1) {
@@ -85,8 +87,8 @@ class CountryGeneratorService {
         return size
     }
 
-    private ClassListViewmodel buildMarginalViewmodel(Collection<String> tags, CountryData data, CountryConfig cfg) {
-        ClassListViewmodel model = buildViewmodel(tags, data, cfg)
+    private ClassListViewmodel buildMarginalViewmodel(Collection<String> chosen, ClassesData data, Map<String, Double> available) {
+        ClassListViewmodel model = buildViewmodel(chosen, data, available)
         model.wealth = (model.wealth * 0.05d).round()
         model.size = (model.size * 0.1d).round()
         if (model.size < 1) {
@@ -103,7 +105,7 @@ class CountryGeneratorService {
         blockers.any { String tag -> tags.contains(tag) }
     }
 
-    static private ClassListViewmodel emptyViewmodel(CountryData data) {
+    static private ClassListViewmodel emptyViewmodel(ClassesData data) {
         return new ClassListViewmodel(
             name: data.name,
             desc: data.desc,
@@ -119,7 +121,7 @@ class CountryGeneratorService {
     private double getValueOfTags(Collection<String> selected, Collection<String> options, Map<String, Double> values) {
         double factor = 1.0
         selected.each { String key ->
-            if (options.contains(key)) {
+            if (options.contains(key) && values.containsKey(key)) {
                 factor *= values.get(key)
             }
         }

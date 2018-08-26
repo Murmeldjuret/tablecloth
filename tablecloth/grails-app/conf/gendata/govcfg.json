@@ -1,26 +1,5 @@
 {
-  "version": 1,
-  "tags": {
-    "EVIL": 1,
-    "GOOD": 1,
-    "CORRUPT": 1,
-    "LAWLESS": 1,
-    "ORDERLY": 1,
-    "MAGICAL": 1,
-    "MUNDANE": 1,
-    "NATURAL": 1,
-    "ARTIFICIAL": 1,
-    "MERCHANT": 1,
-    "COMMERCE": 1,
-    "POPULAR": 1,
-    "DIVINE": 1,
-    "RELIGIOUS": 1,
-    "ROYAL": 1,
-    "AUTHORITY": 1,
-    "DESPOTISM": 1,
-    "NOBLES": 1,
-    "ALLOW_MAGIC": 1
-  },
+  "version": 2,
   "data": [
     {
       "type": "INVESTMENT",

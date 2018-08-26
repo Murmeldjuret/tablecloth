@@ -36,7 +36,7 @@ class GeneratorController {
 
     def country() {
         Collection<String> chosen = params.list('tags')
-        Collection<String> available = (configService.getCountry()?.tags?.keySet()?.toList() ?: []) as List<String>
+        Collection<String> available = (configService.tags?.tags?.keySet()?.toList() ?: []) as List<String>
         Collection<ClassListViewmodel> list = generatorService.generateCountry(chosen)
         list.sort(true) { ClassListViewmodel cls -> 0 - cls.wealth }
         Long totalSize = list.sum { ClassListViewmodel cls -> cls.size } as Long

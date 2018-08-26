@@ -15,21 +15,42 @@ class CountryGeneratorSpec extends HibernateSpec implements ServiceUnitTest<Coun
     void "test dummy service"() {
         given:
             service.configService.getGovernment() >> mockGovConfig()
+            service.configService.getTags() >> mockTags()
+            service.configService.getCountry() >> mockClassesConfig()
         when:
             def response = service.generate()
         then:
-            response == "Success"
+            response == []
     }
 
+    private static TagConfig mockTags() {
+        return new TagConfig(
+            version: 1,
+            size: [:],
+            environment: [:],
+            ages: [:],
+            generic: [
+                test0: 1.1,
+                test1: 1.1,
+                test2: 1.1,
+            ],
+        )
+    }
 
     private static GovConfig mockGovConfig() {
         return new GovConfig(
             version: 1,
-            tags: [
-                "DUMMY": 1,
-            ],
             data: [
                 new GovData()
+            ],
+        )
+    }
+
+    private static ClassesConfig mockClassesConfig() {
+        return new ClassesConfig(
+            version: 1,
+            data: [
+                new ClassesData()
             ],
         )
     }
