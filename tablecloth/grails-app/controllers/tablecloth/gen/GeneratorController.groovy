@@ -7,6 +7,7 @@ import tablecloth.security.SecurityService
 import tablecloth.utils.ValidatableResponseUtil
 import tablecloth.viewmodel.gen.ClassListViewmodel
 import tablecloth.viewmodel.gen.CountryDataViewmodel
+import tablecloth.viewmodel.gen.TagChoicesViewmodel
 
 @GrailsCompileStatic
 @Secured('ROLE_USER')
@@ -36,16 +37,24 @@ class GeneratorController {
     }
 
     def country() {
-        Collection<String> chosen = params.list('tags')
-        Collection<String> available = (configService.tags?.tags?.keySet()?.toList() ?: []) as List<String>
+        Collection<String> chosen = buildChosen()
         Collection<ClassListViewmodel> list = generatorService.generateCountry(chosen)
         list.sort(true) { ClassListViewmodel cls -> 0 - cls.wealth }
+        TagChoicesViewmodel tagChoices = TagChoicesViewmodel.build(configService.tags)
         CountryDataViewmodel countryData = CountryDataViewmodel.build(list)
         render view: '/country/country', model: [
             classes      : list,
-            availableTags: available,
+            availableTags: tagChoices,
             chosenTags   : chosen,
             countryData  : countryData
         ]
+    }
+
+    private Collection<String> buildChosen() {
+        Collection<String> tags = params.list('tags').toList()
+        tags.add(params.ages as String)
+        tags.add(params.fortunes as String)
+        tags.add(params.sizes as String)
+        return tags.grep()
     }
 }

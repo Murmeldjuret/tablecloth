@@ -17,6 +17,8 @@
         "NAVAL",
         "EMPIRE",
         "LARGE_STATE",
+        "BRONZE_AGE",
+        "ASCENDANT",
         "RENAISSANCE"
       ],
       "likesTags": [
@@ -28,17 +30,21 @@
         "MEDIEVAL",
         "DECENTRALIZED",
         "CITY_STATE",
-        "MODERN"
+        "IMPERIAL_AGE",
+        "CLASSICAL",
+        "EARLY_MODERN"
       ],
       "dislikesTags": [
         "CORRUPT",
         "DESPOTISM",
         "FRAGMENTED",
         "LAWLESS",
+        "UNSTABLE",
         "HORDE",
         "DARK_AGE"
       ],
       "hatesTags": [
+        "COLLAPSE",
         "POVERTY"
       ],
       "requiresTags": [],
@@ -63,6 +69,8 @@
         "EMPIRE",
         "DECENTRALIZED",
         "LARGE_STATE",
+        "COLLAPSE",
+        "IRON_AGE",
         "DARK_AGE"
       ],
       "likesTags": [
@@ -71,13 +79,18 @@
         "AGRARIAN",
         "NO_NOMADS",
         "ILLITERATE",
+        "BRONZE_AGE",
         "FRAGMENTED",
+        "UNSTABLE",
         "RENAISSANCE"
       ],
       "dislikesTags": [
         "LAWLESS",
         "ELECTIONS",
         "NO_SLAVERY",
+        "CLASSICAL",
+        "IMPERIAL_AGE",
+        "ASCENDANT",
         "MERCHANT",
         "HORDE",
         "CITY_STATE",
@@ -85,7 +98,7 @@
       ],
       "hatesTags": [
         "POPULAR",
-        "MODERN"
+        "EARLY_MODERN"
       ],
       "requiresTags": [],
       "blockerTags": []
@@ -106,19 +119,26 @@
         "FRAGMENTED",
         "NO_NOMADS",
         "NO_SLAVERY",
+        "BRONZE_AGE",
+        "COLLAPSE",
         "DARK_AGE"
       ],
       "likesTags": [
         "ORDERLY",
         "POPULAR",
+        "CLASSICAL",
+        "IRON_AGE",
         "PROSPERITY",
         "POPULAR",
         "DECENTRALIZED",
         "LARGE_STATE",
+        "ASCENDANT",
+        "UNSTABLE",
         "EMPIRE"
       ],
       "dislikesTags": [
         "LAWLESS",
+        "IMPERIAL_AGE",
         "DESPOTISM",
         "REPRESSIVE",
         "MEDIEVAL"
@@ -143,7 +163,8 @@
       "militarization": 0.0,
       "food": 0.0,
       "lovesTags": [
-        "MODERN",
+        "EARLY_MODERN",
+        "ASCENDANT",
         "MERCHANT"
       ],
       "likesTags": [
@@ -158,18 +179,24 @@
       ],
       "dislikesTags": [
         "LAWLESS",
+        "IMPERIAL_AGE",
         "NO_SLAVERY",
         "DESPOTISM"
       ],
       "hatesTags": [
         "HORDE",
         "POVERTY",
+        "MEDIEVAL",
+        "UNSTABLE",
+        "CLASSICAL",
         "DECENTRALIZED"
       ],
       "requiresTags": [],
       "blockerTags": [
-        "DARK_AGE",
-        "MEDIEVAL"
+        "BRONZE_AGE",
+        "COLLAPSE",
+        "IRON_AGE",
+        "DARK_AGE"
       ]
     },
     {
@@ -188,22 +215,29 @@
         "DESPOTISM",
         "CITY_STATE",
         "PROSPERITY",
+        "CLASSICAL",
+        "IMPERIAL_AGE",
+        "ASCENDANT",
         "NOBLES",
         "SLAVERY"
       ],
       "likesTags": [
         "EVIL",
         "MILITARY",
+        "BRONZE_AGE",
+        "IRON_AGE",
         "DECENTRALIZED",
         "MERCHANT"
       ],
       "dislikesTags": [
         "HORDE",
         "POVERTY",
+        "UNSTABLE",
         "PACIFIST"
       ],
       "hatesTags": [
         "POPULAR",
+        "COLLAPSE",
         "GOOD"
       ],
       "requiresTags": [],
@@ -226,18 +260,25 @@
       "lovesTags": [
         "DESPOTISM",
         "CITY_STATE",
+        "BRONZE_AGE",
+        "CLASSICAL",
+        "IMPERIAL_AGE",
         "SLAVERY"
       ],
       "likesTags": [
         "EVIL",
         "PROSPERITY",
-        "POVERTY",
+        "ASCENDANT",
+        "UNSTABLE",
+        "IRON_AGE",
         "MILITARY",
         "DECENTRALIZED",
         "MERCHANT"
       ],
       "dislikesTags": [
         "HORDE",
+        "COLLAPSE",
+        "POVERTY",
         "PACIFIST"
       ],
       "hatesTags": [
@@ -262,6 +303,7 @@
       "militarization": 0.05,
       "food": 1.05,
       "lovesTags": [
+        "COLLAPSE",
         "AGRARIAN"
       ],
       "likesTags": [
@@ -270,12 +312,17 @@
         "DESPOTISM",
         "NO_NOMADS",
         "NO_SLAVERY",
+        "IRON_AGE",
+        "UNSTABLE",
         "DARK_AGE"
       ],
       "dislikesTags": [
         "POPULAR",
         "PROSPERITY",
-        "MODERN"
+        "BRONZE_AGE",
+        "CLASSICAL",
+        "IMPERIAL_AGE",
+        "EARLY_MODERN"
       ],
       "hatesTags": [
         "HORDE",
@@ -302,24 +349,31 @@
         "ROYAL",
         "AUTHORITY",
         "ORDERLY",
+        "BRONZE_AGE",
+        "ASCENDANT",
         "EMPIRE"
       ],
       "likesTags": [
         "DESPOTISM",
         "MEDIEVAL",
+        "IRON_AGE",
+        "CLASSICAL",
+        "IMPERIAL_AGE",
         "LARGE_STATE",
+        "PROSPERITY",
         "DARK_AGE"
       ],
       "dislikesTags": [
-        "PROSPERITY",
         "HORDE",
         "FRAGMENTED",
-        "MODERN"
+        "COLLAPSE",
+        "EARLY_MODERN"
       ],
       "hatesTags": [
         "POPULAR",
         "DECENTRALIZED",
         "CITY_STATE",
+        "UNSTABLE",
         "ELECTIONS"
       ],
       "requiresTags": [],
@@ -341,20 +395,29 @@
       "food": 0.25,
       "lovesTags": [
         "RELIGIOUS",
+        "MEDEIVAL",
+        "IRON_AGE",
+        "BRONZE_AGE",
+        "ASCENDANT",
         "DIVINE"
       ],
       "likesTags": [
         "ORDERLY",
         "FRAGMENTED",
+        "UNSTABLE",
         "DECENTRALIZED",
+        "IMPERIAL_AGE",
         "GOOD",
         "EVIL"
       ],
       "dislikesTags": [
         "HORDE",
+        "COLLAPSE",
+        "RENAISSANCE",
         "POPULAR"
       ],
       "hatesTags": [
+        "EARLY_MODERN",
         "LAWLESS"
       ],
       "requiresTags": [],
@@ -376,6 +439,8 @@
         "CORRUPT",
         "DECENTRALIZED",
         "FRAGMENTED",
+        "COLLAPSE",
+        "UNSTABLE",
         "EVIL",
         "NO_NOMADS",
         "LAWLESS"
@@ -385,11 +450,16 @@
         "POVERTY",
         "COMMERCE",
         "MERCHANT",
+        "IRON_AGE",
         "HORDE"
       ],
       "dislikesTags": [
         "DESPOTISM",
+        "ASCENDANT",
         "NO_SLAVERY",
+        "BRONZE_AGE",
+        "CLASSICAL",
+        "IMPERIAL_AGE",
         "LEVIES",
         "POPULAR"
       ],
@@ -414,6 +484,7 @@
       "militarization": 0.25,
       "food": 0.0,
       "lovesTags": [
+        "ASCENDANT",
         "MAGICAL"
       ],
       "likesTags": [
@@ -448,7 +519,8 @@
         "NOBLES",
         "RENAISSANCE",
         "NO_SLAVERY",
-        "MODERN"
+        "ASCENDANT",
+        "EARLY_MODERN"
       ],
       "likesTags": [
         "URBAN",
@@ -458,16 +530,20 @@
         "LARGE_STATE",
         "NO_NOMADS",
         "CITY_STATE",
+        "IMPERIAL_AGE",
         "PROSPERITY"
       ],
       "dislikesTags": [
+        "IRON_AGE",
+        "POVERTY",
         "POPULAR"
       ],
       "hatesTags": [
         "HORDE",
-        "POVERTY",
         "AGRARIAN",
         "PASTURE",
+        "COLLAPSE",
+        "UNSTABLE",
         "SLAVERY"
       ],
       "requiresTags": [],
@@ -487,17 +563,21 @@
       "food": 0.0,
       "lovesTags": [
         "URBAN",
+        "ASCENDANT",
         "PROSPERITY"
       ],
       "likesTags": [
         "COMMERCE",
         "CITY_STATE",
         "NO_NOMADS",
+        "IMPERIAL_AGE",
         "MINERALS"
       ],
       "dislikesTags": [
         "HORDE",
         "NO_SLAVERY",
+        "COLLAPSE",
+        "UNSTABLE",
         "POPULAR"
       ],
       "hatesTags": [
@@ -524,6 +604,7 @@
         "URBAN",
         "LARGE_STATE",
         "EMPIRE",
+        "ASCENDANT",
         "AUTHORITY"
       ],
       "likesTags": [
@@ -533,6 +614,10 @@
         "PROSPERITY",
         "COMMERCE",
         "NO_NOMADS",
+        "BRONZE_AGE",
+        "IRON_AGE",
+        "CLASSICAL",
+        "IMPERIAL_AGE",
         "ROYAL"
       ],
       "dislikesTags": [
@@ -544,8 +629,10 @@
       "hatesTags": [
         "HORDE",
         "LAWLESS",
+        "UNSTABLE",
         "FRAGMENTED",
         "CITY_STATE",
+        "COLLAPSE",
         "DECENTRALIZED",
         "POVERTY"
       ],
@@ -566,13 +653,13 @@
       "food": 0.0,
       "lovesTags": [
         "FRAGMENTED",
-        "EMPIRE",
-        "MILITARY"
+        "ASCENDANT",
+        "EMPIRE"
       ],
       "likesTags": [
         "LAWLESS",
-        "POVERTY",
         "PROSPERITY",
+        "COLLAPSE",
         "DECENTRALIZED",
         "LARGE_STATE",
         "CITY_STATE",
@@ -581,7 +668,10 @@
       "dislikesTags": [
         "HORDE",
         "NO_NOMADS",
-        "EVIL"
+        "UNSTABLE",
+        "POVERTY",
+        "EVIL",
+        "MILITARY"
       ],
       "hatesTags": [
         "DESPOTISM"
@@ -603,16 +693,22 @@
       "food": 0.0,
       "lovesTags": [
         "MILITARY",
+        "EARLY_MODERN",
         "NAVAL"
       ],
       "likesTags": [
         "AUTHORITY",
         "CITY_STATE",
+        "BRONZE_AGE",
+        "CLASSICAL",
+        "IMPERIAL_AGE",
         "DESPOTISM",
         "EVIL"
       ],
       "dislikesTags": [
         "POPULAR",
+        "UNSTABLE",
+        "ASCENDANT",
         "DECENTRALIZED",
         "LAWLESS"
       ],
@@ -621,6 +717,7 @@
         "FRAGMENTED",
         "DARK_AGE",
         "LEVIES",
+        "COLLAPSE",
         "PACIFIST"
       ],
       "requiresTags": [],
@@ -642,11 +739,13 @@
         "FRAGMENTED",
         "DECENTRALIZED",
         "DARK_AGE",
+        "UNSTABLE",
         "PASTURE"
       ],
       "likesTags": [
         "MILITARY",
         "LAWLESS",
+        "COLLAPSE",
         "AGRARIAN",
         "ILLITERATE",
         "LARGE_STATE",
@@ -654,6 +753,8 @@
       ],
       "dislikesTags": [
         "ROYAL",
+        "BRONZE_AGE",
+        "ASCENDANT",
         "MINERALS"
       ],
       "hatesTags": [
@@ -666,7 +767,7 @@
       "blockerTags": [
         "NO_NOMADS",
         "CITY_STATE",
-        "MODERN"
+        "EARLY_MODERN"
       ]
     },
     {
@@ -691,7 +792,8 @@
         "EDUCATED",
         "PROSPERITY",
         "CITY_STATE",
-        "MODERN"
+        "ASCENDANT",
+        "EARLY_MODERN"
       ],
       "dislikesTags": [
         "POVERTY",
@@ -701,6 +803,7 @@
         "HORDE",
         "LAWLESS",
         "SLAVERY",
+        "COLLAPSE",
         "DARK_AGE"
       ],
       "requiresTags": [],
@@ -721,19 +824,25 @@
       "lovesTags": [
         "EDUCATED",
         "CITY_STATE",
-        "MODERN"
+        "CLASSICAL",
+        "ASCENDANT",
+        "EARLY_MODERN"
       ],
       "likesTags": [
         "PROSPERITY",
         "NOBLES",
         "CULTURAL",
         "RENAISSANCE",
+        "BRONZE_AGE",
+        "IMPERIAL_AGE",
         "EMPIRE"
       ],
       "dislikesTags": [
         "REPRESSIVE",
         "LAWLESS",
         "DECENTRALIZED",
+        "IRON_AGE",
+        "UNSTABLE",
         "DESPOTISM"
       ],
       "hatesTags": [
@@ -745,6 +854,7 @@
       "requiresTags": [],
       "blockerTags": [
         "ILLITERATE",
+        "COLLAPSE",
         "DARK_AGE"
       ]
     },
@@ -761,6 +871,7 @@
       "militarization": 0.5,
       "food": 0.0,
       "lovesTags": [
+        "COLLAPSE",
         "POVERTY"
       ],
       "likesTags": [
@@ -768,17 +879,22 @@
         "DESPOTISM",
         "LAWLESS",
         "CORRUPT",
+        "BRONZE_AGE",
+        "UNSTABLE",
+        "IRON_AGE",
         "EVIL"
       ],
       "dislikesTags": [
         "GOOD",
         "ORDERLY",
         "COMMERCE",
+        "IMPERIAL_AGE",
         "NO_SLAVERY",
         "CULTURAL"
       ],
       "hatesTags": [
         "HORDE",
+        "ASCENDANT",
         "PROSPERITY"
       ],
       "requiresTags": [],
@@ -802,6 +918,8 @@
         "MEDIEVAL",
         "DARK_AGE",
         "LARGE_STATE",
+        "IRON_AGE",
+        "CLASSICAL",
         "DECENTRALIZED",
         "EMPIRE"
       ],
@@ -811,8 +929,13 @@
         "ORDERLY"
       ],
       "dislikesTags": [
+        "UNSTABLE",
+        "ASCENDANT",
         "PROSPERITY",
         "MERCHANT",
+        "COLLAPSE",
+        "BRONZE_AGE",
+        "IMPERIAL_AGE",
         "CULTURAL",
         "FRAGMENTED",
         "SMALL_STATE",
@@ -828,7 +951,7 @@
         "LEVIES"
       ],
       "blockerTags": [
-        "MODERN"
+        "EARLY_MODERN"
       ]
     }
   ]

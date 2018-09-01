@@ -1,8 +1,8 @@
-<%@ page import="tablecloth.viewmodel.gen.CountryDataViewmodel; tablecloth.viewmodel.gen.ClassListViewmodel" %>
+<%@ page import="tablecloth.viewmodel.gen.TagChoicesViewmodel; tablecloth.viewmodel.gen.CountryDataViewmodel; tablecloth.viewmodel.gen.ClassListViewmodel" %>
 <!DOCTYPE html>
 <g:set var="classes" value="${(List<ClassListViewmodel>) classes}"/>
 <g:set var="chosenTags" value="${(Collection<String>) chosenTags}"/>
-<g:set var="availableTags" value="${(Collection<String>) availableTags}"/>
+<g:set var="availableTags" value="${(TagChoicesViewmodel) availableTags}"/>
 <g:set var="country" value="${(CountryDataViewmodel) countryData}"/>
 <asset:javascript src="countrygen.js"/>
 <asset:javascript src="select2.min.js"/>
@@ -19,17 +19,8 @@
 <h3>Country:</h3>
 
 <div>
-    With Tags: ${chosenTags}
-    <g:form controller="generator" action="country" id="tag_select_form">
-        <g:select from="${availableTags.sort()}"
-                  value="${chosenTags}"
-                  id="tags"
-                  class="select2-country select2-selection--multiple form-control select2-search--inline"
-                  multiple="multiple"
-                  name="tags"/>
-        <br>
-        <g:submitButton name="GENERATE"/>
-    </g:form>
+    <g:render template="/templates/gen/tagchooser"
+              model="[availableTags: availableTags, chosenTags: chosenTags]"/>
 </div>
 
 <br>

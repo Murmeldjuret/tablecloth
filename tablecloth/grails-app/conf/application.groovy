@@ -5,17 +5,18 @@ grails.plugin.springsecurity.userLookup.userDomainClassName = 'tablecloth.model.
 grails.plugin.springsecurity.userLookup.authorityJoinClassName = 'tablecloth.model.domain.users.UserRole'
 grails.plugin.springsecurity.authority.className = 'tablecloth.model.domain.users.Role'
 grails.plugin.springsecurity.controllerAnnotations.staticRules = [
-	[pattern: '/',               access: ['permitAll']],
-	[pattern: '/error',          access: ['permitAll']],
-	[pattern: '/index',          access: ['permitAll']],
-	[pattern: '/index.gsp',      access: ['permitAll']],
-	[pattern: '/shutdown',       access: ['permitAll']],
-	[pattern: '/assets/**',      access: ['permitAll']],
-	[pattern: '/plugin/**',      access: ['permitAll']],
-	[pattern: '/**/js/**',       access: ['permitAll']],
-	[pattern: '/**/css/**',      access: ['permitAll']],
-	[pattern: '/**/images/**',   access: ['permitAll']],
-	[pattern: '/**/favicon.ico', access: ['permitAll']]
+	[pattern: '/',                          access: ['permitAll']],
+	[pattern: '/error',                     access: ['permitAll']],
+	[pattern: '/index',                     access: ['permitAll']],
+	[pattern: '/index.gsp',                 access: ['permitAll']],
+	[pattern: '/shutdown',                  access: ['permitAll']],
+	[pattern: '/assets/**',                 access: ['permitAll']],
+	[pattern: '/plugin/**',                 access: ['permitAll']],
+	[pattern: '/**/js/**',                  access: ['permitAll']],
+	[pattern: '/**/css/**',                 access: ['permitAll']],
+	[pattern: '/**/images/**',              access: ['permitAll']],
+	[pattern: '/generator/country**',       access: ['permitAll']],
+	[pattern: '/**/favicon.ico',            access: ['permitAll']]
 ]
 
 grails.plugin.springsecurity.filterChain.chainMap = [

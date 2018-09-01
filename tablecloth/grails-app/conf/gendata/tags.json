@@ -1,21 +1,28 @@
 {
-  "version": 1,
+  "version": 2,
   "environment": {
   },
   "ages": {
+    "DARK_AGE": 1.2,
     "BRONZE_AGE": 1.2,
-    "COLLAPSE": 1.7,
     "IRON_AGE": 1.2,
     "CLASSICAL": 1.2,
     "IMPERIAL_AGE": 1.2,
-    "DARK_AGE": 1.2,
     "MEDIEVAL": 1.2,
     "RENAISSANCE": 1.2,
     "EARLY_MODERN": 1.5
   },
+  "fortunes": {
+    "COLLAPSE": 1.7,
+    "UNSTABLE": 1.3,
+    "POVERTY": 1.2,
+    "PROSPERITY": 1.2,
+    "ASCENDANT": 1.5
+  },
   "size": {
     "CITY_STATE": 1.6,
     "SMALL_STATE": 1.3,
+    "MEDIUM_STATE": 1.0,
     "LARGE_STATE": 1.3,
     "EMPIRE": 1.4
   },
@@ -44,8 +51,6 @@
     "PASTURE": 1.2,
     "PACIFIST": 1.2,
     "MILITARY": 1.2,
-    "POVERTY": 1.2,
-    "PROSPERITY": 1.2,
     "REPRESSIVE": 1.2,
     "EDUCATED": 1.4,
     "ILLITERATE": 1.4,
