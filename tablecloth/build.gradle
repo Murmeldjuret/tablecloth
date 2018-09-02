@@ -8,7 +8,6 @@ buildscript {
         classpath "org.grails:grails-gradle-plugin:$grailsVersion"
         classpath "org.grails.plugins:hibernate5:${gormVersion - ".RELEASE"}"
         classpath "com.bertramlabs.plugins:asset-pipeline-gradle:3.0.2"
-        //classpath 'com.bmuschko:gradle-clover-plugin:2.1.1'
     }
 }
 
@@ -17,7 +16,6 @@ group "tablecloth"
 
 apply plugin: "eclipse"
 apply plugin: "idea"
-//apply from: "${project.projectDir}/gradle-scripts/clover.gradle"
 apply from: "${project.projectDir}/gradle-scripts/grails.gradle"
 
 bootRun {
