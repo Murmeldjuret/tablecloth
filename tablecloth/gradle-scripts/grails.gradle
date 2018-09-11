@@ -47,6 +47,6 @@ dependencies {
 }
 
 assets {
-    minifyJs = true
+    minifyJs = false
     minifyCss = true
 }

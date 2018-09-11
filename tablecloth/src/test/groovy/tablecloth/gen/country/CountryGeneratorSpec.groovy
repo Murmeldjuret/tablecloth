@@ -28,6 +28,7 @@ class CountryGeneratorSpec extends HibernateSpec implements ServiceUnitTest<Coun
             version: 1,
             size: [:],
             environment: [:],
+            fortunes: [:],
             ages: [:],
             generic: [
                 test0: 1.1,
