@@ -1,4 +1,4 @@
-<%@ page import="tablecloth.viewmodel.gen.ClassListViewmodel" %>
+<%@ page import="tablecloth.viewmodel.gen.ClassListViewmodel; tablecloth.utils.Formatter" %>
 <!DOCTYPE html>
 <g:set var="cls" value="${(ClassListViewmodel) cls}"/>
 <g:set var="percentSize" value="${(Double) cls.size / totalSize}"/>
@@ -9,13 +9,13 @@
         <a data-toggle="tooltip" title="${cls.desc}">${cls.name}</a>
     </td>
     <td>
-        ${cls.size}
+        ${Formatter.number(cls.size)}
     </td>
     <td>
-        ${(percentWealth * 100).trunc(1)}%
+        <g:formatNumber number="${percentWealth}" type="percent" maxFractionDigits="2"/>
     </td>
     <td>
-        ${(percentSize * 100).trunc(1)}%
+        <g:formatNumber number="${percentSize}" type="percent" maxFractionDigits="2"/>
     </td>
 </tr>
 </html>
