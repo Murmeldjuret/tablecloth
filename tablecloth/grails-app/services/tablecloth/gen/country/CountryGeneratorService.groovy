@@ -17,16 +17,17 @@ class CountryGeneratorService {
     RandomService randomService
 
     Collection<ClassListViewmodel> generate(Collection<String> startTags) {
-        ClassesConfig cont = configService.country
+        ClassesConfig cls = configService.cls
         TagConfig tagData = configService.tags
         GovConfig gov = configService.government
-        return generateCountry(startTags, cont, tagData)
+        CountryConfig contCfg = configService.country
+        return generateCountry(startTags, cls, tagData, contCfg)
     }
 
-    private Collection<ClassListViewmodel> generateCountry(Collection<String> startTags, ClassesConfig cfg, TagConfig tagData) {
+    private Collection<ClassListViewmodel> generateCountry(Collection<String> startTags, ClassesConfig cls, TagConfig tagData, CountryConfig country) {
         Collection<String> tags = startTags
         Map<String, Double> availableTags = tagData.tags
-        Collection<ClassesData> classes = cfg.data.findAll { it.type == CountryType.CLASSES }
+        Collection<ClassesData> classes = cls.data.findAll { it.type == CountryType.CLASSES }
         Collection<ClassListViewmodel> response = []
         classes.each { ClassesData data ->
             if (shouldIncludeClass(tags, data, availableTags)) {
@@ -37,6 +38,7 @@ class CountryGeneratorService {
                 response += emptyViewmodel(data)
             }
         }
+        addFoodEfficiency(response, country, startTags, tagData)
         return response
     }
 
@@ -91,21 +93,25 @@ class CountryGeneratorService {
         ClassListViewmodel model = buildViewmodel(chosen, data, available)
         model.wealth = (model.wealth * 0.05d).round()
         model.size = (model.size * 0.1d).round()
+        model.food = (model.size * 0.1d).round()
         if (model.size < 1) {
             model.size = 1L
         }
         return model
     }
 
-    private static boolean requiredTagsFulfilled(Collection<String> requirements, Collection<String> tags) {
+    static
+    private boolean requiredTagsFulfilled(Collection<String> requirements, Collection<String> tags) {
         requirements.every { String tag -> tags.contains(tag) }
     }
 
-    private static boolean blockerTagsFulfilled(Collection<String> blockers, Collection<String> tags) {
+    static
+    private boolean blockerTagsFulfilled(Collection<String> blockers, Collection<String> tags) {
         blockers.any { String tag -> tags.contains(tag) }
     }
 
-    static private ClassListViewmodel emptyViewmodel(ClassesData data) {
+    static
+    private ClassListViewmodel emptyViewmodel(ClassesData data) {
         return new ClassListViewmodel(
             name: data.name,
             desc: data.desc,
@@ -118,6 +124,22 @@ class CountryGeneratorService {
     }
 
     static
+    private void addFoodEfficiency(Collection<ClassListViewmodel> cls, CountryConfig cfg, Collection<String> tags, TagConfig tagData) {
+        String age = tags.find { String tag ->
+            tagData.ages.containsKey(tag)
+        }
+        String fortunes = tags.find { String tag ->
+            tagData.fortunes.containsKey(tag)
+        }
+        Double factor = cfg.getFoodEfficiency(age, fortunes)
+        cls.each { ClassListViewmodel model ->
+            if(model != null && model.size > 0) {
+                model.food *= factor
+            }
+        }
+    }
+
+    static
     private double getValueOfTags(Collection<String> selected, Collection<String> options, Map<String, Double> values) {
         double factor = 1.0
         selected.each { String key ->
@@ -127,5 +149,4 @@ class CountryGeneratorService {
         }
         return factor
     }
-
 }

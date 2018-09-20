@@ -1,0 +1,18 @@
+{
+  "version": 2,
+  "baseFoodEfficiency": {
+    "DARK_AGE": 1.01,
+    "BRONZE_AGE": 1.10,
+    "IRON_AGE": 1.15,
+    "CLASSICAL": 1.20,
+    "IMPERIAL_AGE": 1.25,
+    "MEDIEVAL": 1.35,
+    "RENAISSANCE": 1.4,
+    "EARLY_MODERN": 1.5,
+    "COLLAPSE": 0.7,
+    "UNSTABLE": 0.8,
+    "POVERTY": 0.9,
+    "PROSPERITY": 1.0,
+    "ASCENDANT": 1.15
+  }
+}

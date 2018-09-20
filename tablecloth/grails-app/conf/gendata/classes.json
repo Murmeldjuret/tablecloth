@@ -295,7 +295,7 @@
       "name": "Peasants",
       "code": "cls.peasants",
       "desc": "People who live by meagre farming as serfs or poor landholders.",
-      "baseweight": 0.15,
+      "baseweight": 0.8,
       "basesize": 15000,
       "basechance": 1.0,
       "mandatory": true,
