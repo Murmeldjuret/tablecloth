@@ -20,11 +20,12 @@
     "ASCENDANT": 1.5
   },
   "size": {
-    "CITY_STATE": 1.6,
+    "CITY_STATE": 1.3,
     "SMALL_STATE": 1.3,
     "MEDIUM_STATE": 1.0,
     "LARGE_STATE": 1.3,
-    "EMPIRE": 1.4
+    "VAST_STATE": 1.3,
+    "CONTINENTAL_STATE": 1.3
   },
   "generic": {
     "EVIL": 1.5,

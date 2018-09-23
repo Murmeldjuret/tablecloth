@@ -24,6 +24,8 @@ class ClassesData {
     @JsonProperty
     Double urbanization
     @JsonProperty
+    Double popPerHousehold
+    @JsonProperty
     Double militarization
     @JsonProperty
     Double food

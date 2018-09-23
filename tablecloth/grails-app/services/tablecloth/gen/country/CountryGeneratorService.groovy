@@ -10,9 +10,6 @@ import tablecloth.viewmodel.gen.ClassListViewmodel
 @GrailsCompileStatic
 class CountryGeneratorService {
 
-    private static List<String> sizeIncreaseTags = ["LARGE_STATE", "EMPIRE"]
-    private static List<String> sizeDecreaseTags = ["SMALL_STATE"]
-
     ConfigService configService
     RandomService randomService
 
@@ -38,7 +35,8 @@ class CountryGeneratorService {
                 response += emptyViewmodel(data)
             }
         }
-        addFoodEfficiency(response, country, startTags, tagData)
+        addFoodEfficiency(response, country, startTags)
+        addSizeModifier(response, country, startTags)
         return response
     }
 
@@ -61,11 +59,12 @@ class CountryGeneratorService {
         factor /= getValueOfTags(chosen, data.dislikesTags, available)
         factor *= Math.pow(getValueOfTags(chosen, data.lovesTags, available), 2)
         factor /= Math.pow(getValueOfTags(chosen, data.hatesTags, available), 2)
-        double size = calculateSize(chosen, data, factor, available)
+        double size = calculateSize(data, factor)
         return new ClassListViewmodel(
             name: data.name,
             desc: data.desc,
-            size: size.round(),
+            households: size.round(),
+            population: (size * data.popPerHousehold * randomService.noise()).round(),
             wealth: (size * data.baseweight * randomService.noise()).round(),
             urban: (size * data.urbanization * randomService.noise()).round(),
             militarization: (size * data.militarization * randomService.noise()).round(),
@@ -73,16 +72,8 @@ class CountryGeneratorService {
         )
     }
 
-    private double calculateSize(Collection<String> chosen, ClassesData data, double factor, Map<String, Double> available) {
+    private double calculateSize(ClassesData data, double factor) {
         double size = (data.basesize * factor * randomService.noise()).round()
-        chosen.findAll { String tag ->
-            if (sizeDecreaseTags.contains(tag)) {
-                size /= available[tag]
-            }
-            if (sizeIncreaseTags.contains(tag)) {
-                size *= available[tag] * 10
-            }
-        }
         if (size < 1) {
             size = 1d
         }
@@ -92,12 +83,23 @@ class CountryGeneratorService {
     private ClassListViewmodel buildMarginalViewmodel(Collection<String> chosen, ClassesData data, Map<String, Double> available) {
         ClassListViewmodel model = buildViewmodel(chosen, data, available)
         model.wealth = (model.wealth * 0.05d).round()
-        model.size = (model.size * 0.1d).round()
-        model.food = (model.size * 0.1d).round()
-        if (model.size < 1) {
-            model.size = 1L
+        model.households = (model.households * 0.1d).round()
+        model.food = (model.households * 0.1d).round()
+        if (model.households < 1) {
+            model.households = 1L
         }
         return model
+    }
+
+    private void addSizeModifier(Collection<ClassListViewmodel> cls, CountryConfig cfg, Collection<String> tags) {
+        Double factor = cfg.getSizeModifiers(tags) * randomService.noise()
+        cls.each { ClassListViewmodel model ->
+            if(model != null && model.households > 0 && model.name != 'Royalty') {
+                model.households = (model.households * factor).toLong()
+                model.population = (model.population * factor).toLong()
+                model.food = (model.food * factor).toLong()
+            }
+        }
     }
 
     static
@@ -115,7 +117,8 @@ class CountryGeneratorService {
         return new ClassListViewmodel(
             name: data.name,
             desc: data.desc,
-            size: 0L,
+            households: 0L,
+            population: 0L,
             wealth: 0L,
             urban: 0L,
             militarization: 0L,
@@ -124,16 +127,10 @@ class CountryGeneratorService {
     }
 
     static
-    private void addFoodEfficiency(Collection<ClassListViewmodel> cls, CountryConfig cfg, Collection<String> tags, TagConfig tagData) {
-        String age = tags.find { String tag ->
-            tagData.ages.containsKey(tag)
-        }
-        String fortunes = tags.find { String tag ->
-            tagData.fortunes.containsKey(tag)
-        }
-        Double factor = cfg.getFoodEfficiency(age, fortunes)
+    private void addFoodEfficiency(Collection<ClassListViewmodel> cls, CountryConfig cfg, Collection<String> tags) {
+        Double factor = cfg.getFoodEfficiency(tags)
         cls.each { ClassListViewmodel model ->
-            if(model != null && model.size > 0) {
+            if(model != null && model.households > 0) {
                 model.food *= factor
             }
         }

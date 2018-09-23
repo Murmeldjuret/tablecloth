@@ -1,5 +1,5 @@
 {
-  "version": 2,
+  "version": 3,
   "baseFoodEfficiency": {
     "DARK_AGE": 1.01,
     "BRONZE_AGE": 1.10,
@@ -14,5 +14,13 @@
     "POVERTY": 0.9,
     "PROSPERITY": 1.0,
     "ASCENDANT": 1.15
+  },
+  "baseSizeModifiers": {
+    "CITY_STATE": 1.0,
+    "SMALL_STATE": 4.0,
+    "MEDIUM_STATE": 10.0,
+    "LARGE_STATE": 50.0,
+    "VAST_STATE": 100.0,
+    "CONTINENTAL_STATE": 400.0
   }
 }

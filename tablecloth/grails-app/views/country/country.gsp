@@ -19,34 +19,21 @@
 <h3>Country:</h3>
 
 <div>
-    <g:render template="/templates/gen/tagchooser"
-              model="[availableTags: availableTags, chosenTags: chosenTags]"/>
+    <g:render template="/templates/gen/tagchooser" model="[availableTags: availableTags, chosenTags: chosenTags]"/>
 </div>
 
-<br>
-Total number of households is ${Formatter.number(country.totalSize)}
- where ${Formatter.number(country.totalUrban)} are urban.
-The country has about ${Formatter.number(country.totalSize * 7)} residents.
-The country has a military strength of about
- ${Formatter.number((Math.sqrt(country.totalMil) * 100) as Long)} soldiers.
-<g:if test="${country.totalFood > country.totalSize}">
-    The country exports enough food for ${Formatter.number(country.totalFood - country.totalSize)} households.
-</g:if>
-<g:if test="${country.totalFood < country.totalSize}">
-    The country must import enough food for ${Formatter.number(country.totalSize - country.totalFood)} households.
-</g:if>
-<br>
+<g:render template="/templates/gen/cndesc" model="[country: country]"/>
 <table>
     <tr>
         <th>Name</th>
         <th>#Households</th>
         <th>Power</th>
-        <th>% of Country</th>
+        <th>% of Population</th>
     </tr>
     <g:each in="${classes}" var="cls" status="i">
-        <g:if test="${cls.size > 0}">
+        <g:if test="${cls.households > 0}">
             <g:render template="/templates/gen/cls"
-                      model="[cls: cls, totalSize: country.totalSize, totalWealth: country.totalWealth]"/>
+                      model="[cls: cls, totalPop: country.totalPop, totalWealth: country.totalWealth]"/>
         </g:if>
     </g:each>
 </table>

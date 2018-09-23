@@ -5,7 +5,8 @@ class ClassListViewmodel {
     String name
     String desc
 
-    Long size
+    Long households
+    Long population
     Long wealth
 
     Long urban

@@ -10,11 +10,24 @@ class CountryConfig {
 
     @JsonProperty
     Map<String, Double> baseFoodEfficiency
+    @JsonProperty
+    Map<String, Double> baseSizeModifiers
 
     @JsonIgnore
-    Double getFoodEfficiency(String age, String prosperity) {
-        Double ageFactor = baseFoodEfficiency.get(age) ?: 1.0d
-        Double prosperityFactor = baseFoodEfficiency.get(prosperity) ?: 1.0d
-        return ageFactor * prosperityFactor
+    Double getFoodEfficiency(Collection<String> tags) {
+        double factor = 1.0d
+        baseFoodEfficiency.findAll { tags.contains(it.key) }.each { String tag, Double d ->
+            factor *= d
+        }
+        return factor
+    }
+
+    @JsonIgnore
+    Double getSizeModifiers(Collection<String> tags) {
+        double factor = 1.0d
+        baseSizeModifiers.findAll { tags.contains(it.key) }.each { String tag, Double d ->
+            factor *= d
+        }
+        return factor
     }
 }
