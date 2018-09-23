@@ -124,7 +124,7 @@ environments:
             driverClassName: "com.mysql.jdbc.Driver"
             username: 'admin'
             password: 'Dungeon123'
-            url: "jdbc:mysql://tablecloth-db.c2wnk7wolzew.eu-central-1.rds.amazonaws.com:3306/TABLECLOTH_DB?user=admin&password=Dungeon123"
+            url: "jdbc:mysql://tableclothdb.c2wnk7wolzew.eu-central-1.rds.amazonaws.com:3306/TABLECLOTH_DB?user=admin&password=Dungeon123"
             dialect: org.hibernate.dialect.MySQL5InnoDBDialect
             properties:
                 validationQuery: "SELECT 1"
