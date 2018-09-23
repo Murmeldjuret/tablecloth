@@ -1,6 +1,11 @@
 {
   "version": 2,
   "environment": {
+    "SMALL_FARMS": 1.2,
+    "ESTATE_FARMS": 1.2,
+    "MOUNTAINOUS": 1.2,
+    "STEPPES": 1.3,
+    "COASTAL_FISHERY": 1.3
   },
   "ages": {
     "DARK_AGE": 1.2,
@@ -62,6 +67,7 @@
     "ALLOW_MAGIC": 2,
     "NO_SLAVERY": 1.5,
     "NO_NOMADS": 1.2,
+    "NO_SEA_ACCESS": 15.0,
     "LEVIES": 1.1,
     "MAGICAL": 1.2,
     "MUNDANE": 1.2,

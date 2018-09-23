@@ -52,6 +52,7 @@ class GeneratorController {
 
     private Collection<String> buildChosen() {
         Collection<String> tags = params.list('tags').toList()
+        tags.add(params.environs as String)
         tags.add(params.ages as String)
         tags.add(params.fortunes as String)
         tags.add(params.sizes as String)

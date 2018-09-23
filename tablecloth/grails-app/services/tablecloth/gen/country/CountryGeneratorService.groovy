@@ -97,6 +97,8 @@ class CountryGeneratorService {
             if(model != null && model.households > 0 && model.name != 'Royalty') {
                 model.households = (model.households * factor).toLong()
                 model.population = (model.population * factor).toLong()
+                model.militarization = (model.militarization * factor).toLong()
+                model.urban = (model.urban * factor).toLong()
                 model.food = (model.food * factor).toLong()
             }
         }

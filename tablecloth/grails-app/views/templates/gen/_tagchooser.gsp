@@ -5,6 +5,11 @@
 <html>
 With Tags: ${chosenTags}
 <g:form controller="generator" action="country" id="tag_select_form">
+    Environment:
+    <g:select name="environs"
+              from="${availableTags.environment}"
+              value="${availableTags.getChosenEnviron(chosenTags)}"/>
+    <br>
     Age:
     <g:select name="ages"
               from="${availableTags.ages}"

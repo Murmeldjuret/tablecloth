@@ -22,6 +22,10 @@ class TagChoicesViewmodel {
         )
     }
 
+    String getChosenEnviron(Collection<String> choices) {
+        choices.find { it in environment } ?: 'SMALL_FARMS'
+    }
+
     String getChosenAge(Collection<String> choices) {
         choices.find { it in ages } ?: 'MEDIEVAL'
     }

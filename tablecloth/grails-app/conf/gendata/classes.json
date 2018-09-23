@@ -34,6 +34,7 @@
         "CITY_STATE",
         "IMPERIAL_AGE",
         "CLASSICAL",
+        "COASTAL_FISHERY",
         "EARLY_MODERN"
       ],
       "dislikesTags": [
@@ -74,6 +75,7 @@
         "DECENTRALIZED",
         "COLLAPSE",
         "IRON_AGE",
+        "ESTATE_FARMS",
         "DARK_AGE"
       ],
       "likesTags": [
@@ -94,6 +96,9 @@
         "NO_SLAVERY",
         "CLASSICAL",
         "IMPERIAL_AGE",
+        "MOUNTAINOUS",
+        "STEPPES",
+        "COASTAL_FISHERY",
         "ASCENDANT",
         "MERCHANT",
         "HORDE",
@@ -102,6 +107,7 @@
       ],
       "hatesTags": [
         "POPULAR",
+        "SMALL_FARMS",
         "EARLY_MODERN"
       ],
       "requiresTags": [],
@@ -128,6 +134,8 @@
         "COLLAPSE",
         "VAST_STATE",
         "CONTINENTAL_STATE",
+        "SMALL_FARMS",
+        "MOUNTAINOUS",
         "DARK_AGE"
       ],
       "likesTags": [
@@ -147,10 +155,12 @@
         "IMPERIAL_AGE",
         "DESPOTISM",
         "REPRESSIVE",
+        "STEPPES",
         "MEDIEVAL"
       ],
       "hatesTags": [
         "HORDE",
+        "ESTATE_FARMS",
         "DESPOTISM"
       ],
       "requiresTags": [],
@@ -182,6 +192,7 @@
         "PROSPERITY",
         "LARGE_STATE",
         "CITY_STATE",
+        "ESTATE_FARMS",
         "RENAISSANCE"
       ],
       "dislikesTags": [
@@ -227,6 +238,7 @@
         "IMPERIAL_AGE",
         "ASCENDANT",
         "NOBLES",
+        "ESTATE_FARMS",
         "SLAVERY"
       ],
       "likesTags": [
@@ -271,6 +283,7 @@
         "CITY_STATE",
         "BRONZE_AGE",
         "CLASSICAL",
+        "ESTATE_FARMS",
         "IMPERIAL_AGE",
         "SLAVERY"
       ],
@@ -314,6 +327,7 @@
       "militarization": 0.05,
       "food": 1.05,
       "lovesTags": [
+        "ESTATE_FARMS",
         "AGRARIAN"
       ],
       "likesTags": [
@@ -323,6 +337,7 @@
         "NO_NOMADS",
         "NO_SLAVERY",
         "IRON_AGE",
+        "SMALL_FARMS",
         "UNSTABLE",
         "DARK_AGE"
       ],
@@ -333,6 +348,9 @@
         "BRONZE_AGE",
         "CLASSICAL",
         "IMPERIAL_AGE",
+        "COASTAL_FISHERY",
+        "MOUNTAINOUS",
+        "STEPPES",
         "EARLY_MODERN"
       ],
       "hatesTags": [
@@ -374,6 +392,7 @@
         "PROSPERITY",
         "DARK_AGE",
         "VAST_REALM",
+        "STEPPES",
         "CONTINENTAL_REALM"
       ],
       "dislikesTags": [
@@ -421,6 +440,7 @@
         "UNSTABLE",
         "DECENTRALIZED",
         "IMPERIAL_AGE",
+        "STEPPES",
         "GOOD",
         "EVIL"
       ],
@@ -548,6 +568,7 @@
         "NO_NOMADS",
         "CITY_STATE",
         "IMPERIAL_AGE",
+        "ESTATE_FARMS",
         "PROSPERITY"
       ],
       "dislikesTags": [
@@ -558,6 +579,7 @@
       "hatesTags": [
         "HORDE",
         "AGRARIAN",
+        "DARK_AGE",
         "PASTURE",
         "COLLAPSE",
         "UNSTABLE",
@@ -767,6 +789,7 @@
         "UNSTABLE",
         "VAST_REALM",
         "CONTINENTAL_REALM",
+        "STEPPES",
         "PASTURE"
       ],
       "likesTags": [
@@ -782,11 +805,15 @@
         "ROYAL",
         "BRONZE_AGE",
         "ASCENDANT",
+        "SMALL_FARMS",
+        "MOUNTAINOUS",
         "MINERALS"
       ],
       "hatesTags": [
         "URBAN",
         "ORDERLY",
+        "ESTATE_FARMS",
+        "COASTAL_FISHERY",
         "COMMERCE",
         "EDUCATED"
       ],
@@ -913,6 +940,8 @@
         "BRONZE_AGE",
         "UNSTABLE",
         "IRON_AGE",
+        "SMALL_FARMS",
+        "ESTATE_FARMS",
         "EVIL"
       ],
       "dislikesTags": [
@@ -921,6 +950,8 @@
         "COMMERCE",
         "IMPERIAL_AGE",
         "NO_SLAVERY",
+        "COASTAL_FISHERY",
+        "STEPPES",
         "CULTURAL"
       ],
       "hatesTags": [
@@ -954,11 +985,13 @@
         "CLASSICAL",
         "VAST_REALM",
         "CONTINENTAL_REALM",
+        "SMALL_FARMS",
         "DECENTRALIZED"
       ],
       "likesTags": [
         "AUTHORITY",
         "CITY_STATE",
+        "MOUNTAINOUS",
         "ORDERLY"
       ],
       "dislikesTags": [
@@ -966,6 +999,7 @@
         "ASCENDANT",
         "PROSPERITY",
         "MERCHANT",
+        "ESTATE_FARMS",
         "COLLAPSE",
         "BRONZE_AGE",
         "IMPERIAL_AGE",
@@ -985,6 +1019,96 @@
       ],
       "blockerTags": [
         "EARLY_MODERN"
+      ]
+    },
+    {
+      "type": "CLASSES",
+      "name": "Fisherman",
+      "code": "cls.fisher",
+      "desc": "People who live by fishing the oceans, seas, or lakes.",
+      "baseweight": 0.20,
+      "basesize": 700,
+      "basechance": 0.8,
+      "mandatory": true,
+      "popPerHousehold": 7.0,
+      "urbanization": 0.6,
+      "militarization": 0.1,
+      "food": 1.15,
+      "lovesTags": [
+        "RENAISSANCE",
+        "COASTAL_FISHERY",
+        "NAVAL"
+      ],
+      "likesTags": [
+        "DECENTRALIZED",
+        "CITY_STATE",
+        "ASCENDANT",
+        "EARLY_MODERN",
+        "URBAN"
+      ],
+      "dislikesTags": [
+        "BRONZE_AGE",
+        "IRON_AGE",
+        "MOUNTAINOUS",
+        "STEPPES",
+        "HORDE"
+      ],
+      "hatesTags": [
+        "NO_SEA_ACCESS"
+      ],
+      "requiresTags": [
+      ],
+      "blockerTags": [
+      ]
+    },
+    {
+      "type": "CLASSES",
+      "name": "Sailors",
+      "code": "cls.sailor",
+      "desc": "People who work full time in the navy. Either as civilians or military.",
+      "baseweight": 0.75,
+      "basesize": 300,
+      "basechance": 1.0,
+      "mandatory": false,
+      "popPerHousehold": 3.0,
+      "urbanization": 0.9,
+      "militarization": 0.75,
+      "food": 0.0,
+      "lovesTags": [
+        "MERCHANT",
+        "ASCENDANT",
+        "COASTAL_FISHERY",
+        "CONTINENTAL_STATE",
+        "EARLY_MODERN",
+        "NAVAL"
+      ],
+      "likesTags": [
+        "URBAN",
+        "POPULAR",
+        "MILITARY",
+        "RENAISSANCE",
+        "MEDIEVAL",
+        "PROSPERITY",
+        "COMMERCE",
+        "VAST_STATE",
+        "AUTHORITY"
+      ],
+      "dislikesTags": [
+        "POVERTY",
+        "UNSTABLE",
+        "SMALL_STATE",
+        "PACIFIST"
+      ],
+      "hatesTags": [
+        "COLLAPSE",
+        "MOUNTAINOUS",
+        "STEPPES",
+        "HORDE"
+      ],
+      "requiresTags": [
+      ],
+      "blockerTags": [
+        "NO_SEA_ACCESS"
       ]
     }
   ]
