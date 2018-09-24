@@ -12,6 +12,9 @@
         ${Formatter.number(cls.households)}
     </td>
     <td>
+        ${Formatter.number(cls.population)}
+    </td>
+    <td>
         <g:formatNumber number="${percentWealth}" type="percent" maxFractionDigits="2"/>
     </td>
     <td>

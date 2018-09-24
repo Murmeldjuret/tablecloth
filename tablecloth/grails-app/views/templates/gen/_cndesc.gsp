@@ -3,11 +3,13 @@
 <g:set var="country" value="${(CountryDataViewmodel) country}"/>
 <html>
 <br>
-Total number of households is ${Formatter.number(country.totalHouseholds)}
-where ${Formatter.number(country.totalUrban)} are urban.
-The country has about ${Formatter.number(country.totalPop)} residents.
-The country has a military strength of about
-${Formatter.number((Math.sqrt(country.totalMil) * 100) as Long)} soldiers.
+Total number of households is ${Formatter.number(country.totalHouseholds)}.
+The country has about ${Formatter.number(country.totalPop)} residents where
+${Formatter.number(country.totalUrban)} or
+<g:formatNumber number="${country.urbanPercent}" type="percent" maxFractionDigits="2" />
+live in towns of more than 1000 people.
+The country has a military manpower of about
+${Formatter.number(country.totalMil)} men.
 <g:if test="${country.totalFood > country.totalHouseholds}">
     The country exports enough food for ${Formatter.number(country.totalFood - country.totalHouseholds)} households.
 </g:if>

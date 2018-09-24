@@ -27,6 +27,7 @@
     <tr>
         <th>Name</th>
         <th>#Households</th>
+        <th>Population</th>
         <th>Power</th>
         <th>% of Population</th>
     </tr>

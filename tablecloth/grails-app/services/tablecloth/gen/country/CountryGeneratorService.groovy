@@ -66,7 +66,7 @@ class CountryGeneratorService {
             households: size.round(),
             population: (size * data.popPerHousehold * randomService.noise()).round(),
             wealth: (size * data.baseweight * randomService.noise()).round(),
-            urban: (size * data.urbanization * randomService.noise()).round(),
+            urban: (size * data.popPerHousehold * data.urbanization * randomService.noise()).round(),
             militarization: (size * data.militarization * randomService.noise()).round(),
             food: (size * data.food),
         )
@@ -84,7 +84,9 @@ class CountryGeneratorService {
         ClassListViewmodel model = buildViewmodel(chosen, data, available)
         model.wealth = (model.wealth * 0.05d).round()
         model.households = (model.households * 0.1d).round()
-        model.food = (model.households * 0.1d).round()
+        model.population = (model.population * 0.1d).round()
+        model.urban = (model.urban * 0.1d).round()
+        model.food = (model.food * 0.1d).round()
         if (model.households < 1) {
             model.households = 1L
         }
@@ -92,8 +94,8 @@ class CountryGeneratorService {
     }
 
     private void addSizeModifier(Collection<ClassListViewmodel> cls, CountryConfig cfg, Collection<String> tags) {
-        Double factor = cfg.getSizeModifiers(tags) * randomService.noise()
         cls.each { ClassListViewmodel model ->
+            Double factor = cfg.getSizeModifiers(tags) * randomService.noise()
             if(model != null && model.households > 0 && model.name != 'Royalty') {
                 model.households = (model.households * factor).toLong()
                 model.population = (model.population * factor).toLong()
