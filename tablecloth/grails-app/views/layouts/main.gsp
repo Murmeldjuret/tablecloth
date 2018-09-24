@@ -13,34 +13,31 @@
     <g:layoutHead/>
 </head>
 <body>
-
     <div class="navbar navbar-default navbar-static-top" role="navigation">
         <div class="container">
             <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                <a class="navbar-brand" href="/#">
-                    <i class="fa grails-icon">
-                        <asset:image src="grails-cupsonly-logo-white.svg"/>
-                    </i> Grails
-                </a>
-                <h4>
-                    <sec:ifLoggedIn>
-                        Logged in as: <sec:username/>
-                    </sec:ifLoggedIn>
+
+            </div>
+            <div class="collapse navbar-collapse">
+                <ul class="nav navbar-nav navbar-left">
+                    <li class="nav-item">
+                        <a href="${createLink(controller: 'generator', action: 'country')}">Generate Country</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="${createLink(controller: 'inbox')}">Inbox</a>
+                    </li>
+                </ul>
+                <div class="nav navbar-nav navbar-right">
                     <sec:ifNotLoggedIn>
                         <g:link controller="login">Log in</g:link>
                     </sec:ifNotLoggedIn>
-                </h4>
-            </div>
-            <div class="navbar-collapse collapse" aria-expanded="false" style="height: 0.8px;">
-                <ul class="nav navbar-nav navbar-right">
-                    <g:pageProperty name="page.nav" />
-                </ul>
+                    <sec:ifLoggedIn>
+                        <g:link controller="logoff">Log off</g:link>
+                    </sec:ifLoggedIn>
+                    <sec:ifLoggedIn>
+                        Logged in as: <sec:username/>
+                    </sec:ifLoggedIn>
+                </div>
             </div>
         </div>
     </div>

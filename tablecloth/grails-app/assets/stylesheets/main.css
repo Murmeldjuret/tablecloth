@@ -108,26 +108,6 @@ img {
     text-indent: -9999px;
 }
 
-/* NAVIGATION BAR */
-
-.navbar {
-    zoom: 1;
-}
-
-/* Create two unequal columns that floats next to each other */
-.navbar column {
-    padding: 10px;
-    width: 50%;
-    float: left;
-}
-
-/* Clear floats after the columns */
-.navbar row:after {
-    content: "";
-    display: table;
-    clear: both;
-}
-
 /* NAVIGATION MENU */
 
 .nav {
