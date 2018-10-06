@@ -37,6 +37,7 @@ class CountryGeneratorService {
         }
         addFoodEfficiency(response, country, startTags)
         addSizeModifier(response, country, startTags)
+        ensurePopRequirement(response)
         return response
     }
 
@@ -68,7 +69,7 @@ class CountryGeneratorService {
             wealth: (size * data.baseweight * randomService.noise()).round(),
             urban: (size * data.popPerHousehold * data.urbanization * randomService.noise()).round(),
             militarization: (size * data.militarization * randomService.noise()).round(),
-            food: (size * data.food),
+            food: (size * data.food * data.popPerHousehold),
         )
     }
 
@@ -82,11 +83,12 @@ class CountryGeneratorService {
 
     private ClassListViewmodel buildMarginalViewmodel(Collection<String> chosen, ClassesData data, Map<String, Double> available) {
         ClassListViewmodel model = buildViewmodel(chosen, data, available)
-        model.wealth = (model.wealth * 0.05d).round()
+        model.wealth = (model.wealth * 0.01d).round()
         model.households = (model.households * 0.1d).round()
         model.population = (model.population * 0.1d).round()
         model.urban = (model.urban * 0.1d).round()
-        model.food = (model.food * 0.1d).round()
+        model.food = (model.food * data.popPerHousehold * 0.1d).round()
+        model.militarization = (model.households * data.militarization * 0.1d).round()
         if (model.households < 1) {
             model.households = 1L
         }
@@ -102,6 +104,15 @@ class CountryGeneratorService {
                 model.militarization = (model.militarization * factor).toLong()
                 model.urban = (model.urban * factor).toLong()
                 model.food = (model.food * factor).toLong()
+            }
+        }
+    }
+
+    static
+    private void ensurePopRequirement(Collection<ClassListViewmodel> classes) {
+        classes.each { ClassListViewmodel cls ->
+            if(cls.population < cls.households) {
+                cls.population = cls.households
             }
         }
     }

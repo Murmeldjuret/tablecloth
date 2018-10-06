@@ -10,11 +10,11 @@ ${Formatter.number(country.totalUrban)} or
 live in towns of more than 1000 people.
 The country has a military manpower of about
 ${Formatter.number(country.totalMil)} men.
-<g:if test="${country.totalFood > country.totalHouseholds}">
-    The country exports enough food for ${Formatter.number(country.totalFood - country.totalHouseholds)} households.
+<g:if test="${country.totalFood > country.totalPop}">
+    Farmland that can feed ${Formatter.number(country.totalFood - country.totalPop)} people is used for export or cash crops.
 </g:if>
-<g:if test="${country.totalFood < country.totalHouseholds}">
-    The country must import enough food for ${Formatter.number(country.totalHouseholds - country.totalFood)} households.
+<g:if test="${country.totalFood < country.totalPop}">
+    The country must import enough food for ${Formatter.number(country.totalPop - country.totalFood)} people.
 </g:if>
 <br>
 </html>
