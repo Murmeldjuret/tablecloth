@@ -5,17 +5,20 @@
       "type": "INVESTMENT",
       "name": "Election",
       "code": "inv.election",
-      "desc": "Power at the highest level passes by election, where a handful or more choose.",
-      "newTags": [
-        "ELECTION"
-      ],
+      "desc": "Power passes from election by the level below.",
       "baseweight": 100,
+      "lovesTags": [
+        "ELECTION",
+        "POPULAR"
+      ],
       "likesTags": [
         "ORDERLY",
         "MERCHANT",
         "COMMERCE",
-        "POPULAR",
         "GOOD"
+      ],
+      "dislikesTags": [
+        "POVERTY"
       ],
       "hatesTags": [
         "LAWLESS",
@@ -23,66 +26,85 @@
         "AUTHORITY",
         "DESPOTISM"
       ],
+      "newTags": [
+        "ELECTION"
+      ],
+      "blockerTags": [],
       "requiresTags": []
     },
     {
       "type": "INVESTMENT",
       "name": "Hereditary",
       "code": "inv.hereditary",
-      "desc": "Power at the highest level passes from parent to kin.",
-      "newTags": [
-        "ROYAL"
-      ],
+      "desc": "Power is inherited by next of succession.",
       "baseweight": 250,
+      "lovesTags": [
+        "ROYAL",
+        "DESPOTISM"
+      ],
       "likesTags": [
         "ORDERLY",
-        "ROYAL"
+        "AUTHORITY"
+      ],
+      "dislikesTags": [
+        "ELECTION",
+        "POVERTY"
       ],
       "hatesTags": [
         "LAWLESS",
-        "ELECTION",
         "POPULAR"
       ],
+      "newTags": [
+        "NOBLES"
+      ],
+      "blockerTags": [],
       "requiresTags": []
     },
     {
       "type": "INVESTMENT",
       "name": "Eternal",
       "code": "inv.eternal",
-      "desc": "Power at the highest does not pass as ruloership is not expected to change.",
-      "newTags": [
-        "MAGICAL"
-      ],
+      "desc": "Power does not transfer to new groups as rulership is not expected to change.",
       "baseweight": 5,
+      "lovesTags": [
+        "DESPOTISM",
+        "ORDERLY"
+      ],
       "likesTags": [
         "MAGICAL"
       ],
-      "hatesTags": [
-        "MUNDANE",
-        "ELECTION",
-        "POPULAR"
-      ],
-      "requiresTags": [
-        "ALLOW_MAGIC"
-      ]
+      "dislikesTags": [],
+      "hatesTags": [],
+      "newTags": [],
+      "blockerTags": [],
+      "requiresTags": []
     },
     {
       "type": "INVESTMENT",
       "name": "Power",
       "code": "inv.power",
-      "desc": "Power at the highest has no relation to previous power, but is there for taking.",
-      "newTags": [
-        "LAWLESS"
-      ],
+      "desc": "Power has no relation to previous power, but is there for taking.",
       "baseweight": 30,
-      "likesTags": [
-        "LAWLESS"
-      ],
-      "hatesTags": [
-        "ORDERLY",
-        "ELECTION",
-        "ROYAL"
-      ],
+      "lovesTags": [],
+      "likesTags": [],
+      "dislikesTags": [],
+      "hatesTags": [],
+      "newTags": [],
+      "blockerTags": [],
+      "requiresTags": []
+    },
+    {
+      "type": "SUCCESSOR",
+      "name": "Power",
+      "code": "inv.power",
+      "desc": "Power has no relation to previous power, but is there for taking.",
+      "baseweight": 30,
+      "lovesTags": [],
+      "likesTags": [],
+      "dislikesTags": [],
+      "hatesTags": [],
+      "newTags": [],
+      "blockerTags": [],
       "requiresTags": []
     },
     {
@@ -90,20 +112,13 @@
       "name": "Monarch",
       "code": "head.monarch",
       "desc": "The head of state is a member of a royal dynasty.",
-      "newTags": [
-        "ROYAL"
-      ],
       "baseweight": 100,
-      "likesTags": [
-        "ROYAL",
-        "AUTHORITY",
-        "NOBLES",
-        "ORDERLY"
-      ],
-      "hatesTags": [
-        "ELECTION",
-        "POPULAR"
-      ],
+      "lovesTags": [],
+      "likesTags": [],
+      "dislikesTags": [],
+      "hatesTags": [],
+      "newTags": [],
+      "blockerTags": [],
       "requiresTags": []
     },
     {
@@ -111,41 +126,27 @@
       "name": "Divine Entity",
       "code": "head.divine",
       "desc": "The head of state is a divine entity.",
-      "newTags": [
-        "DIVINE",
-        "RELIGIOUS",
-        "MAGICAL"
-      ],
       "baseweight": 5,
-      "likesTags": [
-        "DIVINE",
-        "RELIGIOUS",
-        "MAGICAL"
-      ],
-      "hatesTags": [
-        "MUNDANE"
-      ],
-      "requiresTags": [
-        "ALLOW_MAGIC"
-      ]
+      "lovesTags": [],
+      "likesTags": [],
+      "dislikesTags": [],
+      "hatesTags": [],
+      "newTags": [],
+      "blockerTags": [],
+      "requiresTags": []
     },
     {
       "type": "HEAD_OF_STATE",
       "name": "Theocrat",
       "code": "head.theocrat",
       "desc": "The head of state also heads a religion or is a member of clergy.",
-      "newTags": [
-        "RELIGIOUS"
-      ],
       "baseweight": 30,
-      "likesTags": [
-        "RELIGIOUS",
-        "DIVINE",
-        "ORDERLY"
-      ],
-      "hatesTags": [
-        "LAWLESS"
-      ],
+      "lovesTags": [],
+      "likesTags": [],
+      "dislikesTags": [],
+      "hatesTags": [],
+      "newTags": [],
+      "blockerTags": [],
       "requiresTags": []
     },
     {
@@ -153,25 +154,14 @@
       "name": "No Head",
       "code": "head.none",
       "desc": "There is no formal head of state, and the highest body assigns one as required.",
-      "newTags": [],
       "baseweight": 30,
-      "likesTags": [
-        "ELECTION",
-        "POPULAR",
-        "LAWLESS"
-      ],
-      "hatesTags": [
-        "ROYAL",
-        "DESPOTISM",
-        "AUTHORITY",
-        "ORDERLY"
-      ],
-      "requiresTags": [
-        "ELECTION"
-      ],
-      "requiresChoices": [
-        "PLURALITY"
-      ]
+      "lovesTags": [],
+      "likesTags": [],
+      "dislikesTags": [],
+      "hatesTags": [],
+      "newTags": [],
+      "blockerTags": [],
+      "requiresTags": []
     }
   ]
 }

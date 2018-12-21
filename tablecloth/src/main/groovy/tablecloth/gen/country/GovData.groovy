@@ -1,6 +1,5 @@
 package tablecloth.gen.country
 
-import com.fasterxml.jackson.annotation.JsonIgnore
 import com.fasterxml.jackson.annotation.JsonProperty
 
 class GovData {
@@ -19,19 +18,17 @@ class GovData {
     @JsonProperty
     List<String> newTags
     @JsonProperty
+    List<String> lovesTags
+    @JsonProperty
     List<String> likesTags
+    @JsonProperty
+    List<String> dislikesTags
     @JsonProperty
     List<String> hatesTags
     @JsonProperty
-    List<String> requiresTags
-
+    List<String> blockerTags
     @JsonProperty
-    List<String> requiresChoices
-
-    @JsonIgnore
-    List<String> getTags() {
-        return newTags + likesTags + hatesTags + requiresTags
-    }
+    List<String> requiresTags
 
     @Override
     String toString() {
