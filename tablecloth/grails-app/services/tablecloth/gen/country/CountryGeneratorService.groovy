@@ -14,18 +14,14 @@ class CountryGeneratorService {
     RandomService randomService
 
     Collection<ClassListViewmodel> generate(Collection<String> startTags) {
-        ClassesConfig cls = configService.cls
-        TagConfig tagData = configService.tags
-        GovConfig gov = configService.government
-        CountryConfig contCfg = configService.country
-        return generateCountry(startTags, cls, tagData, contCfg)
+        return generateCountry(startTags, configService.cfg)
     }
 
-    private Collection<ClassListViewmodel> generateCountry(Collection<String> startTags, ClassesConfig cls, TagConfig tagData, CountryConfig country) {
+    private Collection<ClassListViewmodel> generateCountry(Collection<String> startTags, GeneratorConfiguration cfg) {
         Collection<String> tags = startTags
-        Map<String, Double> availableTags = tagData.tags
-        Collection<ClassesData> classes = cls.data.findAll { it.type == CountryType.CLASSES }
-        Collection<ClassListViewmodel> response = []
+        Map<String, Double> availableTags = cfg.tags.tags
+        Collection<ClassesData> classes = cfg.classes.data.findAll { it.type == CountryType.CLASSES }
+        Collection<ClassListViewmodel> response = [] as Collection<ClassListViewmodel>
         classes.each { ClassesData data ->
             if (shouldIncludeClass(tags, data, availableTags)) {
                 response += buildViewmodel(tags, data, availableTags)
@@ -35,8 +31,8 @@ class CountryGeneratorService {
                 response += emptyViewmodel(data)
             }
         }
-        addFoodEfficiency(response, country, startTags)
-        addSizeModifier(response, country, startTags)
+        addFoodEfficiency(response, cfg.countryConfig, startTags)
+        addSizeModifier(response, cfg.countryConfig, startTags)
         ensurePopRequirement(response)
         return response
     }
@@ -98,7 +94,7 @@ class CountryGeneratorService {
     private void addSizeModifier(Collection<ClassListViewmodel> cls, CountryConfig cfg, Collection<String> tags) {
         cls.each { ClassListViewmodel model ->
             Double factor = cfg.getSizeModifiers(tags) * randomService.noise()
-            if(model != null && model.households > 0 && model.name != 'Royalty') {
+            if (model != null && model.households > 0 && model.name != 'Royalty') {
                 model.households = (model.households * factor).toLong()
                 model.population = (model.population * factor).toLong()
                 model.militarization = (model.militarization * factor).toLong()
@@ -111,7 +107,7 @@ class CountryGeneratorService {
     static
     private void ensurePopRequirement(Collection<ClassListViewmodel> classes) {
         classes.each { ClassListViewmodel cls ->
-            if(cls.population < cls.households) {
+            if (cls.population < cls.households) {
                 cls.population = cls.households
             }
         }
@@ -145,7 +141,7 @@ class CountryGeneratorService {
     private void addFoodEfficiency(Collection<ClassListViewmodel> cls, CountryConfig cfg, Collection<String> tags) {
         Double factor = cfg.getFoodEfficiency(tags)
         cls.each { ClassListViewmodel model ->
-            if(model != null && model.households > 0) {
+            if (model != null && model.households > 0) {
                 model.food *= factor
             }
         }

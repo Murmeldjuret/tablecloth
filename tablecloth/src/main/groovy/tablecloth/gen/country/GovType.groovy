@@ -4,6 +4,7 @@ enum GovType {
 
     INVESTMENT,
     HEAD_OF_STATE,
-    FRANCHISE
+    FRANCHISE,
+    SUCCESSOR
 
 }

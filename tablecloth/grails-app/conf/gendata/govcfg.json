@@ -26,9 +26,6 @@
         "AUTHORITY",
         "DESPOTISM"
       ],
-      "newTags": [
-        "ELECTION"
-      ],
       "blockerTags": [],
       "requiresTags": []
     },
@@ -54,9 +51,6 @@
         "LAWLESS",
         "POPULAR"
       ],
-      "newTags": [
-        "NOBLES"
-      ],
       "blockerTags": [],
       "requiresTags": []
     },
@@ -75,7 +69,6 @@
       ],
       "dislikesTags": [],
       "hatesTags": [],
-      "newTags": [],
       "blockerTags": [],
       "requiresTags": []
     },
@@ -89,7 +82,6 @@
       "likesTags": [],
       "dislikesTags": [],
       "hatesTags": [],
-      "newTags": [],
       "blockerTags": [],
       "requiresTags": []
     },
@@ -103,7 +95,6 @@
       "likesTags": [],
       "dislikesTags": [],
       "hatesTags": [],
-      "newTags": [],
       "blockerTags": [],
       "requiresTags": []
     },
@@ -113,11 +104,14 @@
       "code": "head.monarch",
       "desc": "The head of state is a member of a royal dynasty.",
       "baseweight": 100,
-      "lovesTags": [],
+      "lovesTags": [
+        "ROYAL"
+      ],
       "likesTags": [],
       "dislikesTags": [],
-      "hatesTags": [],
-      "newTags": [],
+      "hatesTags": [
+        "ELECTIONS"
+      ],
       "blockerTags": [],
       "requiresTags": []
     },
@@ -131,7 +125,6 @@
       "likesTags": [],
       "dislikesTags": [],
       "hatesTags": [],
-      "newTags": [],
       "blockerTags": [],
       "requiresTags": []
     },
@@ -145,7 +138,6 @@
       "likesTags": [],
       "dislikesTags": [],
       "hatesTags": [],
-      "newTags": [],
       "blockerTags": [],
       "requiresTags": []
     },
@@ -154,14 +146,56 @@
       "name": "No Head",
       "code": "head.none",
       "desc": "There is no formal head of state, and the highest body assigns one as required.",
-      "baseweight": 30,
+      "baseweight": 10,
       "lovesTags": [],
       "likesTags": [],
       "dislikesTags": [],
       "hatesTags": [],
-      "newTags": [],
       "blockerTags": [],
       "requiresTags": []
+    },
+    {
+      "type": "HEAD_OF_STATE",
+      "code": "gov.president",
+      "name": "President",
+      "desc": "There is a president of a council as formal head of state.",
+      "baseweight": 30,
+      "lovesTags": [
+        "ELECTIONS"
+      ],
+      "likesTags": [
+      ],
+      "dislikesTags": [
+      ],
+      "hatesTags": [
+        "ROYAL"
+      ],
+      "requiresTags": [
+        "ELECTIONS"
+      ],
+      "blockerTags": []
+    },
+    {
+      "type": "HEAD_OF_STATE",
+      "code": "gov.mayor",
+      "name": "Mayor",
+      "desc": "The mayor of a city is the formal head of government.",
+      "baseweight": 30,
+      "lovesTags": [
+        "CITY_STATE",
+        "ELECTIONS"
+      ],
+      "likesTags": [
+      ],
+      "dislikesTags": [
+      ],
+      "hatesTags": [
+        "ROYAL"
+      ],
+      "requiresTags": [
+        "CITY_STATE"
+      ],
+      "blockerTags": []
     }
   ]
 }

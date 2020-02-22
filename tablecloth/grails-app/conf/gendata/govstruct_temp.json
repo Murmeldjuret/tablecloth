@@ -1,0 +1,107 @@
+{
+  "version": 1,
+  "govs": [
+    {
+      "code": "struct.monarchy",
+      "name": "Monarchy",
+      "features": [
+        "gov.monarch",
+        "gov.provinces",
+        "gov.estates"
+      ]
+    },
+    {
+      "code": "struct.monarchy",
+      "name": "Parliamentary Monarchy",
+      "features": [
+        "gov.monarch",
+        "gov.provinces",
+        "gov.parliament"
+      ]
+    },
+    {
+      "code": "struct.monarchy",
+      "name": "Constitutional Monarchy",
+      "features": [
+        "gov.monarch",
+        "gov.provinces",
+        "gov.constitution",
+        "gov.parliament"
+      ]
+    },
+    {
+      "code": "struct.monarchy.bicameral",
+      "name": "Bicameral Parliamentary Monarchy",
+      "features": [
+        "gov.monarch",
+        "gov.upperhouse",
+        "gov.provinces",
+        "gov.parliament"
+      ]
+    },
+    {
+      "code": "struct.monarchy.bicameral",
+      "name": "Bicameral Constitutional Monarchy",
+      "features": [
+        "gov.monarch",
+        "gov.upperhouse",
+        "gov.provinces",
+        "gov.constitution",
+        "gov.parliament"
+      ]
+    },
+    {
+      "code": "struct.republic",
+      "name": "Republic",
+      "features": [
+        "gov.headofstate",
+        "gov.provinces",
+        "gov.parliament"
+      ]
+    }
+  ],
+  "features": [
+    {
+      "code": "gov.monarch",
+      "name": "Monarch",
+      "desc": "At the head of the state is a monarch who wields sovereign authority.",
+      "types": [
+        "SOVEREIGN",
+        "RATIFICATION",
+        "SUCCESSOR"
+      ]
+    },
+    {
+      "code": "gov.monarch",
+      "name": "Monarch",
+      "desc": "At the head of the state is a monarch who wields sovereign authority.",
+      "types": [
+        "SOVEREIGN",
+        "RATIFICATION",
+        "SUCCESSOR"
+      ]
+    },
+    {
+      "code": "gov.estates",
+      "name": "Estates of the Realm",
+      "desc": "Changes to the feudal order can only happen through agreement by the estates of the realm.",
+      "types": [
+        "FRANCHISE",
+        "INVESTMENT",
+        "CLASS",
+        "FREQUENCY"
+      ]
+    },
+    {
+      "code": "gov.upperhouse",
+      "name": "Upper House",
+      "desc": "An upper house.",
+      "types": [
+        "FRANCHISE",
+        "INVESTMENT",
+        "CLASS",
+        "FREQUENCY"
+      ]
+    }
+  ]
+}

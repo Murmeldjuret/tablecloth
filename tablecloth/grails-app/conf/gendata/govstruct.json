@@ -1,70 +1,11 @@
 {
   "version": 1,
-  "govs": [
+  "structs": [
     {
-      "code": "struct.monarchy.feudal",
-      "name": "Feudal Monarchy",
-      "features": [
-        "gov.monarch",
-        "gov.estates"
-      ]
-    },
-    {
-      "code": "struct.monarchy.elective",
-      "name": "Elective Monarchy",
-      "features": [
-        "gov.monarch",
-        "gov.estates"
-      ]
-    },
-    {
-      "code": "struct.monarchy.parliamentary",
-      "name": "Parliamentary Monarchy",
-      "features": [
-        "gov.monarch",
-        "gov.estates"
-      ]
-    },
-    {
-      "code": "struct.monarchy.bicameral",
-      "name": "Bicameral Parliamentary Monarchy",
-      "features": [
-        "gov.monarch",
-        "gov.upperhouse",
-        "gov.estates"
-      ]
-    }
-  ],
-  "features": [
-    {
-      "code": "gov.monarch",
-      "name": "Monarch",
-      "desc": "At the head of the state is a monarch who wields sovereign power.",
-      "types": [
-        "SOVEREIGN",
-        "SUCCESSOR"
-      ]
-    },
-    {
-      "code": "gov.estates",
-      "name": "Estates of the Realm",
-      "desc": "Changes to the feudal order can only happen through agreement by the estates of the realm.",
-      "types": [
-        "FRANCHISE",
-        "INVESTMENT",
-        "CLASS",
-        "FREQUENCY"
-      ]
-    },
-    {
-      "code": "gov.upperhouse",
-      "name": "Upper House",
-      "desc": "An upper house.",
-      "types": [
-        "FRANCHISE",
-        "INVESTMENT",
-        "CLASS",
-        "FREQUENCY"
+      "code": "struct.autocracy",
+      "name": "Autocracy",
+      "has": [
+        "HEAD_OF_STATE"
       ]
     }
   ]

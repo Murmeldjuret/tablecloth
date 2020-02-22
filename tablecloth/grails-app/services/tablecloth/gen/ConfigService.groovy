@@ -4,7 +4,9 @@ import com.fasterxml.jackson.databind.ObjectMapper
 import grails.gorm.transactions.Transactional
 import tablecloth.gen.country.ClassesConfig
 import tablecloth.gen.country.CountryConfig
+import tablecloth.gen.country.GeneratorConfiguration
 import tablecloth.gen.country.GovConfig
+import tablecloth.gen.country.GovStructConfig
 import tablecloth.gen.country.TagConfig
 
 import javax.annotation.PostConstruct
@@ -12,11 +14,13 @@ import javax.annotation.PostConstruct
 @Transactional
 class ConfigService {
 
+    private static final String govStructPath = "gendata/govstruct.json"
     private static final String govPath = "gendata/govcfg.json"
     private static final String clsPath = "gendata/classes.json"
     private static final String tagsPath = "gendata/tags.json"
     private static final String countryPath = "gendata/country.json"
 
+    private static GovStructConfig govStructDefault
     private static GovConfig govCfgDefault
     private static ClassesConfig classesCfgDefault
     private static TagConfig tagsCfgDefault
@@ -24,17 +28,32 @@ class ConfigService {
 
     @PostConstruct
     init() {
+        govStructDefault = readConfig(govStructPath, GovStructConfig)
         govCfgDefault = readConfig(govPath, GovConfig)
         classesCfgDefault = readConfig(clsPath, ClassesConfig)
         tagsCfgDefault = readConfig(tagsPath, TagConfig)
         countryCfgDefault = readConfig(countryPath, CountryConfig)
     }
 
+    GeneratorConfiguration getCfg() {
+        return new GeneratorConfiguration(
+            govStructs: govStructDefault,
+            govCats: govCfgDefault,
+            classes: classesCfgDefault,
+            tags: tagsCfgDefault,
+            countryConfig: countryCfgDefault,
+        )
+    }
+
     ClassesConfig getCls() {
         return classesCfgDefault
     }
 
-    GovConfig getGovernment() {
+    GovStructConfig getGovernment() {
+        return govStructDefault
+    }
+
+    GovConfig getGovernmentCategories() {
         return govCfgDefault
     }
 
