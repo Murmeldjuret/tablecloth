@@ -13,9 +13,12 @@ class CountryDataViewmodel {
     Long totalMil
     Long totalFood
 
-    static CountryDataViewmodel build(Collection<ClassListViewmodel> list) {
-        list.sort(true) { ClassListViewmodel cls -> 0 - cls.wealth }
+    GovDataViewmodel gov
+    Collection<ClassListViewmodel> clsList
+
+    static CountryDataViewmodel build(Collection<ClassListViewmodel> list, GovDataViewmodel gov) {
         CountryDataViewmodel ret = new CountryDataViewmodel()
+        ret.clsList = list
         ret.totalHouseholds = list.sum { ClassListViewmodel cls -> cls.households } as Long
         ret.totalPop = list.sum { ClassListViewmodel cls -> cls.population } as Long
         ret.totalWealth = list.sum { ClassListViewmodel cls -> cls.wealth } as Long
@@ -23,6 +26,7 @@ class CountryDataViewmodel {
         ret.urbanPercent = (ret.totalUrban / ret.totalPop).toDouble()
         ret.totalMil = list.sum { ClassListViewmodel cls -> cls.militarization } as Long
         ret.totalFood = list.sum { ClassListViewmodel cls -> cls.food.round() } as Long
+        ret.gov = gov
         return ret
     }
 }

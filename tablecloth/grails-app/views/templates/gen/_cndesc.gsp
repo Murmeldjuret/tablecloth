@@ -3,10 +3,12 @@
 <g:set var="country" value="${(CountryDataViewmodel) country}"/>
 <html>
 <br>
+The government is ${country.gov.name}
+<br>
 Total number of households is ${Formatter.number(country.totalHouseholds)}.
 The country has about ${Formatter.number(country.totalPop)} residents where
 ${Formatter.number(country.totalUrban)} or
-<g:formatNumber number="${country.urbanPercent}" type="percent" maxFractionDigits="2" />
+<g:formatNumber number="${country.urbanPercent}" type="percent" maxFractionDigits="2"/>
 live in towns of more than 1000 people.
 The country has a military manpower of about
 ${Formatter.number(country.totalMil)} men.

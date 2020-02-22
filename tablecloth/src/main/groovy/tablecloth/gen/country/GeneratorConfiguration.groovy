@@ -12,4 +12,12 @@ class GeneratorConfiguration {
 
     CountryConfig countryConfig
 
+    List<ClassesData> getClassDataFor(CountryType target) {
+        classes.data.findAll { it.type == target }
+    }
+
+    Map<String, Double> getAllAvailableTags() {
+        return tags.tags
+    }
+
 }

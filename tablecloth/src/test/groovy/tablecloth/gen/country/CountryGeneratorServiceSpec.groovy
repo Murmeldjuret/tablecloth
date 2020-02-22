@@ -3,6 +3,7 @@ package tablecloth.gen.country
 import grails.test.hibernate.HibernateSpec
 import grails.testing.services.ServiceUnitTest
 import tablecloth.gen.ConfigService
+import tablecloth.rng.RandomService
 
 class CountryGeneratorServiceSpec extends HibernateSpec implements ServiceUnitTest<CountryGeneratorService> {
 
@@ -10,15 +11,18 @@ class CountryGeneratorServiceSpec extends HibernateSpec implements ServiceUnitTe
 
     void setup() {
         service.configService = Mock(ConfigService)
+        service.randomService = Mock(RandomService)
+        service.randomService.noise(*_) >> 1.0
     }
 
     void "test dummy service"() {
         given:
             service.configService.getCfg() >> mockCfg()
         when:
-            def response = service.generate()
+            def response = service.generate([])
         then:
-            response == []
+            response.totalPop == 50
+            response.totalFood == 2500
     }
 
     private static GeneratorConfiguration mockCfg() {
@@ -68,7 +72,7 @@ class CountryGeneratorServiceSpec extends HibernateSpec implements ServiceUnitTe
         return new ClassesConfig(
             version: 1,
             data: [
-                new ClassesData()
+                mockClsData()
             ],
         )
     }
@@ -78,6 +82,20 @@ class CountryGeneratorServiceSpec extends HibernateSpec implements ServiceUnitTe
             version: 1,
             baseFoodEfficiency: [:] as Map<String, Double>,
             baseSizeModifiers: [:] as Map<String, Double>,
+        )
+    }
+
+    private static ClassesData mockClsData() {
+        return new ClassesData(
+            type: CountryType.CLASSES,
+            basesize: 50,
+            mandatory: true,
+            urbanization: 1.0,
+            popPerHousehold: 10,
+            basechance: 1.0,
+            baseweight: 1.0,
+            militarization: 1.0,
+            food: 5,
         )
     }
 }

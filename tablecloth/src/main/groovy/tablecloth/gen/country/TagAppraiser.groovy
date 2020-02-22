@@ -5,16 +5,16 @@ import com.fasterxml.jackson.annotation.JsonProperty
 trait TagAppraiser {
 
     @JsonProperty
-    List<String> lovesTags
+    List<String> lovesTags = [] as List<String>
     @JsonProperty
-    List<String> likesTags
+    List<String> likesTags = [] as List<String>
     @JsonProperty
-    List<String> dislikesTags
+    List<String> dislikesTags = [] as List<String>
     @JsonProperty
-    List<String> hatesTags
+    List<String> hatesTags = [] as List<String>
     @JsonProperty
-    List<String> requiresTags
+    List<String> requiresTags = [] as List<String>
     @JsonProperty
-    List<String> blockerTags
+    List<String> blockerTags = [] as List<String>
 
 }

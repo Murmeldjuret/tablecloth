@@ -5,6 +5,8 @@ import grails.gorm.transactions.Transactional
 import tablecloth.gen.ConfigService
 import tablecloth.rng.RandomService
 import tablecloth.viewmodel.gen.ClassListViewmodel
+import tablecloth.viewmodel.gen.CountryDataViewmodel
+import tablecloth.viewmodel.gen.GovDataViewmodel
 
 @Transactional
 @GrailsCompileStatic
@@ -13,28 +15,37 @@ class CountryGeneratorService {
     ConfigService configService
     RandomService randomService
 
-    Collection<ClassListViewmodel> generate(Collection<String> startTags) {
-        return generateCountry(startTags, configService.cfg)
+    CountryDataViewmodel generate(Collection<String> startTags) {
+        GeneratorConfiguration cfg = configService.cfg
+        Collection<String> tags = startTags
+        GovDataViewmodel govData = generateGov(cfg, tags)
+        Collection<ClassListViewmodel> clsList = generateCountry(cfg, tags)
+        CountryDataViewmodel cdv = CountryDataViewmodel.build(clsList, govData)
+        return cdv
     }
 
-    private Collection<ClassListViewmodel> generateCountry(Collection<String> startTags, GeneratorConfiguration cfg) {
-        Collection<String> tags = startTags
-        Map<String, Double> availableTags = cfg.tags.tags
-        Collection<ClassesData> classes = cfg.classes.data.findAll { it.type == CountryType.CLASSES }
-        Collection<ClassListViewmodel> response = [] as Collection<ClassListViewmodel>
+    private GovDataViewmodel generateGov(GeneratorConfiguration cfg, Collection<String> tags) {
+        return new GovDataViewmodel()
+    }
+
+    private Collection<ClassListViewmodel> generateCountry(GeneratorConfiguration cfg, Collection<String> tags) {
+        Map<String, Double> availableTags = cfg.allAvailableTags
+        Collection<ClassesData> classes = cfg.getClassDataFor(CountryType.CLASSES)
+        Collection<ClassListViewmodel> clsList = [] as Collection<ClassListViewmodel>
         classes.each { ClassesData data ->
             if (shouldIncludeClass(tags, data, availableTags)) {
-                response += buildViewmodel(tags, data, availableTags)
+                clsList += buildViewmodel(tags, data, availableTags)
             } else if (data.mandatory) {
-                response += buildMarginalViewmodel(tags, data, availableTags)
+                clsList += buildMarginalViewmodel(tags, data, availableTags)
             } else {
-                response += emptyViewmodel(data)
+                clsList += emptyViewmodel(data)
             }
         }
-        addFoodEfficiency(response, cfg.countryConfig, startTags)
-        addSizeModifier(response, cfg.countryConfig, startTags)
-        ensurePopRequirement(response)
-        return response
+        addFoodEfficiency(clsList, cfg.countryConfig, tags)
+        addSizeModifier(clsList, cfg.countryConfig, tags)
+        ensurePopRequirement(clsList)
+        clsList.sort(true) { ClassListViewmodel cls -> 0 - cls.wealth }
+        return clsList
     }
 
     private boolean shouldIncludeClass(Collection<String> chosen, ClassesData data, Map<String, Double> available) {

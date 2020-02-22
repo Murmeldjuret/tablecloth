@@ -1,6 +1,5 @@
 <%@ page import="tablecloth.utils.Formatter; tablecloth.viewmodel.gen.TagChoicesViewmodel; tablecloth.viewmodel.gen.CountryDataViewmodel; tablecloth.viewmodel.gen.ClassListViewmodel" %>
 <!DOCTYPE html>
-<g:set var="classes" value="${(List<ClassListViewmodel>) classes}"/>
 <g:set var="chosenTags" value="${(Collection<String>) chosenTags}"/>
 <g:set var="availableTags" value="${(TagChoicesViewmodel) availableTags}"/>
 <g:set var="country" value="${(CountryDataViewmodel) countryData}"/>
@@ -31,7 +30,7 @@
         <th>Power</th>
         <th>% of Population</th>
     </tr>
-    <g:each in="${classes}" var="cls" status="i">
+    <g:each in="${countryData.clsList}" var="cls" status="i">
         <g:if test="${cls.households > 0}">
             <g:render template="/templates/gen/cls"
                       model="[cls: cls, totalPop: country.totalPop, totalWealth: country.totalWealth]"/>

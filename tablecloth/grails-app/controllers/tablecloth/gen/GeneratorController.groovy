@@ -5,7 +5,6 @@ import grails.plugin.springsecurity.annotation.Secured
 import tablecloth.commands.PersonNameCommand
 import tablecloth.security.SecurityService
 import tablecloth.utils.ValidatableResponseUtil
-import tablecloth.viewmodel.gen.ClassListViewmodel
 import tablecloth.viewmodel.gen.CountryDataViewmodel
 import tablecloth.viewmodel.gen.TagChoicesViewmodel
 
@@ -38,12 +37,9 @@ class GeneratorController {
 
     def country() {
         Collection<String> chosen = buildChosen()
-        Collection<ClassListViewmodel> list = generatorService.generateCountry(chosen)
-        list.sort(true) { ClassListViewmodel cls -> 0 - cls.wealth }
+        CountryDataViewmodel countryData = generatorService.generateCountry(chosen)
         TagChoicesViewmodel tagChoices = TagChoicesViewmodel.build(configService.tags)
-        CountryDataViewmodel countryData = CountryDataViewmodel.build(list)
         render view: '/country/country', model: [
-            classes      : list,
             availableTags: tagChoices,
             chosenTags   : chosen,
             countryData  : countryData
