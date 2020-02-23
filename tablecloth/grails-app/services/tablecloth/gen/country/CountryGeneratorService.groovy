@@ -43,8 +43,10 @@ class CountryGeneratorService {
         Map<String, Double> availableTags = cfg.allAvailableTags
         Map<GovData, Double> buckets = [:] as Map<GovData, Double>
         govData.collect { GovData gd ->
-            Double factor = getAppreciation(gd, cfg, availableTags)
-            buckets[(gd)] = factor
+            if (shouldIncludeGov(gd, cfg)) {
+                Double factor = getAppreciation(gd, cfg, availableTags)
+                buckets[(gd)] = factor
+            }
         }
         return buckets
     }
@@ -67,6 +69,14 @@ class CountryGeneratorService {
         ensurePopRequirement(clsList)
         clsList.sort(true) { ClassListViewmodel cls -> 0 - cls.wealth }
         return clsList
+    }
+
+    private boolean shouldIncludeGov(GovData data, Generator cfg) {
+        return data.requiresTags.every {
+            it in cfg.currentTags
+        } && data.blockerTags.every {
+            !(it in cfg.currentTags)
+        }
     }
 
     private boolean shouldIncludeClass(Collection<String> chosen, ClassesData data, Map<String, Double> available) {

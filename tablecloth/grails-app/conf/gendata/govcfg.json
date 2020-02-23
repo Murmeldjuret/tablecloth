@@ -105,10 +105,26 @@
       "desc": "The head of state is a member of a royal dynasty.",
       "baseweight": 100,
       "lovesTags": [
-        "ROYAL"
+        "ROYAL",
+        "LEVIES"
       ],
-      "likesTags": [],
-      "dislikesTags": [],
+      "likesTags": [
+        "CONTINENTAL_STATE",
+        "ORDERLY",
+        "DESPOTISM",
+        "REPRESSIVE",
+        "NOBLES",
+        "MILITARY",
+        "AUTHORITY",
+        "MEDIEVAL"
+      ],
+      "dislikesTags": [
+        "CITY_STATE",
+        "PACIFIST",
+        "FRAGMENTED",
+        "MINERALS",
+        "POPULAR"
+      ],
       "hatesTags": [
         "ELECTIONS"
       ],
@@ -121,12 +137,36 @@
       "code": "head.divine",
       "desc": "The head of state is a divine entity.",
       "baseweight": 5,
-      "lovesTags": [],
-      "likesTags": [],
-      "dislikesTags": [],
-      "hatesTags": [],
+      "lovesTags": [
+        "DIVINE",
+        "MAGICAL",
+        "GOOD",
+        "EVIL",
+        "AUTHORITY"
+      ],
+      "likesTags": [
+        "DESPOTISM",
+        "ARTIFICIAL",
+        "RELIGIOUS",
+        "ASCENDANT",
+        "SMALL_STATE",
+        "CITY_STATE",
+        "ORDERLY"
+      ],
+      "dislikesTags": [
+        "NATURAL",
+        "CONTINENTAL_STATE",
+        "VAST_STATE"
+      ],
+      "hatesTags": [
+        "ELECTIONS",
+        "LARGE_STATE",
+        "MUNDANE"
+      ],
       "blockerTags": [],
-      "requiresTags": []
+      "requiresTags": [
+        "ALLOW_MAGIC"
+      ]
     },
     {
       "type": "HEAD_OF_STATE",
@@ -134,10 +174,33 @@
       "code": "head.theocrat",
       "desc": "The head of state also heads a religion or is a member of clergy.",
       "baseweight": 30,
-      "lovesTags": [],
-      "likesTags": [],
-      "dislikesTags": [],
-      "hatesTags": [],
+      "lovesTags": [
+        "RELIGIOUS",
+        "DIVINE",
+        "GOOD",
+        "CULTURAL"
+      ],
+      "likesTags": [
+        "ORDERLY",
+        "EVIL",
+        "SMALL_STATE",
+        "RENAISSANCE",
+        "MEDIEVAL",
+        "AUTHORITY"
+      ],
+      "dislikesTags": [
+        "EDUCATED",
+        "COLLAPSE",
+        "EARLY_MODERN",
+        "MERCHANT",
+        "FRAGMENTED",
+        "VAST_STATE",
+        "HORDE"
+      ],
+      "hatesTags": [
+        "ROYAL",
+        "CONTINENTAL_STATE"
+      ],
       "blockerTags": [],
       "requiresTags": []
     },
@@ -147,10 +210,34 @@
       "code": "head.none",
       "desc": "There is no formal head of state, and the highest body assigns one as required.",
       "baseweight": 10,
-      "lovesTags": [],
-      "likesTags": [],
-      "dislikesTags": [],
-      "hatesTags": [],
+      "lovesTags": [
+        "DARK_AGE",
+        "DECENTRALIZED",
+        "LAWLESS",
+        "FRAGMENTED",
+        "HORDE",
+        "COLLAPSE",
+        "UNSTABLE"
+      ],
+      "likesTags": [
+        "POVERTY",
+        "ILLITERATE"
+      ],
+      "dislikesTags": [
+        "VAST_STATE",
+        "POPULAR",
+        "AUTHORITY",
+        "DESPOTISM",
+        "CULTURAL",
+        "REPRESSIVE"
+      ],
+      "hatesTags": [
+        "CONTINENTAL_STATE",
+        "ORDERLY",
+        "ASCENDANT",
+        "ELECTIONS",
+        "PROSPERITY"
+      ],
       "blockerTags": [],
       "requiresTags": []
     },
@@ -161,14 +248,43 @@
       "desc": "There is a president of a council as formal head of state.",
       "baseweight": 30,
       "lovesTags": [
-        "ELECTIONS"
+        "EARLY_MODERN",
+        "ELECTIONS",
+        "ELECTIONS",
+        "ASCENDANT",
+        "POPULAR",
+        "URBAN"
       ],
       "likesTags": [
+        "MERCHANT",
+        "ORDERLY",
+        "EDUCATED",
+        "COMMERCE",
+        "CULTURAL",
+        "PROSPERITY"
       ],
       "dislikesTags": [
+        "STEPPES",
+        "DIVINE",
+        "RELIGIOUS",
+        "COLLAPSE"
       ],
       "hatesTags": [
-        "ROYAL"
+        "LAWLESS",
+        "DESPOTISM",
+        "DARK_AGE",
+        "BRONZE_AGE",
+        "IRON_AGE",
+        "CLASSICAL",
+        "IMPERIAL_AGE",
+        "MEDIEVAL",
+        "ROYAL",
+        "NOBLES",
+        "ROYAL",
+        "ILLITERATE",
+        "DECENTRALIZED",
+        "FRAGMENTED",
+        "HORDE"
       ],
       "requiresTags": [
         "ELECTIONS"
@@ -183,14 +299,34 @@
       "baseweight": 30,
       "lovesTags": [
         "CITY_STATE",
-        "ELECTIONS"
+        "EARLY_MODERN",
+        "RENAISSANCE",
+        "ELECTIONS",
+        "URBAN"
       ],
       "likesTags": [
+        "MOUNTAINOUS",
+        "MEDIEVAL",
+        "ASCENDANT",
+        "MERCHANT",
+        "EDUCATED",
+        "COMMERCE",
+        "POPULAR",
+        "CULTURAL",
+        "PROSPERITY"
       ],
       "dislikesTags": [
+        "COLLAPSE",
+        "DARK_AGE",
+        "DESPOTISM"
       ],
       "hatesTags": [
-        "ROYAL"
+        "NOBLES",
+        "ROYAL",
+        "ILLITERATE",
+        "DECENTRALIZED",
+        "FRAGMENTED",
+        "HORDE"
       ],
       "requiresTags": [
         "CITY_STATE"

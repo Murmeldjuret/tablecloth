@@ -43,6 +43,7 @@ class RandomService {
             }
             return false
         }
+        log.info("Chose $selected.key with a chance of $selected.value / $total")
         return selected.key
     }
 }
