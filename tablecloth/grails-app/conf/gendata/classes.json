@@ -35,6 +35,7 @@
         "IMPERIAL_AGE",
         "CLASSICAL",
         "COASTAL_FISHERY",
+        "REPUBLIC",
         "EARLY_MODERN"
       ],
       "dislikesTags": [
@@ -44,6 +45,7 @@
         "LAWLESS",
         "UNSTABLE",
         "HORDE",
+        "THEOCRACY",
         "DARK_AGE"
       ],
       "hatesTags": [
@@ -94,6 +96,8 @@
         "ELECTIONS",
         "NO_SLAVERY",
         "CLASSICAL",
+        "REPUBLIC",
+        "THEOCRACY",
         "IMPERIAL_AGE",
         "MOUNTAINOUS",
         "STEPPES",
@@ -158,6 +162,7 @@
         "NO_SLAVERY",
         "IMPERIAL_AGE",
         "MOUNTAINOUS",
+        "THEOCRACY",
         "STEPPES",
         "MERCHANT",
         "HORDE",
@@ -199,6 +204,7 @@
       "likesTags": [
         "ORDERLY",
         "POPULAR",
+        "REPUBLIC",
         "CLASSICAL",
         "IRON_AGE",
         "PROSPERITY",
@@ -250,27 +256,29 @@
         "PROSPERITY",
         "LARGE_STATE",
         "CITY_STATE",
+        "REPUBLIC",
         "ESTATE_FARMS",
         "RENAISSANCE"
       ],
       "dislikesTags": [
         "LAWLESS",
-        "IMPERIAL_AGE",
         "NO_SLAVERY",
         "DESPOTISM"
       ],
       "hatesTags": [
         "HORDE",
         "POVERTY",
-        "MEDIEVAL",
         "UNSTABLE",
-        "CLASSICAL",
+        "THEOCRACY",
         "DECENTRALIZED"
       ],
       "requiresTags": [],
       "blockerTags": [
         "BRONZE_AGE",
         "COLLAPSE",
+        "IMPERIAL_AGE",
+        "MEDIEVAL",
+        "CLASSICAL",
         "IRON_AGE",
         "DARK_AGE"
       ]
@@ -427,7 +435,7 @@
       "desc": "People who are closely connected to the royal courts and live from state money.",
       "baseweight": 10000.0,
       "basesize": 1,
-      "basechance": 0.75,
+      "basechance": 1.0,
       "mandatory": false,
       "popPerHousehold": 15.0,
       "urbanization": 0.90,
@@ -466,7 +474,9 @@
         "UNSTABLE",
         "ELECTIONS"
       ],
-      "requiresTags": [],
+      "requiresTags": [
+        "MONARCHY"
+      ],
       "blockerTags": [
         "REPUBLIC"
       ]
@@ -489,6 +499,7 @@
         "MEDEIVAL",
         "IRON_AGE",
         "BRONZE_AGE",
+        "THEOCRACY",
         "ASCENDANT",
         "DIVINE"
       ],

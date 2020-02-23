@@ -72,5 +72,10 @@
     "MAGICAL": 1.2,
     "MUNDANE": 1.2,
     "MINERALS": 1.2
+  },
+  "govtags": {
+    "THEOCRACY": 1.5,
+    "MONARCHY": 1.5,
+    "REPUBLIC": 1.5
   }
 }

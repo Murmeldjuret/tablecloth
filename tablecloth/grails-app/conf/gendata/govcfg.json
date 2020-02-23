@@ -103,6 +103,9 @@
       "name": "Monarch",
       "code": "head.monarch",
       "desc": "The head of state is a member of a royal dynasty.",
+      "newTags": [
+        "MONARCHY"
+      ],
       "baseweight": 100,
       "lovesTags": [
         "ROYAL",
@@ -128,7 +131,10 @@
       "hatesTags": [
         "ELECTIONS"
       ],
-      "blockerTags": [],
+      "blockerTags": [
+        "REPUBLIC",
+        "THEOCRACY"
+      ],
       "requiresTags": []
     },
     {
@@ -136,6 +142,9 @@
       "name": "Divine Entity",
       "code": "head.divine",
       "desc": "The head of state is a divine entity.",
+      "newTags": [
+        "THEOCRACY"
+      ],
       "baseweight": 5,
       "lovesTags": [
         "DIVINE",
@@ -163,7 +172,10 @@
         "LARGE_STATE",
         "MUNDANE"
       ],
-      "blockerTags": [],
+      "blockerTags": [
+        "REPUBLIC",
+        "MONARCHY"
+      ],
       "requiresTags": [
         "ALLOW_MAGIC"
       ]
@@ -174,6 +186,9 @@
       "code": "head.theocrat",
       "desc": "The head of state also heads a religion or is a member of clergy.",
       "baseweight": 30,
+      "newTags": [
+        "THEOCRACY"
+      ],
       "lovesTags": [
         "RELIGIOUS",
         "DIVINE",
@@ -201,14 +216,18 @@
         "ROYAL",
         "CONTINENTAL_STATE"
       ],
-      "blockerTags": [],
+      "blockerTags": [
+        "REPUBLIC",
+        "MONARCHY"
+      ],
       "requiresTags": []
     },
     {
       "type": "HEAD_OF_STATE",
       "name": "No Head",
       "code": "head.none",
-      "desc": "There is no formal head of state, and the highest body assigns one as required.",
+      "desc": "There is no formal head of state as the government is unable to keep together.",
+      "newTags": [],
       "baseweight": 10,
       "lovesTags": [
         "DARK_AGE",
@@ -216,7 +235,6 @@
         "LAWLESS",
         "FRAGMENTED",
         "HORDE",
-        "COLLAPSE",
         "UNSTABLE"
       ],
       "likesTags": [
@@ -239,13 +257,18 @@
         "PROSPERITY"
       ],
       "blockerTags": [],
-      "requiresTags": []
+      "requiresTags": [
+        "COLLAPSE"
+      ]
     },
     {
       "type": "HEAD_OF_STATE",
       "code": "gov.president",
       "name": "President",
       "desc": "There is a president of a council as formal head of state.",
+      "newTags": [
+        "REPUBLIC"
+      ],
       "baseweight": 30,
       "lovesTags": [
         "EARLY_MODERN",
@@ -289,13 +312,19 @@
       "requiresTags": [
         "ELECTIONS"
       ],
-      "blockerTags": []
+      "blockerTags": [
+        "THEOCRACY",
+        "MONARCHY"
+      ]
     },
     {
       "type": "HEAD_OF_STATE",
       "code": "gov.mayor",
       "name": "Mayor",
       "desc": "The mayor of a city is the formal head of government.",
+      "newTags": [
+        "REPUBLIC"
+      ],
       "baseweight": 30,
       "lovesTags": [
         "CITY_STATE",
@@ -331,7 +360,10 @@
       "requiresTags": [
         "CITY_STATE"
       ],
-      "blockerTags": []
+      "blockerTags": [
+        "THEOCRACY",
+        "MONARCHY"
+      ]
     }
   ]
 }

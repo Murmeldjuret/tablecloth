@@ -12,6 +12,10 @@ class GovData implements TagAppraiser {
     String code
     @JsonProperty
     String desc
+
+    @JsonProperty
+    List<String> newTags = [] as List<String>
+
     @JsonProperty
     Integer baseweight
 

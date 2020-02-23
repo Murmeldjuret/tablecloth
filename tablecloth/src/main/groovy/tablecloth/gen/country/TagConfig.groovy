@@ -18,10 +18,12 @@ class TagConfig {
     Map<String, Double> size
     @JsonProperty
     Map<String, Double> generic
+    @JsonProperty
+    Map<String, Double> govtags
 
     @JsonIgnore
     Map<String, Double> getTags() {
-        return ages + fortunes + size + environment + generic
+        return ages + fortunes + size + environment + generic + govtags
     }
 
     @JsonIgnore

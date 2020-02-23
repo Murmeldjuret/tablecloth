@@ -36,13 +36,15 @@ class CountryGeneratorService {
 
     private GovData selectCandidate(List<GovData> govData, Generator cfg) {
         Map<GovData, Double> buckets = buildBuckets(govData, cfg)
-        return randomService.chooseBucket(buckets) as GovData
+        GovData choice = randomService.chooseBucket(buckets) as GovData
+        cfg.addNewTags(choice.newTags)
+        return choice
     }
 
     private Map<GovData, Double> buildBuckets(List<GovData> govData, Generator cfg) {
         Map<String, Double> availableTags = cfg.allAvailableTags
         Map<GovData, Double> buckets = [:] as Map<GovData, Double>
-        govData.collect { GovData gd ->
+        govData.each { GovData gd ->
             if (shouldIncludeGov(gd, cfg)) {
                 Double factor = getAppreciation(gd, cfg, availableTags)
                 buckets[(gd)] = factor

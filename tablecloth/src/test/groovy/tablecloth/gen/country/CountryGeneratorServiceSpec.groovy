@@ -45,6 +45,7 @@ class CountryGeneratorServiceSpec extends HibernateSpec implements ServiceUnitTe
             environment: [:] as Map<String, Double>,
             fortunes: [:] as Map<String, Double>,
             ages: [:] as Map<String, Double>,
+            govtags: [:] as Map<String, Double>,
             generic: [
                 test0: 1.1,
                 test1: 1.1,

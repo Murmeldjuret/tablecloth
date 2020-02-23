@@ -14,6 +14,11 @@ class Generator {
 
     CountryConfig countryConfig
 
+    void addNewTags(Collection<String> newTags) {
+        currentTags.addAll(newTags)
+        currentTags.unique(true)
+    }
+
     List<ClassesData> getClassDataFor(CountryType target) {
         return classes.data.findAll { it.type == target }
     }
