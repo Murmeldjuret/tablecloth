@@ -42,26 +42,24 @@ class CountryGeneratorService {
     }
 
     private Map<GovData, Double> buildBuckets(List<GovData> govData, Generator cfg) {
-        Map<String, Double> availableTags = cfg.allAvailableTags
         Map<GovData, Double> buckets = [:] as Map<GovData, Double>
-        govData.each { GovData gd ->
-            if (shouldIncludeGov(gd, cfg)) {
-                Double factor = getAppreciation(gd, cfg, availableTags)
-                buckets[(gd)] = factor
+        govData.each { GovData candidate ->
+            if (shouldIncludeGov(candidate, cfg)) {
+                Double factor = candidate.appreciate(cfg)
+                buckets[(candidate)] = factor
             }
         }
         return buckets
     }
 
     private Collection<ClassListViewmodel> generateCountry(Generator cfg) {
-        Map<String, Double> availableTags = cfg.allAvailableTags
         Collection<ClassesData> classes = cfg.getClassDataFor(CountryType.CLASSES)
         Collection<ClassListViewmodel> clsList = [] as Collection<ClassListViewmodel>
         classes.each { ClassesData data ->
-            if (shouldIncludeClass(cfg.currentTags, data, availableTags)) {
-                clsList += buildViewmodel(cfg, data, availableTags)
+            if (shouldIncludeClass(cfg, data)) {
+                clsList += buildViewmodel(cfg, data)
             } else if (data.mandatory) {
-                clsList += buildMarginalViewmodel(cfg, data, availableTags)
+                clsList += buildMarginalViewmodel(cfg, data)
             } else {
                 clsList += emptyViewmodel(data)
             }
@@ -81,21 +79,20 @@ class CountryGeneratorService {
         }
     }
 
-    private boolean shouldIncludeClass(Collection<String> chosen, ClassesData data, Map<String, Double> available) {
-        if (!requiredTagsFulfilled(data.requiresTags, chosen)) {
+    private boolean shouldIncludeClass(Generator cfg, ClassesData data) {
+        if (!requiredTagsFulfilled(data.requiresTags, cfg.currentTags)) {
             return false
         }
-        if (blockerTagsFulfilled(data.blockerTags, chosen)) {
+        if (blockerTagsFulfilled(data.blockerTags, cfg.currentTags)) {
             return false
         }
         double chance = data.basechance
-        chance *= getValueOfTags(chosen, data.lovesTags, available)
-        chance /= getValueOfTags(chosen, data.hatesTags, available)
+        chance *= data.appreciateExtremes(cfg)
         return randomService.rollPercent(chance)
     }
 
-    private ClassListViewmodel buildViewmodel(Generator cfg, ClassesData data, Map<String, Double> available) {
-        Double factor = getAppreciation(data, cfg, available)
+    private ClassListViewmodel buildViewmodel(Generator cfg, ClassesData data) {
+        Double factor = data.appreciate(cfg)
         Double size = calculateSize(data, factor)
         return new ClassListViewmodel(
             name: data.name,
@@ -107,15 +104,6 @@ class CountryGeneratorService {
             militarization: (size * data.militarization * randomService.noise()).round(),
             food: (size * data.food * data.popPerHousehold),
         )
-    }
-
-    private Double getAppreciation(TagAppraiser data, Generator cfg, Map<String, Double> available) {
-        Double factor = 1.0d
-        factor *= getValueOfTags(cfg.currentTags, data.likesTags, available)
-        factor /= getValueOfTags(cfg.currentTags, data.dislikesTags, available)
-        factor *= Math.pow(getValueOfTags(cfg.currentTags, data.lovesTags, available), 2)
-        factor /= Math.pow(getValueOfTags(cfg.currentTags, data.hatesTags, available), 2)
-        return factor as Double
     }
 
     private GovDataViewmodel buildGovViewmodel(GovStruct struct, List<GovData> chosen) {
@@ -133,8 +121,8 @@ class CountryGeneratorService {
         return size
     }
 
-    private ClassListViewmodel buildMarginalViewmodel(Generator cfg, ClassesData data, Map<String, Double> available) {
-        ClassListViewmodel model = buildViewmodel(cfg, data, available)
+    private ClassListViewmodel buildMarginalViewmodel(Generator cfg, ClassesData data) {
+        ClassListViewmodel model = buildViewmodel(cfg, data)
         model.wealth = (model.wealth * 0.01d).round()
         model.households = (model.households * 0.1d).round()
         model.population = (model.population * 0.1d).round()
@@ -201,16 +189,5 @@ class CountryGeneratorService {
                 model.food *= factor
             }
         }
-    }
-
-    static
-    private double getValueOfTags(Collection<String> selected, Collection<String> options, Map<String, Double> values) {
-        double factor = 1.0
-        selected.each { String key ->
-            if (options.contains(key) && values.containsKey(key)) {
-                factor *= values.get(key)
-            }
-        }
-        return factor
     }
 }
