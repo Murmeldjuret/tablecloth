@@ -25,7 +25,29 @@ class CountryGeneratorService {
     }
 
     private GovDataViewmodel generateGov(GeneratorConfiguration cfg, Collection<String> tags) {
-        return new GovDataViewmodel()
+        GovStruct struct = cfg.govStructs.structs.first()
+        List<GovData> chosen = [] as List<GovData>
+        struct.has.each { GovType type ->
+            List<GovData> dataCandidates = cfg.getGovCatsByType(type)
+            GovData choice = selectCandidate(dataCandidates, tags, cfg)
+            chosen << choice
+        }
+        return buildGovViewmodel(struct, chosen)
+    }
+
+    private GovData selectCandidate(List<GovData> govData, Collection<String> tags, GeneratorConfiguration cfg) {
+        Map<GovData, Double> buckets = buildBuckets(govData, tags, cfg)
+        return randomService.chooseBucket(buckets) as GovData
+    }
+
+    private Map<GovData, Double> buildBuckets(List<GovData> govData, Collection<String> tags, GeneratorConfiguration cfg) {
+        Map<String, Double> availableTags = cfg.allAvailableTags
+        Map<GovData, Double> buckets = [:] as Map<GovData, Double>
+        govData.collect { GovData gd ->
+            Double factor = getAppreciation(gd, tags, availableTags)
+            buckets[(gd)] = factor
+        }
+        return buckets
     }
 
     private Collection<ClassListViewmodel> generateCountry(GeneratorConfiguration cfg, Collection<String> tags) {
@@ -62,12 +84,8 @@ class CountryGeneratorService {
     }
 
     private ClassListViewmodel buildViewmodel(Collection<String> chosen, ClassesData data, Map<String, Double> available) {
-        double factor = 1.0
-        factor *= getValueOfTags(chosen, data.likesTags, available)
-        factor /= getValueOfTags(chosen, data.dislikesTags, available)
-        factor *= Math.pow(getValueOfTags(chosen, data.lovesTags, available), 2)
-        factor /= Math.pow(getValueOfTags(chosen, data.hatesTags, available), 2)
-        double size = calculateSize(data, factor)
+        Double factor = getAppreciation(data, chosen, available)
+        Double size = calculateSize(data, factor)
         return new ClassListViewmodel(
             name: data.name,
             desc: data.desc,
@@ -80,7 +98,23 @@ class CountryGeneratorService {
         )
     }
 
-    private double calculateSize(ClassesData data, double factor) {
+    private Double getAppreciation(TagAppraiser data, Collection<String> chosen, Map<String, Double> available) {
+        Double factor = 1.0d
+        factor *= getValueOfTags(chosen, data.likesTags, available)
+        factor /= getValueOfTags(chosen, data.dislikesTags, available)
+        factor *= Math.pow(getValueOfTags(chosen, data.lovesTags, available), 2)
+        factor /= Math.pow(getValueOfTags(chosen, data.hatesTags, available), 2)
+        return factor as Double
+    }
+
+    private GovDataViewmodel buildGovViewmodel(GovStruct struct, List<GovData> chosen) {
+        return new GovDataViewmodel(
+            name: struct.name,
+            data: chosen.first().name,
+        )
+    }
+
+    private double calculateSize(ClassesData data, Double factor) {
         double size = (data.basesize * factor * randomService.noise()).round()
         if (size < 1) {
             size = 1d
@@ -110,7 +144,7 @@ class CountryGeneratorService {
                 model.population = (model.population * factor).toLong()
                 model.militarization = (model.militarization * factor).toLong()
                 model.urban = (model.urban * factor).toLong()
-                model.food = (model.food * factor).toLong()
+                model.food = (model.food * factor)
             }
         }
     }

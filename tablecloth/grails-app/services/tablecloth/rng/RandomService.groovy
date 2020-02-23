@@ -23,13 +23,26 @@ class RandomService {
     }
 
     boolean rollPercent(double val) {
-        if(val >= 1) {
+        if (val >= 1) {
             return true
         }
-        if(val <= 0) {
+        if (val <= 0) {
             return false
         }
         return rnd.nextDouble() <= val
     }
 
+    Object chooseBucket(Map<? extends Object, Double> buckets) {
+        Double total = buckets.values().sum() as Double
+        Double jump = rnd.nextDouble() * total
+        Double totalJumped = 0.0d
+        def selected = buckets.find { Object cand, Double weight ->
+            totalJumped += weight
+            if (totalJumped > jump) {
+                return true
+            }
+            return false
+        }
+        return selected.key
+    }
 }

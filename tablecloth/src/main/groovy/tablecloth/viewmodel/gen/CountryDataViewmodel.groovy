@@ -25,7 +25,7 @@ class CountryDataViewmodel {
         ret.totalUrban = list.sum { ClassListViewmodel cls -> cls.urban } as Long
         ret.urbanPercent = (ret.totalUrban / ret.totalPop).toDouble()
         ret.totalMil = list.sum { ClassListViewmodel cls -> cls.militarization } as Long
-        ret.totalFood = list.sum { ClassListViewmodel cls -> cls.food.round() } as Long
+        ret.totalFood = (list.sum { ClassListViewmodel cls -> cls.food } as Double).round() as Long
         ret.gov = gov
         return ret
     }

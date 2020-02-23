@@ -3,7 +3,7 @@
 <g:set var="country" value="${(CountryDataViewmodel) country}"/>
 <html>
 <br>
-The government is ${country.gov.name}
+The government is ${country.gov.name} ruled by a ${country.gov.data}.
 <br>
 Total number of households is ${Formatter.number(country.totalHouseholds)}.
 The country has about ${Formatter.number(country.totalPop)} residents where

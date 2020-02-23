@@ -13,7 +13,11 @@ class GeneratorConfiguration {
     CountryConfig countryConfig
 
     List<ClassesData> getClassDataFor(CountryType target) {
-        classes.data.findAll { it.type == target }
+        return classes.data.findAll { it.type == target }
+    }
+
+    List<GovData> getGovCatsByType(GovType target) {
+        return govCats.data.findAll { it.type == target }
     }
 
     Map<String, Double> getAllAvailableTags() {

@@ -13,6 +13,9 @@ class CountryGeneratorServiceSpec extends HibernateSpec implements ServiceUnitTe
         service.configService = Mock(ConfigService)
         service.randomService = Mock(RandomService)
         service.randomService.noise(*_) >> 1.0
+        service.randomService.chooseBucket(*_) >> { args ->
+            return (args[0] as Map<Object, String>).keySet().first()
+        }
     }
 
     void "test dummy service"() {
@@ -54,7 +57,12 @@ class CountryGeneratorServiceSpec extends HibernateSpec implements ServiceUnitTe
         return new GovStructConfig(
             version: 1,
             structs: [
-                new GovStruct()
+                new GovStruct(
+                    name: 'govname',
+                    has: [
+                        GovType.HEAD_OF_STATE,
+                    ],
+                )
             ],
         )
     }
@@ -63,7 +71,11 @@ class CountryGeneratorServiceSpec extends HibernateSpec implements ServiceUnitTe
         return new GovConfig(
             version: 1,
             data: [
-                new GovData()
+                new GovData(
+                    type: GovType.HEAD_OF_STATE,
+                    name: 'supreme leader',
+                    baseweight: 50,
+                )
             ],
         )
     }
