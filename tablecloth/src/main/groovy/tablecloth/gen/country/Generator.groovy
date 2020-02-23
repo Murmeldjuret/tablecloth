@@ -1,6 +1,8 @@
 package tablecloth.gen.country
 
-class GeneratorConfiguration {
+class Generator {
+
+    Collection<String> currentTags = []
 
     GovStructConfig govStructs
 

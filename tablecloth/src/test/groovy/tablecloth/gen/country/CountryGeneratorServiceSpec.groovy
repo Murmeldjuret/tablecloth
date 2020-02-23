@@ -13,14 +13,14 @@ class CountryGeneratorServiceSpec extends HibernateSpec implements ServiceUnitTe
         service.configService = Mock(ConfigService)
         service.randomService = Mock(RandomService)
         service.randomService.noise(*_) >> 1.0
-        service.randomService.chooseBucket(*_) >> { args ->
-            return (args[0] as Map<Object, String>).keySet().first()
+        service.randomService.chooseBucket(*_) >> { def args ->
+            return ((args as Collection)[0] as Map<Object, String>).keySet().first()
         }
     }
 
     void "test dummy service"() {
         given:
-            service.configService.getCfg() >> mockCfg()
+            service.configService.createNewGenerator(*_) >> mockCfg()
         when:
             def response = service.generate([])
         then:
@@ -28,8 +28,8 @@ class CountryGeneratorServiceSpec extends HibernateSpec implements ServiceUnitTe
             response.totalFood == 2500
     }
 
-    private static GeneratorConfiguration mockCfg() {
-        return new GeneratorConfiguration(
+    private static Generator mockCfg() {
+        return new Generator(
             govStructs: mockGovStructConfig(),
             govCats: mockGovConfig(),
             classes: mockClassesConfig(),

@@ -16,55 +16,54 @@ class CountryGeneratorService {
     RandomService randomService
 
     CountryDataViewmodel generate(Collection<String> startTags) {
-        GeneratorConfiguration cfg = configService.cfg
-        Collection<String> tags = startTags
-        GovDataViewmodel govData = generateGov(cfg, tags)
-        Collection<ClassListViewmodel> clsList = generateCountry(cfg, tags)
+        Generator cfg = configService.createNewGenerator(startTags)
+        GovDataViewmodel govData = generateGov(cfg)
+        Collection<ClassListViewmodel> clsList = generateCountry(cfg)
         CountryDataViewmodel cdv = CountryDataViewmodel.build(clsList, govData)
         return cdv
     }
 
-    private GovDataViewmodel generateGov(GeneratorConfiguration cfg, Collection<String> tags) {
+    private GovDataViewmodel generateGov(Generator cfg) {
         GovStruct struct = cfg.govStructs.structs.first()
         List<GovData> chosen = [] as List<GovData>
         struct.has.each { GovType type ->
             List<GovData> dataCandidates = cfg.getGovCatsByType(type)
-            GovData choice = selectCandidate(dataCandidates, tags, cfg)
+            GovData choice = selectCandidate(dataCandidates, cfg)
             chosen << choice
         }
         return buildGovViewmodel(struct, chosen)
     }
 
-    private GovData selectCandidate(List<GovData> govData, Collection<String> tags, GeneratorConfiguration cfg) {
-        Map<GovData, Double> buckets = buildBuckets(govData, tags, cfg)
+    private GovData selectCandidate(List<GovData> govData, Generator cfg) {
+        Map<GovData, Double> buckets = buildBuckets(govData, cfg)
         return randomService.chooseBucket(buckets) as GovData
     }
 
-    private Map<GovData, Double> buildBuckets(List<GovData> govData, Collection<String> tags, GeneratorConfiguration cfg) {
+    private Map<GovData, Double> buildBuckets(List<GovData> govData, Generator cfg) {
         Map<String, Double> availableTags = cfg.allAvailableTags
         Map<GovData, Double> buckets = [:] as Map<GovData, Double>
         govData.collect { GovData gd ->
-            Double factor = getAppreciation(gd, tags, availableTags)
+            Double factor = getAppreciation(gd, cfg, availableTags)
             buckets[(gd)] = factor
         }
         return buckets
     }
 
-    private Collection<ClassListViewmodel> generateCountry(GeneratorConfiguration cfg, Collection<String> tags) {
+    private Collection<ClassListViewmodel> generateCountry(Generator cfg) {
         Map<String, Double> availableTags = cfg.allAvailableTags
         Collection<ClassesData> classes = cfg.getClassDataFor(CountryType.CLASSES)
         Collection<ClassListViewmodel> clsList = [] as Collection<ClassListViewmodel>
         classes.each { ClassesData data ->
-            if (shouldIncludeClass(tags, data, availableTags)) {
-                clsList += buildViewmodel(tags, data, availableTags)
+            if (shouldIncludeClass(cfg.currentTags, data, availableTags)) {
+                clsList += buildViewmodel(cfg, data, availableTags)
             } else if (data.mandatory) {
-                clsList += buildMarginalViewmodel(tags, data, availableTags)
+                clsList += buildMarginalViewmodel(cfg, data, availableTags)
             } else {
                 clsList += emptyViewmodel(data)
             }
         }
-        addFoodEfficiency(clsList, cfg.countryConfig, tags)
-        addSizeModifier(clsList, cfg.countryConfig, tags)
+        addFoodEfficiency(clsList, cfg)
+        addSizeModifier(clsList, cfg)
         ensurePopRequirement(clsList)
         clsList.sort(true) { ClassListViewmodel cls -> 0 - cls.wealth }
         return clsList
@@ -83,8 +82,8 @@ class CountryGeneratorService {
         return randomService.rollPercent(chance)
     }
 
-    private ClassListViewmodel buildViewmodel(Collection<String> chosen, ClassesData data, Map<String, Double> available) {
-        Double factor = getAppreciation(data, chosen, available)
+    private ClassListViewmodel buildViewmodel(Generator cfg, ClassesData data, Map<String, Double> available) {
+        Double factor = getAppreciation(data, cfg, available)
         Double size = calculateSize(data, factor)
         return new ClassListViewmodel(
             name: data.name,
@@ -98,12 +97,12 @@ class CountryGeneratorService {
         )
     }
 
-    private Double getAppreciation(TagAppraiser data, Collection<String> chosen, Map<String, Double> available) {
+    private Double getAppreciation(TagAppraiser data, Generator cfg, Map<String, Double> available) {
         Double factor = 1.0d
-        factor *= getValueOfTags(chosen, data.likesTags, available)
-        factor /= getValueOfTags(chosen, data.dislikesTags, available)
-        factor *= Math.pow(getValueOfTags(chosen, data.lovesTags, available), 2)
-        factor /= Math.pow(getValueOfTags(chosen, data.hatesTags, available), 2)
+        factor *= getValueOfTags(cfg.currentTags, data.likesTags, available)
+        factor /= getValueOfTags(cfg.currentTags, data.dislikesTags, available)
+        factor *= Math.pow(getValueOfTags(cfg.currentTags, data.lovesTags, available), 2)
+        factor /= Math.pow(getValueOfTags(cfg.currentTags, data.hatesTags, available), 2)
         return factor as Double
     }
 
@@ -122,8 +121,8 @@ class CountryGeneratorService {
         return size
     }
 
-    private ClassListViewmodel buildMarginalViewmodel(Collection<String> chosen, ClassesData data, Map<String, Double> available) {
-        ClassListViewmodel model = buildViewmodel(chosen, data, available)
+    private ClassListViewmodel buildMarginalViewmodel(Generator cfg, ClassesData data, Map<String, Double> available) {
+        ClassListViewmodel model = buildViewmodel(cfg, data, available)
         model.wealth = (model.wealth * 0.01d).round()
         model.households = (model.households * 0.1d).round()
         model.population = (model.population * 0.1d).round()
@@ -136,9 +135,9 @@ class CountryGeneratorService {
         return model
     }
 
-    private void addSizeModifier(Collection<ClassListViewmodel> cls, CountryConfig cfg, Collection<String> tags) {
+    private void addSizeModifier(Collection<ClassListViewmodel> cls, Generator cfg) {
         cls.each { ClassListViewmodel model ->
-            Double factor = cfg.getSizeModifiers(tags) * randomService.noise()
+            Double factor = cfg.countryConfig.getSizeModifiers(cfg.currentTags) * randomService.noise()
             if (model != null && model.households > 0 && model.name != 'Royalty') {
                 model.households = (model.households * factor).toLong()
                 model.population = (model.population * factor).toLong()
@@ -183,8 +182,8 @@ class CountryGeneratorService {
     }
 
     static
-    private void addFoodEfficiency(Collection<ClassListViewmodel> cls, CountryConfig cfg, Collection<String> tags) {
-        Double factor = cfg.getFoodEfficiency(tags)
+    private void addFoodEfficiency(Collection<ClassListViewmodel> cls, Generator cfg) {
+        Double factor = cfg.countryConfig.getFoodEfficiency(cfg.currentTags)
         cls.each { ClassListViewmodel model ->
             if (model != null && model.households > 0) {
                 model.food *= factor

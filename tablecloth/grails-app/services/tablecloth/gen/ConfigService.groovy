@@ -2,12 +2,7 @@ package tablecloth.gen
 
 import com.fasterxml.jackson.databind.ObjectMapper
 import grails.gorm.transactions.Transactional
-import tablecloth.gen.country.ClassesConfig
-import tablecloth.gen.country.CountryConfig
-import tablecloth.gen.country.GeneratorConfiguration
-import tablecloth.gen.country.GovConfig
-import tablecloth.gen.country.GovStructConfig
-import tablecloth.gen.country.TagConfig
+import tablecloth.gen.country.*
 
 import javax.annotation.PostConstruct
 
@@ -35,8 +30,9 @@ class ConfigService {
         countryCfgDefault = readConfig(countryPath, CountryConfig)
     }
 
-    GeneratorConfiguration getCfg() {
-        return new GeneratorConfiguration(
+    Generator createNewGenerator(Collection<String> startingTags) {
+        return new Generator(
+            currentTags: startingTags,
             govStructs: govStructDefault,
             govCats: govCfgDefault,
             classes: classesCfgDefault,
