@@ -24,7 +24,7 @@ class CountryGeneratorService {
     }
 
     private GovDataViewmodel generateGov(Generator cfg) {
-        GovStruct struct = cfg.govStructs.structs.first()
+        GovStruct struct = selectCandidate(cfg.govStructs.structs, cfg)
         List<GovData> chosen = [] as List<GovData>
         struct.has.each { GovType type ->
             List<GovData> dataCandidates = cfg.getGovCatsByType(type)
@@ -34,17 +34,17 @@ class CountryGeneratorService {
         return buildGovViewmodel(struct, chosen)
     }
 
-    private GovData selectCandidate(List<GovData> govData, Generator cfg) {
-        Map<GovData, Double> buckets = buildBuckets(govData, cfg)
-        GovData choice = randomService.chooseBucket(buckets) as GovData
+    private <T extends TagAppraiserWithNew> T selectCandidate(Collection<T> cand, Generator cfg) {
+        Map<T, Double> buckets = buildBuckets(cand, cfg)
+        T choice = randomService.chooseBucket(buckets)
         cfg.addNewTags(choice.newTags)
         return choice
     }
 
-    private Map<GovData, Double> buildBuckets(List<GovData> govData, Generator cfg) {
-        Map<GovData, Double> buckets = [:] as Map<GovData, Double>
-        govData.each { GovData candidate ->
-            if (shouldIncludeGov(candidate, cfg)) {
+    private <T extends TagAppraiser> Map<T, Double> buildBuckets(Collection<T> cand, Generator cfg) {
+        Map<T, Double> buckets = [:] as Map<T, Double>
+        cand.each { T candidate ->
+            if (candidate.isCompatible(cfg.currentTags)) {
                 Double factor = candidate.appreciate(cfg)
                 buckets[(candidate)] = factor
             }
@@ -71,19 +71,8 @@ class CountryGeneratorService {
         return clsList
     }
 
-    private boolean shouldIncludeGov(GovData data, Generator cfg) {
-        return data.requiresTags.every {
-            it in cfg.currentTags
-        } && data.blockerTags.every {
-            !(it in cfg.currentTags)
-        }
-    }
-
     private boolean shouldIncludeClass(Generator cfg, ClassesData data) {
-        if (!requiredTagsFulfilled(data.requiresTags, cfg.currentTags)) {
-            return false
-        }
-        if (blockerTagsFulfilled(data.blockerTags, cfg.currentTags)) {
+        if (!data.isCompatible(cfg.currentTags)) {
             return false
         }
         double chance = data.basechance
@@ -155,16 +144,6 @@ class CountryGeneratorService {
                 cls.population = cls.households
             }
         }
-    }
-
-    static
-    private boolean requiredTagsFulfilled(Collection<String> requirements, Collection<String> tags) {
-        requirements.every { String tag -> tags.contains(tag) }
-    }
-
-    static
-    private boolean blockerTagsFulfilled(Collection<String> blockers, Collection<String> tags) {
-        blockers.any { String tag -> tags.contains(tag) }
     }
 
     static

@@ -263,7 +263,7 @@
     },
     {
       "type": "HEAD_OF_STATE",
-      "code": "gov.president",
+      "code": "head.president",
       "name": "President",
       "desc": "There is a president of a council as formal head of state.",
       "newTags": [
@@ -319,7 +319,7 @@
     },
     {
       "type": "HEAD_OF_STATE",
-      "code": "gov.mayor",
+      "code": "head.mayor",
       "name": "Mayor",
       "desc": "The mayor of a city is the formal head of government.",
       "newTags": [

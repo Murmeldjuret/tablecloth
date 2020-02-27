@@ -32,11 +32,11 @@ class RandomService {
         return rnd.nextDouble() <= val
     }
 
-    Object chooseBucket(Map<? extends Object, Double> buckets) {
+    def <T> T chooseBucket(Map<T, Double> buckets) {
         Double total = buckets.values().sum() as Double
         Double jump = rnd.nextDouble() * total
         Double totalJumped = 0.0d
-        def selected = buckets.find { Object cand, Double weight ->
+        Map.Entry<T, Double> selected = buckets.find { T cand, Double weight ->
             totalJumped += weight
             if (totalJumped > jump) {
                 return true

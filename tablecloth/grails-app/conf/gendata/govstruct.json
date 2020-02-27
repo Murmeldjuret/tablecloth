@@ -6,7 +6,146 @@
       "name": "Autocracy",
       "has": [
         "HEAD_OF_STATE"
-      ]
+      ],
+      "newTags": [],
+      "lovesTags": [
+        "AUTHORITY",
+        "REPRESSIVE",
+        "DESPOTISM"
+      ],
+      "likesTags": [
+        "SLAVERY",
+        "EVIL",
+        "COLLAPSE",
+        "MILITARY",
+        "URBAN",
+        "ILLITERATE",
+        "CORRUPT",
+        "UNSTABLE",
+        "ORDERLY"
+      ],
+      "dislikesTags": [
+        "VAST_STATE",
+        "MOUNTAINOUS",
+        "PROSPERITY",
+        "NOBLES",
+        "GOOD",
+        "COMMERCE",
+        "DARK_AGE",
+        "ROYAL",
+        "DECENTRALIZED",
+        "ASCENDANT"
+      ],
+      "hatesTags": [
+        "POPULAR",
+        "HORDE",
+        "PACIFIST",
+        "EDUCATED",
+        "LAWLESS",
+        "FRAGMENTED",
+        "CONTINENTAL_STATE"
+      ],
+      "blockerTags": [
+        "ELECTIONS"
+      ],
+      "requiresTags": []
+    },
+    {
+      "code": "struct.feudal",
+      "name": "Feudal State",
+      "has": [
+        "HEAD_OF_STATE"
+      ],
+      "newTags": [],
+      "lovesTags": [
+        "ESTATE_FARMS",
+        "MEDIEVAL",
+        "DECENTRALIZED",
+        "FRAGMENTED",
+        "LEVIES",
+        "NOBLES"
+      ],
+      "likesTags": [
+        "DARK_AGE",
+        "IRON_AGE",
+        "RENAISSANCE",
+        "SMALL_FARMS",
+        "CLASSICAL",
+        "UNSTABLE",
+        "CORRUPT",
+        "LARGE_STATE",
+        "AGRARIAN",
+        "POVERTY",
+        "MILITARY",
+        "ROYAL"
+      ],
+      "dislikesTags": [
+        "BRONZE_AGE",
+        "IMPERIAL_AGE",
+        "AUTHORITY",
+        "CONTINENTAL_STATE",
+        "HORDE",
+        "DESPOTISM",
+        "ASCENDANT",
+        "COMMERCE",
+        "MERCHANT"
+      ],
+      "hatesTags": [
+        "EARLY_MODERN",
+        "PASTURE",
+        "POPULAR",
+        "ELECTIONS",
+        "PACIFIST",
+        "CITY_STATE"
+      ],
+      "blockerTags": [
+      ],
+      "requiresTags": []
+    },
+    {
+      "code": "struct.council",
+      "name": "Council Rule",
+      "has": [
+        "HEAD_OF_STATE"
+      ],
+      "newTags": [],
+      "lovesTags": [
+        "ASCENDANT",
+        "CITY_STATE",
+        "MERCHANT",
+        "ELECTIONS"
+      ],
+      "likesTags": [
+        "SMALL_FARMS",
+        "AUTHORITY",
+        "SMALL_STATE",
+        "COMMERCE",
+        "PACIFIST",
+        "EDUCATED"
+      ],
+      "dislikesTags": [
+        "STEPPES",
+        "BRONZE_AGE",
+        "ROYAL",
+        "VAST_STATE",
+        "IRON_AGE",
+        "POVERTY",
+        "CLASSICAL",
+        "FRAGMENTED",
+        "UNSTABLE",
+        "HORDE",
+        "REPRESSIVE",
+        "IMPERIAL_AGE",
+        "LAWLESS",
+        "MEDIEVAL"
+      ],
+      "hatesTags": [
+        "COLLAPSE",
+        "CONTINENTAL_STATE"
+      ],
+      "blockerTags": [
+      ],
+      "requiresTags": []
     }
   ]
 }

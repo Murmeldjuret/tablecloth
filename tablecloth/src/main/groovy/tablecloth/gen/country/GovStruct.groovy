@@ -2,7 +2,7 @@ package tablecloth.gen.country
 
 import org.codehaus.jackson.annotate.JsonProperty
 
-class GovStruct {
+class GovStruct implements TagAppraiserWithNew {
 
     @JsonProperty
     String code
@@ -11,5 +11,10 @@ class GovStruct {
 
     @JsonProperty
     List<GovType> has
+
+    @Override
+    String toString() {
+        return code
+    }
 
 }

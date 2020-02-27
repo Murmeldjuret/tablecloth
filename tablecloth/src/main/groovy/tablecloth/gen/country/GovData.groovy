@@ -3,7 +3,7 @@ package tablecloth.gen.country
 import com.fasterxml.jackson.annotation.JsonProperty
 import org.codehaus.jackson.annotate.JsonIgnore
 
-class GovData implements TagAppraiser {
+class GovData implements TagAppraiserWithNew {
 
     @JsonProperty
     GovType type
@@ -13,9 +13,6 @@ class GovData implements TagAppraiser {
     String code
     @JsonProperty
     String desc
-
-    @JsonProperty
-    List<String> newTags = [] as List<String>
 
     @JsonProperty
     Integer baseweight

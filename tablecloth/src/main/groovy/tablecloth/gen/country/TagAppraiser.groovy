@@ -41,6 +41,15 @@ trait TagAppraiser {
         return factor as Double
     }
 
+    @JsonIgnore
+    Boolean isCompatible(Collection<String> tags) {
+        return requiresTags.every {
+            it in tags
+        } && blockerTags.every {
+            !(it in tags)
+        }
+    }
+
     static
     private double getValueOfTags(Collection<String> selected, Collection<String> options, Map<String, Double> values) {
         double factor = 1.0
