@@ -14,7 +14,7 @@ class RandomService {
     }
 
     double noise(int iterations = 25) {
-        double factor = 1.0
+        double factor = 0.0
         (1..iterations).each {
             factor += rnd.nextDouble()
         }
