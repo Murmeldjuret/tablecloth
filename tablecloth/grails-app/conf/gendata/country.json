@@ -1,14 +1,14 @@
 {
-  "version": 3,
+  "version": 4,
   "baseFoodEfficiency": {
-    "DARK_AGE": 1.01,
-    "BRONZE_AGE": 1.03,
-    "IRON_AGE": 1.05,
-    "CLASSICAL": 1.1,
-    "IMPERIAL_AGE": 1.15,
-    "MEDIEVAL": 1.2,
-    "RENAISSANCE": 1.25,
-    "EARLY_MODERN": 1.3,
+    "DARK_AGE": 1.05,
+    "BRONZE_AGE": 1.1,
+    "IRON_AGE": 1.1,
+    "CLASSICAL": 1.15,
+    "IMPERIAL_AGE": 1.2,
+    "MEDIEVAL": 1.25,
+    "RENAISSANCE": 1.35,
+    "EARLY_MODERN": 1.5,
     "COLLAPSE": 0.7,
     "UNSTABLE": 0.8,
     "POVERTY": 0.9,
@@ -16,11 +16,19 @@
     "ASCENDANT": 1.15
   },
   "baseSizeModifiers": {
-    "CITY_STATE": 1.0,
-    "SMALL_STATE": 4.0,
-    "MEDIUM_STATE": 10.0,
-    "LARGE_STATE": 50.0,
+    "CITY_STATE": 0.5,
+    "SMALL_STATE": 3.0,
+    "MEDIUM_STATE": 7.0,
+    "LARGE_STATE": 20.0,
     "VAST_STATE": 100.0,
-    "CONTINENTAL_STATE": 400.0
+    "CONTINENTAL_STATE": 300.0
+  },
+  "upperSizeModifiers": {
+    "CITY_STATE": 2.0,
+    "SMALL_STATE": 6.0,
+    "MEDIUM_STATE": 15.0,
+    "LARGE_STATE": 80.0,
+    "VAST_STATE": 200.0,
+    "CONTINENTAL_STATE": 500.0
   }
 }

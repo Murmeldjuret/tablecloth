@@ -128,7 +128,7 @@
       "popPerHousehold": 7.0,
       "urbanization": 0.0,
       "militarization": 1,
-      "food": 1.1,
+      "food": 1.5,
       "lovesTags": [
         "NOBLES",
         "MEDIEVAL",
@@ -391,7 +391,7 @@
       "popPerHousehold": 7.0,
       "urbanization": 0.01,
       "militarization": 0.05,
-      "food": 1.05,
+      "food": 1.1,
       "lovesTags": [
         "ESTATE_FARMS",
         "AGRARIAN"
@@ -763,7 +763,7 @@
       "popPerHousehold": 4.0,
       "urbanization": 0.5,
       "militarization": 0.0,
-      "food": 0.0,
+      "food": 0.5,
       "lovesTags": [
         "FRAGMENTED",
         "ASCENDANT",
@@ -996,7 +996,7 @@
       "popPerHousehold": 3.0,
       "urbanization": 0.5,
       "militarization": 0.5,
-      "food": 0.0,
+      "food": 0.1,
       "lovesTags": [
         "COLLAPSE",
         "POVERTY"
@@ -1043,7 +1043,7 @@
       "popPerHousehold": 7.0,
       "urbanization": 0.02,
       "militarization": 1.5,
-      "food": 1.1,
+      "food": 1.15,
       "lovesTags": [
         "MILITARY",
         "AGRARIAN",
@@ -1102,7 +1102,7 @@
       "popPerHousehold": 7.0,
       "urbanization": 0.6,
       "militarization": 0.1,
-      "food": 1.15,
+      "food": 1.5,
       "lovesTags": [
         "RENAISSANCE",
         "COASTAL_FISHERY",
@@ -1142,7 +1142,7 @@
       "popPerHousehold": 2.5,
       "urbanization": 0.9,
       "militarization": 0.75,
-      "food": 0.0,
+      "food": 0.1,
       "lovesTags": [
         "MERCHANT",
         "ASCENDANT",

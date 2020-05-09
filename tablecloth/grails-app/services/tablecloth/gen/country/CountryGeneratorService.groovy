@@ -125,8 +125,9 @@ class CountryGeneratorService {
     }
 
     private void addSizeModifier(Collection<ClassListViewmodel> cls, Generator cfg) {
+        Double countrySizeFactor = getCountrySizeFactor(cfg)
         cls.each { ClassListViewmodel model ->
-            Double factor = cfg.countryConfig.getSizeModifiers(cfg.currentTags) * randomService.noise()
+            Double factor = countrySizeFactor * randomService.noise()
             if (model != null && model.households > 0 && model.name != 'Royalty') {
                 model.households = (model.households * factor).toLong()
                 model.population = (model.population * factor).toLong()
@@ -135,6 +136,12 @@ class CountryGeneratorService {
                 model.food = (model.food * factor)
             }
         }
+    }
+
+    private double getCountrySizeFactor(Generator cfg) {
+        Double lower = cfg.countryConfig.getBaseSizeModifiers(cfg.currentTags)
+        Double upper = cfg.countryConfig.getUpperSizeModifiers(cfg.currentTags)
+        return randomService.valueBetween(lower, upper)
     }
 
     static

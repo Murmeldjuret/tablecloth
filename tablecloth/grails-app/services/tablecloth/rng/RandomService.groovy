@@ -32,6 +32,10 @@ class RandomService {
         return rnd.nextDouble() <= val
     }
 
+    Double valueBetween(Double lower, Double upper) {
+        return (rnd.nextDouble() * (upper - lower)) + lower
+    }
+
     def <T> T chooseBucket(Map<T, Double> buckets) {
         Double total = buckets.values().sum() as Double
         Double jump = rnd.nextDouble() * total
@@ -43,7 +47,7 @@ class RandomService {
             }
             return false
         }
-        log.info("Chose $selected.key with a chance of $selected.value / $total")
+        log.debug("Chose $selected.key with a chance of $selected.value / $total")
         return selected.key
     }
 }

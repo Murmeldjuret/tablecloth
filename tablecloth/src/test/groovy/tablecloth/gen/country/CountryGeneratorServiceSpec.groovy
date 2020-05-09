@@ -13,6 +13,9 @@ class CountryGeneratorServiceSpec extends HibernateSpec implements ServiceUnitTe
         service.configService = Mock(ConfigService)
         service.randomService = Mock(RandomService)
         service.randomService.noise(*_) >> 1.0
+        service.randomService.valueBetween(*_) >> { def args ->
+            return (args[0] + args[1]) / 2
+        }
         service.randomService.chooseBucket(*_) >> { def args ->
             return ((args as Collection)[0] as Map<Object, String>).keySet().first()
         }
@@ -95,6 +98,7 @@ class CountryGeneratorServiceSpec extends HibernateSpec implements ServiceUnitTe
             version: 1,
             baseFoodEfficiency: [:] as Map<String, Double>,
             baseSizeModifiers: [:] as Map<String, Double>,
+            upperSizeModifiers: [:] as Map<String, Double>,
         )
     }
 

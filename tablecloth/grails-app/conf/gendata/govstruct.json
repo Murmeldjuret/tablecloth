@@ -98,8 +98,7 @@
         "PACIFIST",
         "CITY_STATE"
       ],
-      "blockerTags": [
-      ],
+      "blockerTags": [],
       "requiresTags": []
     },
     {
