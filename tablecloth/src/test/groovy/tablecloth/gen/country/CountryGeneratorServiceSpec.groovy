@@ -74,10 +74,24 @@ class CountryGeneratorServiceSpec extends HibernateSpec implements ServiceUnitTe
     private static GovConfig mockGovConfig() {
         return new GovConfig(
             version: 1,
-            data: [
+            headOfState: [
                 new GovData(
                     type: GovType.HEAD_OF_STATE,
                     name: 'supreme leader',
+                    baseweight: 50,
+                )
+            ],
+            investment: [
+                new GovData(
+                    type: GovType.INVESTMENT,
+                    name: 'divine appointment',
+                    baseweight: 50,
+                )
+            ],
+            franchise: [
+                new GovData(
+                    type: GovType.FRANCHISE,
+                    name: 'cool kids',
                     baseweight: 50,
                 )
             ],
