@@ -105,9 +105,12 @@
       "code": "struct.council",
       "name": "Council Rule",
       "has": [
-        "HEAD_OF_STATE"
+        "HEAD_OF_STATE",
+        "FRANCHISE"
       ],
-      "newTags": [],
+      "newTags": [
+        "COUNCIL"
+      ],
       "lovesTags": [
         "ASCENDANT",
         "CITY_STATE",

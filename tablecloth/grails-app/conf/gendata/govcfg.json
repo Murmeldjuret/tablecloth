@@ -1,103 +1,6 @@
 {
-  "version": 2,
-  "data": [
-    {
-      "type": "INVESTMENT",
-      "name": "Election",
-      "code": "inv.election",
-      "desc": "Power passes from election by the level below.",
-      "baseweight": 100,
-      "lovesTags": [
-        "ELECTION",
-        "POPULAR"
-      ],
-      "likesTags": [
-        "ORDERLY",
-        "MERCHANT",
-        "COMMERCE",
-        "GOOD"
-      ],
-      "dislikesTags": [
-        "POVERTY"
-      ],
-      "hatesTags": [
-        "LAWLESS",
-        "ROYAL",
-        "AUTHORITY",
-        "DESPOTISM"
-      ],
-      "blockerTags": [],
-      "requiresTags": []
-    },
-    {
-      "type": "INVESTMENT",
-      "name": "Hereditary",
-      "code": "inv.hereditary",
-      "desc": "Power is inherited by next of succession.",
-      "baseweight": 250,
-      "lovesTags": [
-        "ROYAL",
-        "DESPOTISM"
-      ],
-      "likesTags": [
-        "ORDERLY",
-        "AUTHORITY"
-      ],
-      "dislikesTags": [
-        "ELECTION",
-        "POVERTY"
-      ],
-      "hatesTags": [
-        "LAWLESS",
-        "POPULAR"
-      ],
-      "blockerTags": [],
-      "requiresTags": []
-    },
-    {
-      "type": "INVESTMENT",
-      "name": "Eternal",
-      "code": "inv.eternal",
-      "desc": "Power does not transfer to new groups as rulership is not expected to change.",
-      "baseweight": 5,
-      "lovesTags": [
-        "DESPOTISM",
-        "ORDERLY"
-      ],
-      "likesTags": [
-        "MAGICAL"
-      ],
-      "dislikesTags": [],
-      "hatesTags": [],
-      "blockerTags": [],
-      "requiresTags": []
-    },
-    {
-      "type": "INVESTMENT",
-      "name": "Power",
-      "code": "inv.power",
-      "desc": "Power has no relation to previous power, but is there for taking.",
-      "baseweight": 30,
-      "lovesTags": [],
-      "likesTags": [],
-      "dislikesTags": [],
-      "hatesTags": [],
-      "blockerTags": [],
-      "requiresTags": []
-    },
-    {
-      "type": "SUCCESSOR",
-      "name": "Power",
-      "code": "inv.power",
-      "desc": "Power has no relation to previous power, but is there for taking.",
-      "baseweight": 30,
-      "lovesTags": [],
-      "likesTags": [],
-      "dislikesTags": [],
-      "hatesTags": [],
-      "blockerTags": [],
-      "requiresTags": []
-    },
+  "version": 3,
+  "headOfState": [
     {
       "type": "HEAD_OF_STATE",
       "name": "Monarch",
@@ -310,7 +213,7 @@
         "HORDE"
       ],
       "requiresTags": [
-        "ELECTIONS"
+        "ELECTION"
       ],
       "blockerTags": [
         "THEOCRACY",
@@ -364,6 +267,107 @@
         "THEOCRACY",
         "MONARCHY"
       ]
+    }
+  ],
+  "investment": [
+    {
+      "type": "INVESTMENT",
+      "name": "Election",
+      "code": "inv.election",
+      "desc": "Power passes from election by the level below.",
+      "baseweight": 100,
+      "lovesTags": [
+        "ELECTION",
+        "POPULAR"
+      ],
+      "likesTags": [
+        "ORDERLY",
+        "MERCHANT",
+        "COMMERCE",
+        "GOOD"
+      ],
+      "dislikesTags": [
+        "POVERTY"
+      ],
+      "hatesTags": [
+        "LAWLESS",
+        "ROYAL",
+        "AUTHORITY",
+        "DESPOTISM"
+      ],
+      "blockerTags": [],
+      "requiresTags": []
+    },
+    {
+      "type": "INVESTMENT",
+      "name": "Hereditary",
+      "code": "inv.hereditary",
+      "desc": "Power is inherited by next of succession.",
+      "baseweight": 250,
+      "lovesTags": [
+        "ROYAL",
+        "DESPOTISM"
+      ],
+      "likesTags": [
+        "ORDERLY",
+        "AUTHORITY"
+      ],
+      "dislikesTags": [
+        "ELECTION",
+        "POVERTY"
+      ],
+      "hatesTags": [
+        "LAWLESS",
+        "POPULAR"
+      ],
+      "blockerTags": [],
+      "requiresTags": []
+    },
+    {
+      "type": "INVESTMENT",
+      "name": "Eternal",
+      "code": "inv.eternal",
+      "desc": "Power does not transfer to new groups as rulership is not expected to change.",
+      "baseweight": 5,
+      "lovesTags": [
+        "DESPOTISM",
+        "ORDERLY"
+      ],
+      "likesTags": [
+        "MAGICAL"
+      ],
+      "dislikesTags": [],
+      "hatesTags": [],
+      "blockerTags": [],
+      "requiresTags": []
+    },
+    {
+      "type": "INVESTMENT",
+      "name": "Power",
+      "code": "inv.power",
+      "desc": "Power has no relation to previous power, but is there for taking.",
+      "baseweight": 30,
+      "lovesTags": [],
+      "likesTags": [],
+      "dislikesTags": [],
+      "hatesTags": [],
+      "blockerTags": [],
+      "requiresTags": []
+    }
+  ],
+  "franchise": [
+    {
+      "type": "FRANCHISE",
+      "name": "Aristocratic",
+      "code": "frc.aristocrat",
+      "desc": "Elections are reserved for the nobility.",
+      "baseweight": 30,
+      "lovesTags": [],
+      "likesTags": [],
+      "dislikesTags": [],
+      "hatesTags": [],
+      "blockerTags": [],
+      "requiresTags": []
     }
   ]
 }

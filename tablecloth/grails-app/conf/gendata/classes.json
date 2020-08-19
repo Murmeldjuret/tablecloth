@@ -25,6 +25,7 @@
       ],
       "likesTags": [
         "COMMERCE",
+        "COUNCIL",
         "MERCHANT",
         "POPULAR",
         "GOOD",
@@ -83,6 +84,7 @@
       "likesTags": [
         "ORDERLY",
         "AGRARIAN",
+        "COUNCIL",
         "NO_NOMADS",
         "ILLITERATE",
         "BRONZE_AGE",
@@ -141,6 +143,7 @@
       ],
       "likesTags": [
         "ORDERLY",
+        "COUNCIL",
         "ROYAL",
         "AGRARIAN",
         "NO_NOMADS",
@@ -192,6 +195,7 @@
       "lovesTags": [
         "FRAGMENTED",
         "NO_NOMADS",
+        "COUNCIL",
         "NO_SLAVERY",
         "BRONZE_AGE",
         "COLLAPSE",
@@ -250,6 +254,7 @@
       ],
       "likesTags": [
         "ORDERLY",
+        "COUNCIL",
         "COMMERCE",
         "MERCHANT",
         "NO_NOMADS",
@@ -465,6 +470,7 @@
         "HORDE",
         "FRAGMENTED",
         "COLLAPSE",
+        "COUNCIL",
         "EARLY_MODERN"
       ],
       "hatesTags": [
@@ -505,6 +511,7 @@
       ],
       "likesTags": [
         "ORDERLY",
+        "COUNCIL",
         "FRAGMENTED",
         "UNSTABLE",
         "DECENTRALIZED",
@@ -594,6 +601,7 @@
       ],
       "likesTags": [
         "GOOD",
+        "COUNCIL",
         "EVIL"
       ],
       "dislikesTags": [
@@ -713,6 +721,7 @@
       "lovesTags": [
         "LARGE_STATE",
         "VAST_REALM",
+        "COUNCIL",
         "CONTINENTAL_REALM",
         "ASCENDANT",
         "AUTHORITY"
@@ -822,6 +831,7 @@
       ],
       "dislikesTags": [
         "POPULAR",
+        "COUNCIL",
         "UNSTABLE",
         "ASCENDANT",
         "DECENTRALIZED",
@@ -954,6 +964,7 @@
         "EARLY_MODERN"
       ],
       "likesTags": [
+        "COUNCIL",
         "PROSPERITY",
         "NOBLES",
         "CULTURAL",

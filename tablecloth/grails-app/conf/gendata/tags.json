@@ -76,6 +76,7 @@
   "govtags": {
     "THEOCRACY": 1.5,
     "MONARCHY": 1.5,
+    "COUNCIL": 1.2,
     "REPUBLIC": 1.5
   }
 }
